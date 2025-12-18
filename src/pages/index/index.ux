@@ -1,0 +1,411 @@
+<template>
+  <div class="container">
+    <text class="title">箱即是空</text>
+
+    <!-- 游戏信息 -->
+    <div class="info">
+      <text class="infoText">
+        控制: 
+        <text class="playerBadge" style="color: {{ currentPlayer === 6 ? '#333333' : '#FFFFFF' }}; 
+                     background-color: {{ currentPlayer === 6 ? '#FFFFFF' : '#333333' }};">
+          {{ currentPlayer === 6 ? '白' : '黑' }}
+        </text>
+      </text>
+      <text class="hint">白走黑墙 · 黑走白地</text>
+    </div>
+
+    <!-- 画布 -->
+    <div class="gameArea">
+      <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5]">
+        <div class="cell"
+             style="background-color: {{ getCellBg(y, x) }};
+                    border-color: {{ getCellBorder(y, x) }}"
+             for="(x, indexX) in [0, 1, 2, 3]">
+          <text class="icon" 
+                style="color: {{ (y == whiteY && x == whiteX) ? getIconColor(6) : 
+                                 (y == blackY && x == blackX) ? getIconColor(7) : 
+                                 'transparent' }};"> 
+                                 {{ (y == whiteY && x == whiteX) ? getIcon(6) : 
+                                     (y == blackY && x == blackX) ? getIcon(7) : 
+                                     '' }}
+          </text>
+        </div>
+      </div>
+    </div>
+
+    <!-- 角色状态 -->
+    <div class="playerStatus">
+      <div class="playerBox whiteBox">
+        <text class="playerPos">白: ({{ whiteX }}, {{ whiteY }})</text>
+      </div>
+      <div class="playerBox blackBox">
+        <text class="playerPos">黑: ({{ blackX }}, {{ blackY }})</text>
+      </div>
+    </div>
+
+    <!-- 控制区域 -->
+    <div class="controlArea">
+      <!-- 切换角色按钮 -->
+      <div class="switchArea">
+        <input class="btnSwitch" 
+               style="background-color: {{ switchBtnColor }}"
+               type="button"
+               value="{{ currentPlayer === 6 ? '切换到黑' : '切换到白' }}"
+               onclick="onSwitch" />
+      </div>
+
+      <!-- 方向键 -->
+      <div class="controlPanel">
+        <div class="btnRow1">
+          <input class="btnArrow" 
+                 style="background-color: {{ upBtnColor }}"
+                 type="button" 
+                 value="↑" 
+                 onclick="onUp" />
+        </div>
+        <div class="btnRow2">
+          <input class="btnArrow" 
+                 style="background-color: {{ leftBtnColor }}"
+                 type="button" 
+                 value="←" 
+                 onclick="onLeft" />
+          <input class="btnArrow" 
+                 style="background-color: {{ downBtnColor }}"
+                 type="button" 
+                 value="↓" 
+                 onclick="onDown" />
+          <input class="btnArrow" 
+                 style="background-color: {{ rightBtnColor }}"
+                 type="button" 
+                 value="→" 
+                 onclick="onRight" />
+        </div>
+      </div>
+    </div>
+    <!-- 一个隐藏的响应式变量，用于触发重渲染 -->
+    <text style="display: none;">{{ renderTrigger }}</text>
+  </div>
+</template>
+
+<script>
+// 导入 prompt 模块
+const prompt = require('@system.prompt');
+
+export default {
+  data() {
+    return {
+      // 疑似二维数组不触发UI更新，换一维键值对
+      mapRules:{
+        // key: "y,x", value: 0/1
+      },
+      whiteX: 0,
+      whiteY: 1,
+      blackX: 2,
+      blackY: 3,
+      currentPlayer: 7, // 黑
+      moveCount: 0,
+      // 按钮颜色
+      switchBtnColor: '#FF416C',
+      upBtnColor: '#36D1DC',
+      downBtnColor: '#36D1DC',
+      leftBtnColor: '#36D1DC',
+      rightBtnColor: '#36D1DC',
+    };
+  },
+
+  onInit() {
+    this.initMapRules();
+  },
+
+  initMapRules(){
+    const width = 4, height = 6;
+    this.mapRules = {};
+
+    // 1. 所有位置默认白地（0）
+    for (let y = 0; y < height; y++){
+      for(let x = 0; x < width; x++){
+        this.mapRules[y + "," + x] = 0;
+      }
+    }
+
+    // 2. 四周黑墙(1)
+    for(let x = 0; x < width; x++){
+      this.mapRules[0 + "," + x] = 1; //顶部
+      this.mapRules[(height-1) + "," + x] = 1; //底部
+    }
+
+    for(let y = 0; y < height; y++){
+      this.mapRules[y + "," + 0] = 1; //左边
+      this.mapRules[y + "," + (width - 1)] = 1; //右边
+    }
+
+    // 3. 内部黑墙
+    this.mapRules['1,2'] = 1;
+    this.mapRules['2,2'] = 1;
+
+    // 4. 初始化角色位置
+    this.whiteX = 0;
+    this.whiteY = 1;
+    this.blackX = 2;
+    this.blackY = 3;
+  },
+
+  getMapValue(y, x){
+    return this.mapRules[y + "," + x] || 0;
+  },
+
+  getCellBg(y, x){
+    // 角色位置
+    if(y === this.whiteY && x === this.whiteX) return '#ECF0F1';
+    if(y === this.blackY && x === this.blackX) return '#34495E';
+
+    // 普通地图
+    return this.getMapValue(y, x) === 0? '#F8F8F8' : "2C3E50";
+  },
+
+  getCellBorder(y, x){
+      // 角色位置
+    if(y === this.whiteY && x === this.whiteX) return '#3498DB';
+    if(y === this.blackY && x === this.blackX) return '#E74C3C';
+
+    // 普通地图
+    return '#CCCCCC';
+  },
+
+  // 切换角色
+  onSwitch() {
+    // 白6黑7
+    this.currentPlayer = this.currentPlayer === 6 ? 7 : 6;
+    this.switchBtnColor = '#E03A5F';
+
+    setTimeout(() => 
+      this.switchBtnColor = '#FF416C', 100);
+  },
+
+  onUp() {this.move(0, -1); this.btnFlash('up')},
+  onDown() {this.move(0, 1); this.btnFlash('down')},
+  onLeft() {this.move(-1, 0); this.btnFlash('left')},
+  onRight() {this.move(1, 0); this.btnFlash('right')},
+  
+  btnFlash(type){
+    this[`${type}BtnColor`] = '#2EB8C2';
+    setTimeout(() => this[`${type}BtnColor`] = '#36D1DC', 100);
+  },
+
+  move(dx, dy){
+    const isWhite = this.currentPlayer === 6;
+    let [x, y] = isWhite ? [this.whiteX, this.whiteY] : [this.blackX, this.blackY];
+    const [nx, ny] = [x + dx, y + dy];
+ // 边界检查：4列(0-3), 6行(0-5)
+ if (nx < 0 || nx >= 4 || ny < 0 || ny >= 6) {
+        prompt.showToast({ 
+            message: '不能越界！', 
+            duration: 800 
+        });
+        return;
+    }
+
+    const target = this.getMapValue(ny, nx);
+    
+    // 不能走到另一个角色所在位置
+    if ((nx === this.whiteX && ny === this.whiteY) || 
+        (nx == this.blackX && ny == this.blackY)){
+        prompt.showToast({ 
+            message: '不能走到另一个角色位置！', 
+            duration: 800 
+        });
+        return;
+    }
+
+    // 路径限制
+    if (isWhite && target !== 1){
+        prompt.showToast({ 
+            message: '白角色只能走黑墙！', 
+            duration: 1000 
+        });
+        return;
+    }
+    if (!isWhite && target !== 0){
+        prompt.showToast({ 
+            message: '黑角色只能走白地！', 
+            duration: 1000 
+        });
+        return;
+    }
+    
+  // 更新角色坐标
+  if (isWhite) {
+        this.whiteX = nx;
+        this.whiteY = ny;
+    } else {
+        this.blackX = nx;
+        this.blackY = ny;
+    }
+  },
+
+  getIconColor(value) {
+    switch(value) {
+      case 6: return '#3498DB'; // 蓝色图标
+      case 7: return '#E74C3C'; // 红色图标
+      default: return '#00000000'; // 透明
+    }
+  },
+
+  getIcon(value) {
+    switch(value) {
+      case 6: return '●'; // 白角色
+      case 7: return '●'; // 黑角色
+      default: return '';
+    }
+  }
+};
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background-color: #667EEA;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin: 6px 0;
+}
+
+.info {
+  background-color: #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin: 6px 0;
+  width: 95%;
+}
+
+.infoText {
+  font-size: 13px;
+  color: #333333;
+  font-weight: bold;
+  text-align: center;
+}
+
+.playerBadge {
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin: 0 3px;
+}
+
+.hint {
+  font-size: 10px;
+  color: #666666;
+  margin-top: 3px;
+  text-align: center;
+}
+
+.gameArea {
+  display: flex;
+  flex-direction: column;
+  background-color: #555555;
+  padding: 2px;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+}
+
+.icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.playerStatus {
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+  margin: 8px 0;
+}
+
+.playerBox {
+  flex: 1;
+  margin: 0 3px;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.whiteBox {
+  background-color: #F0F0F0;
+  color: #333333;
+}
+
+.blackBox {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.playerPos {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.controlArea {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 8px;
+}
+
+.switchArea {
+  margin-bottom: 10px;
+}
+
+.btnSwitch {
+  width: 100%;
+  height: 30px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+}
+
+.controlPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btnRow1, .btnRow2 {
+  display: flex;
+  justify-content: center;
+}
+
+.btnArrow {
+  width: 24px;
+  height: 24px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  margin: 0 1px;
+}
+</style>
