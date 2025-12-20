@@ -19,26 +19,14 @@
 
     <!-- 画布 -->
     <div class="gameArea">
-      <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5]">
+      <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5, 6, 7]">
         <div class="cell" style="background-color: {{ getCellBg(y, x) }}; 
                     border-color: {{ getCellBorder(y, x) }}"
-          for="(x, indexX) in [0, 1, 2, 3]">
+          for="(x, indexX) in [0, 1, 2, 3, 4]">
           <text class="icon" style="color: {{ getIconColor(y, x) }};">
             {{ getIcon(y, x) }}
           </text>
         </div>
-      </div>
-    </div>
-
-    <!-- 角色状态 -->
-    <div class="playerStatus">
-      <div class="playerBox whiteBox">
-        <text class="playerPos">白: ({{ whiteX }}, {{ whiteY }})</text>
-        <text class="boxCount">箱: {{ whiteBoxes.length }} / {{ whiteTargets.length }}</text>
-      </div>
-      <div class="playerBox blackBox">
-        <text class="playerPos">黑: ({{ blackX }}, {{ blackY }})</text>
-        <text class="boxCount">箱: {{ blackBoxes.length }} / {{ blackTargets.length }}</text>
       </div>
     </div>
 
@@ -123,30 +111,30 @@ export default {
   initBoxes() {
     // 白箱子只能在黑色地形上移动
     this.whiteBoxes = [
-      {x: 1, y: 2},
-      {x: 2, y: 1}
-    ]
+        {x: 1, y: 2},
+        {x: 2, y: 1}
+    ];
     // 黑箱子只能在白色地形上移动
     this.blackBoxes = [
-      {x: 1, y: 4}
-    ]
-  },
-  
-  initTargets() {
+        {x: 1, y: 4}
+    ];
+},
+
+initTargets() {
     // 白箱子目标点
     this.whiteTargets = [
-      {x: 1, y: 5},
-      {x: 2, y: 5}
-    ]
+        {x: 1, y: 5},
+        {x: 2, y: 5}
+    ];
     // 黑箱子目标点
     this.blackTargets = [
-      {x: 2, y: 3}
-    ]
-  },
+        {x: 2, y: 3}
+    ];
+},
 
   initMapRules() {
-    const width = 4,
-      height = 6
+    const width = 5,
+      height = 8
     this.mapRules = {}
 
     // 1. 所有位置默认白地（0）
@@ -249,7 +237,7 @@ export default {
         const isWhite = this.currentPlayer === 6 
         let [x, y] = isWhite? [this.whiteX, this.whiteY] : [this.blackX, this.blackY] 
         const [nx, ny] = [x + dx, y + dy] 
-        const width = 4, height = 6 
+        const width = 5, height = 8 
         
         // 1. 边界检查 
         if (nx < 0 || nx >= width || ny < 0 || ny >= height) { 
@@ -520,29 +508,6 @@ export default {
   margin: 8px 0;
 }
 
-.playerBox {
-  flex: 1;
-  margin: 0 3px;
-  padding: 5px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.whiteBox {
-  background-color: #F8F9FA;
-  color: #333333;
-}
-
-.blackBox {
-  background-color: #1A1A1A;
-  color: #FFFFFF;
-}
-
-.playerPos {
-  font-size: 12px;
-  font-weight: bold;
-}
 
 .switchArea {
   margin-bottom: 10px;
@@ -589,7 +554,7 @@ export default {
   width: 30px; 
   height: 30px;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   margin: 1px;
   display: flex; /* 关键：让文字居中 */
   align-items: center;
@@ -602,11 +567,6 @@ export default {
   font-size: 14px; 
   font-weight: bold;
   text-align: center;
-}
-
-.boxCount { 
-  font-size: 14px;
-  margin-top: 2px;
 }
 
 .btnReset {
