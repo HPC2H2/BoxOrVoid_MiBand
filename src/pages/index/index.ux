@@ -51,7 +51,7 @@
       <!-- 切换角色按钮（input不支持background-color，改为div） -->
       <div class="switchArea">
         <div class="btnSwitch" id="switchBtn" style="background-color: {{ switchBtnColor }}" onclick="onSwitch">
-          <text id="switchBtnText" class="btnText">{{ currentPlayer === 6 ? "切换到黑" : "切换到白" }}</text>
+          <text class="btnText">{{ currentPlayer === 6 ? "切换到黑" : "切换到白" }}</text>
         </div>
       </div>
 
@@ -101,6 +101,7 @@ export default {
       downBtnColor: "#36D1DC",
       leftBtnColor: "#36D1DC",
       rightBtnColor: "#36D1DC",
+      resetBtnColor: "#8E44AD",
 
       // 箱子数据
       whiteBoxes: [],
@@ -120,12 +121,12 @@ export default {
     this.initTargets()
   },
   initBoxes() {
-    // 白箱子只能在黑墙或黑角色上移动
+    // 白箱子只能在黑色地形上移动
     this.whiteBoxes = [
       {x: 1, y: 2},
       {x: 2, y: 1}
     ]
-    // 黑箱子只能在白地或白角色上移动
+    // 黑箱子只能在白色地形上移动
     this.blackBoxes = [
       {x: 1, y: 4}
     ]
@@ -181,6 +182,7 @@ export default {
     return this.mapRules[y + "," + x] || 0
   },
 
+  // 返回画布中单元格背景颜色
   getCellBg(y, x) {
     // 检查是否是目标点
     const isWhiteTarget = this.whiteTargets.some(t => t.x === x && t.y === y)
@@ -191,14 +193,15 @@ export default {
     // 优先级: 角色 > 箱子 > 目标点 > 地图
     if (y === this.whiteY && x === this.whiteX) return "#ECF0F1"
     if (y === this.blackY && x === this.blackX) return "#34495E"
-    if (hasWhiteBox) return "#BBBBBB"
+    if (hasWhiteBox) return "#DDDDDD"
     if (hasBlackBox) return "#222222"
     if (isWhiteTarget) return "#FFE4E1"
-    if (isBlackTarget) return "#E6E6FA"
+    if (isBlackTarget) return "#333333"
     
     return this.getMapValue(y, x) === 0 ? "#F8F8F8" : "#555555"
   },
 
+  // 返回画布中单元格边框颜色
   getCellBorder(y, x) {
     // 角色位置
     if (y === this.whiteY && x === this.whiteX) return "#3498DB"
@@ -252,35 +255,15 @@ export default {
         const [nx, ny] = [x + dx, y + dy] 
         const width = 4, height = 6 
         
-        // 边界检查 
+        // 1. 边界检查 
         if (nx < 0 || nx >= width || ny < 0 || ny >= height) { 
             prompt.showToast({ message: "不能越界！", duration: 800 }) 
             return 
         } 
 
         const targetValue = this.getMapValue(ny, nx) 
-        
-        // 确定另一角色的位置
-        const otherX = isWhite? this.blackX : this.whiteX;
-        const otherY = isWhite? this.blackY : this.whiteY;
-        
-        // 检查是否是另一角色 (允许互相踩踏，忽略地形限制)
-        const isTargetOppositePlayer = (nx === otherX && ny === otherY);
-        if (isTargetOppositePlayer) {
-            // 允许踩踏，直接跳过所有地形和箱子检查，直接更新位置
-            if (isWhite) {
-                this.whiteX = nx
-                this.whiteY = ny
-            } else {
-                this.blackX = nx
-                this.blackY = ny
-            }
-            this.checkWinCondition()
-            return
-        }
 
-
-        // 检查是否是箱子 
+        // 2. 检查是否是箱子 
         const whiteBoxIndex = this.whiteBoxes.findIndex(b => b.x === nx && b.y === ny) 
         const blackBoxIndex = this.blackBoxes.findIndex(b => b.x === nx && b.y === ny) 
 
@@ -290,7 +273,7 @@ export default {
             const isMyBox = (isWhite && boxColor === 'white') || (!isWhite && boxColor === 'black') 
 
             if (isMyBox) {
-                // PUSHING OWN BOX LOGIC (推动自己颜色的箱子)
+                // PUSHING OWN BOX LOGIC (推动和自己同颜色的箱子)
 
                 const boxIndex = whiteBoxIndex !== -1? whiteBoxIndex : blackBoxIndex 
                 const boxes = boxColor === 'white'? this.whiteBoxes : this.blackBoxes 
@@ -299,38 +282,39 @@ export default {
                 const boxNextX = nx + dx 
                 const boxNextY = ny + dy 
 
-                // 1. 箱子目标位置检查：边界
+                // 2.1. 箱子目标位置检查：边界
                 if (boxNextX < 0 || boxNextX >= width || boxNextY < 0 || boxNextY >= height) { 
                     prompt.showToast({ message: "箱子不能越界！", duration: 800 }) 
                     return 
                 } 
 
-                // 检查箱子目标位置是否被另一个箱子占用
+                // 2.2. 检查箱子目标位置是否被另一个同颜色箱子占用，.some()便遍历所有箱子
                 const occupiedByBox = 
-                    this.whiteBoxes.some((b, i) => i !== whiteBoxIndex && b.x === boxNextX && b.y === boxNextY) | 
-                    this.blackBoxes.some((b, i) => i !== blackBoxIndex && b.x === boxNextX && b.y === boxNextY)
+                    this.whiteBoxes.some((b, i) => i !== whiteBoxIndex && b.x 
+                    === boxNextX && b.y === boxNextY) | 
+                    this.blackBoxes.some((b, i) => i !== blackBoxIndex && b.x 
+                    === boxNextX && b.y === boxNextY)
 
-                // 检查箱子目标位置是否被角色占用 (如果不是踩踏，理论上角色不该在箱子下一格)
-                const occupiedByPlayer = (boxNextX === this.whiteX && boxNextY === this.whiteY) || (boxNextX === this.blackX && boxNextY === this.blackY)
-
-                if (occupiedByBox || occupiedByPlayer) { 
+                if (occupiedByBox) { 
                     prompt.showToast({ message: "箱子前方被阻挡！", duration: 800 }) 
-                    return 
+                    return
                 } 
 
-                // 2. 箱子地形限制检查
+                // 2.3 箱子地形限制检查
                 const boxNextValue = this.getMapValue(boxNextY, boxNextX) 
-                
-                // 白箱子只能在黑墙(1)上移动 
-                if (boxColor === 'white' && boxNextValue !== 1) { 
-                    prompt.showToast({ message: "白箱子只能在黑墙上移动！", duration: 1000 }) 
+                const isOnWhitePlayer = (boxNextX === this.whiteX && boxNextY === this.whiteY) 
+                const isOnBlackPlayer = (boxNextX === this.blackX && boxNextY === this.blackY)
+
+                // 白箱子只能在黑墙(1)或黑角色上移动 
+                if (boxColor === 'white' && boxNextValue !== 1 && !isOnBlackPlayer) { 
+                    prompt.showToast({ message: "白箱子只能在黑色地形上移动！", duration: 1000 }) 
                     return 
                 } 
-                // 黑箱子只能在白地(0)上移动 
-                if (boxColor === 'black' && boxNextValue !== 0) { 
-                    prompt.showToast({ message: "黑箱子只能在白地上移动！", duration: 1000 }) 
-                    return 
-                } 
+                // 黑箱子只能在白地(0)或白角色上移动 
+                if (boxColor === 'black' && boxNextValue !== 0 && !isOnWhitePlayer) { 
+                    prompt.showToast({ message: "黑箱子只能在白色地形移动！", duration: 1000 }) 
+                    return
+                }
 
                 // 推动成功
                 boxes[boxIndex].x = boxNextX 
@@ -356,16 +340,23 @@ export default {
                     this.blackY = ny
                 }
             }
-        } else { 
-            // --- 目标位置是空地形 --- 
-            
-            // 正常地形检查 (如果不是踩踏或推箱子，则需要检查地形颜色)
-            if (isWhite && targetValue !== 1) { 
-                prompt.showToast({ message: "白角色只能走黑墙！", duration: 1000 }) 
+        } else { // 3. 检查非箱子情况：角色、箱子目标点、空地形
+            // --- 非箱子情况 ---
+            // 角色判断
+            const otherX = isWhite ? this.blackX : this.whiteX
+            const otherY = isWhite ? this.blackY : this.whiteY
+            const isTargetOppositePlayer = (nx === otherX && ny === otherY)
+
+            // 箱子目标点判断
+            const isWhiteBoxTarget = this.whiteTargets.some(t => t.x === nx && t.y === ny)
+            const isBlackBoxTarget = this.blackTargets.some(t => t.x === nx && t.y === ny)
+
+            if (isWhite && (targetValue !== 1 && !isTargetOppositePlayer && !isBlackBoxTarget)) { 
+                prompt.showToast({ message: "白角色只能走黑色地形！", duration: 1000 }) 
                 return 
             } 
-            if (!isWhite && targetValue !== 0) { 
-                prompt.showToast({ message: "黑角色只能走白地！", duration: 1000 }) 
+            if (!isWhite && (targetValue !== 0 && !isTargetOppositePlayer && !isWhiteBoxTarget)) { 
+                prompt.showToast({ message: "黑角色只能走白色地形！", duration: 1000 }) 
                 return 
             } 
             
@@ -384,20 +375,40 @@ export default {
 
 
   getIconColor(y, x) {
-    return "#FFFFFF"
+    // 角色图标颜色
+    if (y === this.whiteY && x === this.whiteX) return "#333333"
+    if (y === this.blackY && x === this.blackX) return "#FFFFFF"
+
+    // 箱子图标颜色
+    const hasWhiteBox = this.whiteBoxes.some(b => b.x === x && b.y === y)
+    const hasBlackBox = this.blackBoxes.some(b => b.x === x && b.y === y)
+        if (hasWhiteBox) return "#333333"
+        if (hasBlackBox) return "#FFFFFF"
+    
+    // 目标点图标
+    const isWhiteTarget = this.whiteTargets.some(t => t.x === x && t.y === y)
+    const isBlackTarget = this.blackTargets.some(t => t.x === x && t.y === y)
+          if (isWhiteTarget) return "#333333"
+          if (isBlackTarget) return "#FFFFFF"
+    
+    return "#000000"
   },
 
   getIcon(y, x) {
     // 角色图标
-    if (y === this.whiteY && x === this.whiteX) return "●"
-    if (y === this.blackY && x === this.blackX) return "●"
+    if (y === this.whiteY && x === this.whiteX) return "白"
+    if (y === this.blackY && x === this.blackX) return "黑"
     
     // 箱子图标
     const hasWhiteBox = this.whiteBoxes.some(b => b.x === x && b.y === y)
     const hasBlackBox = this.blackBoxes.some(b => b.x === x && b.y === y)
-        if (hasWhiteBox | hasBlackBox) return "■"
-
+        if (hasWhiteBox | hasBlackBox) return "箱"
     
+    // 目标点图标
+    const isWhiteTarget = this.whiteTargets.some(t => t.x === x && t.y === y)
+    const isBlackTarget = this.blackTargets.some(t => t.x === x && t.y === y)
+        if (isWhiteTarget) return "白位"
+        if (isBlackTarget) return "黑位"
     return ""
   },
 
@@ -447,19 +458,20 @@ export default {
   font-size: 18px;
   font-weight: bold;
   color: white;
-  margin: 6px 0;
+  margin: 6px 0 3px 0;
 }
 
 .info {
   background-color: #ffffff;
   padding: 5px 10px;
   border-radius: 6px;
-  margin: 6px 0;
+  margin: 6px 2px;
   width: 95%;
+  font-size: 12px;
 }
 
 .infoText {
-  font-size: 13px;
+  font-size: 14px;
   color: #333333;
   font-weight: bold;
   text-align: center;
@@ -472,7 +484,7 @@ export default {
 }
 
 .hint {
-  font-size: 10px;
+  font-size: 14px;
   color: #666666;
   margin-top: 3px;
   text-align: center;
@@ -550,7 +562,7 @@ export default {
 /* 控制区域 */
 .controlArea {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 /* 切换按钮 */
@@ -563,8 +575,8 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #ff416c;
-  padding: 4px;
-  margin: 8px;
+  padding: 2px;
+  margin: 4px;
   flex-wrap: wrap;
   text-align: center;
 }
@@ -574,12 +586,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 8px;
+  margin: 4px;
 }
 
 /* 方向按钮：增加flex布局，确保文字居中 */
 .btnArrow {
-  width: 30px; /* 增大按钮尺寸，适配手表触摸 */
+  width: 30px; 
   height: 30px;
   border: none;
   border-radius: 2px;
@@ -589,16 +601,28 @@ export default {
   justify-content: center;
 }
 
-/* 按钮文字：明确设置字体大小，确保显示 */
+/* 按钮文字 */
 .btnText {
   color: #ffffff;
-  font-size: 15px; /* 增大文字尺寸 */
+  font-size: 14px; 
   font-weight: bold;
   text-align: center;
 }
 
 .boxCount { 
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 2px;
+}
+
+.btnReset {
+  width: 25px;
+  height: 60px;
+  border: none;
+  border-radius: 4px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 4px;
 }
 </style>
