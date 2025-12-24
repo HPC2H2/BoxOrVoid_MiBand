@@ -11,15 +11,19 @@
     <!-- 画布 -->
     <div class="gameArea">
       <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5, 6]">
-        <div
-          class="cell"
-          style="background-color: {{ getCellBg(y, x) }};  
-                    border-color: {{ getCellBorder(y, x) }}"
-          for="(x, indexX) in [0, 1, 2, 3, 4]"
-        >
-          <text class="icon" style="color: {{ getIconColor(y, x) }};">
-            {{ getIcon(y, x) }}
-          </text>
+        <div class="cell" style="background-color: {{ getCellBg(y, x) }}; border-color: {{ getCellBorder(y, x) }}">
+          <block if="{{ iconParts = getIconParts(y, x) }}">
+            <block if="{{ !iconParts.single && iconParts.src1 && iconParts.src2 }}">
+              <div class="combined-icon">
+                <image class="icon" src="{{ iconParts.src1 }}" style="width: 16px; height: 16px;" />
+                <image class="icon" src="{{ iconParts.src2 }}" style="width: 16px; height: 16px;" />
+              </div>
+            </block>
+            <block elif="{{ iconParts.single && iconParts.src }}">
+              <image class="icon" src="{{ iconParts.src }}" style="width: 16px; height: 16px;" />
+            </block>
+            <!-- 如果 src 为空或 null，不渲染任何内容 -->
+          </block>
         </div>
       </div>
     </div>
@@ -105,8 +109,8 @@ export default {
     blackBoxTargets: [],
 
     // 角色目标点
-    whiteCharacterTarget: [],
-    blackCharacterTarget: [],
+    whitePlayerTarget: [],
+    blackPlayerTarget: [],
   },
 
   onInit() {
@@ -140,10 +144,10 @@ export default {
 
     // 2. 角色目标点
     // 白角色目标点(在黑色位置)
-    this.whiteCharacterTarget = [{x: 1, y: 5}]
+    this.whitePlayerTarget = [{x: 1, y: 5}]
 
     // 黑角色目标点
-    this.blackCharacterTarget = [{x: 4, y: 2}]
+    this.blackPlayerTarget = [{x: 4, y: 2}]
   },
 
   initMapRules() {
@@ -450,31 +454,70 @@ export default {
     return "#000000"
   },
 
-  getIcon(y, x) {
-    // 角色图标
-    if (y === this.whiteY && x === this.whiteX) return "白"
-    if (y === this.blackY && x === this.blackX) return "黑"
+  getIconType(y, x) {
+    // 角色
+    if (y === this.whiteY && x === this.whiteX) return "white-player";
+    if (y === this.blackY && x === this.blackX) return "black-player";
 
-    // 箱子图标
-    const hasWhiteBox = this.whiteBoxes.some((b) => b.x === x && b.y === y)
-    const hasBlackBox = this.blackBoxes.some((b) => b.x === x && b.y === y)
-    if (hasWhiteBox | hasBlackBox) return "箱"
+    // 箱子
+    const hasWhiteBox = this.whiteBoxes.some(b => b.x === x && b.y === y);
+    const hasBlackBox = this.blackBoxes.some(b => b.x === x && b.y === y);
+    if (hasWhiteBox) return "white-box";
+    if (hasBlackBox) return "black-box";
 
-    // 箱子目标点图标
-    const isWhiteBoxTarget = this.whiteBoxTargets.some((t) => t.x === x && t.y === y)
-    const isBlackBoxTarget = this.blackBoxTargets.some((t) => t.x === x && t.y === y)
-    if (isWhiteBoxTarget) return "箱位"
-    if (isBlackBoxTarget) return "箱位"
+    // 箱子目标点
+    const isWhiteBoxTarget = this.whiteBoxTargets.some(t => t.x === x && t.y === y);
+    const isBlackBoxTarget = this.blackBoxTargets.some(t => t.x === x && t.y === y);
+    if (isWhiteBoxTarget) return "white-box-white-target";
+    if (isBlackBoxTarget) return "black-box-black-target";
 
-
-    // 角色目标点图标
+    // 角色目标点
     const whitePosition = {x: 1, y: 5};
     const blackPosition = {x: 4, y: 2};
-    if (y === whitePosition.y && x === whitePosition.x) return "白位";
-    if (y === blackPosition.y && x === blackPosition.x) return "黑位";
+    if (y === whitePosition.y && x === whitePosition.x) return "white-player-white-target";
+    if (y === blackPosition.y && x === blackPosition.x) return "black-player-black-target";
 
-    return ""
+    return null; // 无图标
   },
+
+  // 返回 { single: true, src: "..." } 或 { single: false, src1: "...", src2: "..." }
+  getIconParts(y, x) {
+    const type = this.getIconType(y, x);
+    if (!type) {
+      return { single: true, src: null }; // 无图标
+    }
+
+    const parts = type.split('-');
+    // 判断是否需要拆分：只有当有 3 个 '-'（即 parts.length === 4）时才拆
+    if (parts.length === 4) {
+      // 按第2个'-'（从0开始是索引2）拆：前2段 + 后2段
+      const firstPart = parts[0] + '-' + parts[1];   // e.g. "white-box"
+      const secondPart = parts[2] + '-' + parts[3];  // e.g. "white-target"
+      return {
+        single: false,
+        src1: this.getIconImagePath(firstPart),
+        src2: this.getIconImagePath(secondPart)
+      };
+    } else {
+      // 单图标
+      return {
+        single: true,
+        src: this.getIconImagePath(type)
+      };
+    }
+  },
+
+  getIconImagePath(type) {
+  const icons = {
+    "white-player": "/common/game/icons/white.png",
+    "black-player": "/common/game/icons/black.png",
+    "white-box": "/common/game/icons/white_box.png",
+    "black-box": "/common/game/icons/black_box.png",
+    "white-target": "/common/game/icons/white_target.png",
+    "black-target": "/common/game/icons/black_target.png",
+  };
+  return icons[type] || "";
+},
 
   checkWinCondition() {
     // 检查所有白箱子是否在白目标点上
@@ -644,4 +687,16 @@ export default {
   color: white;
   text-align: center;
 }
+
+.combined-icon {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* 小间距 */
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
 </style>
