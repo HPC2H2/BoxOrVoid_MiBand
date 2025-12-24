@@ -1,20 +1,11 @@
 <template>
   <div class="container">
-    <text class="title">箱即是空</text>
+    <image class="title" src="/common/game/title.png"/>
 
     <!-- 游戏信息 -->
     <div class="info">
-      <text class="infoText">
-        控制:
-        <text
-          class="playerBadge"
-          style="color: {{ currentPlayer === 6 ? '#333333' : '#FFFFFF' }};   
-                     background-color: {{ currentPlayer === 6 ? '#FFFFFF' : '#333333' }};"
-        >
-          {{ currentPlayer === 6 ? "白" : "黑" }}
-        </text>
-      </text>
-      <text class="hint">白走黑，黑走白</text>
+      <image class="infoText" src="/common/game/infoText.png"/>
+      <image class="hint" src="/common/game/hint.png"/>
     </div>
 
     <!-- 画布 -->
@@ -425,8 +416,8 @@ export default {
     // 目标点图标
     const isWhiteTarget = this.whiteTargets.some((t) => t.x === x && t.y === y)
     const isBlackTarget = this.blackTargets.some((t) => t.x === x && t.y === y)
-    if (isWhiteTarget) return "白位"
-    if (isBlackTarget) return "黑位"
+    if (isWhiteTarget) return "箱位"
+    if (isBlackTarget) return "箱位"
     return ""
   },
 
@@ -473,39 +464,27 @@ export default {
 }
 
 .title {
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
+  background-color: #1a1a1a;
+  height:30px;
+  width: 70%;
+  object-fit: fill;
   margin: 6px 0 3px 0;
 }
 
 .info {
   background-color: #ffffff;
-  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px;
   border-radius: 6px;
-  margin: 6px 2px;
-  width: 95%;
-  font-size: 12px;
+  overflow: hidden; /* 隐藏超出边界的图片内容 */
 }
 
-.infoText {
-  font-size: 14px;
-  color: #333333;
-  font-weight: bold;
-  text-align: center;
-}
-
-.playerBadge {
-  padding: 2px 5px;
-  border-radius: 3px;
-  margin: 0 3px;
-}
-
-.hint {
-  font-size: 14px;
-  color: #666666;
-  margin-top: 3px;
-  text-align: center;
+.infoText, .hint {
+  height: 40px; /* 统一高度 */
+  width: 100%;
+  object-fit: fill; /* 保持比例，填充整个区域 */
+  border-radius: inherit;
 }
 
 .gameArea {
