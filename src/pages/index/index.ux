@@ -182,7 +182,7 @@ export default {
     this.mapRules["2,4"] = 1
 
     // 4. 初始化角色位置
-    this.whiteX = 0
+    this.whiteX = 4
     this.whiteY = 1
     this.blackX = 2
     this.blackY = 3
@@ -462,10 +462,12 @@ export default {
     // console.log(`黑角色位置: (${this.blackY},${this.blackX})`);
     // 角色：白角色
     if (y === this.whiteY && x === this.whiteX) {
+      // console.log(`白角色位置匹配: (${y},${x})`);
       return "white-player";
     }
     // 角色：黑角色
     if (y === this.blackY && x === this.blackX) {
+      // console.log(`黑角色位置匹配: (${y},${x})`);
       return "black-player";
     }
 
@@ -510,6 +512,7 @@ export default {
   getIconParts(y, x) {
     const type = this.getIconType(y, x);
     if (!type) {
+      // console.log(`无图标类型: (${y},${x})`);
       return { single: true, src: null }; // 无图标
     }
 
@@ -519,6 +522,7 @@ export default {
       // 按第2个'-'（从0开始是索引2）拆：前2段 + 后2段
       const firstPart = parts[0] + '-' + parts[1];   // e.g. "white-box"
       const secondPart = parts[2] + '-' + parts[3];  // e.g. "white-target"
+      // console.log(`双图标类型: ${firstPart}, ${secondPart}`);
       return {
         single: false,
         src1: this.getIconImagePath(firstPart),
@@ -526,6 +530,7 @@ export default {
       };
     } else {
       // 单图标
+      // console.log(`单图标类型: ${type}`);
       return {
         single: true,
         src: this.getIconImagePath(type)

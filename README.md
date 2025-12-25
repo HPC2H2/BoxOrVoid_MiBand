@@ -1,40 +1,5 @@
 ## 快速上手
 
-### 1. 开发
+小米手环上的《箱即是空》游戏。
 
-```
-npm install
-npm run start
-```
-
-### 2. 构建
-
-```
-npm run build
-npm run release
-```
-
-### 3. 调试
-
-```
-npm run watch
-```
-### 4. 代码规范化配置
-代码规范化可以帮助开发者在git commit前进行代码校验、格式化、commit信息校验
-
-使用前提：必须先关联git
-
-macOS or Linux
-```
-sh husky.sh
-```
-
-windows
-```
-./husky.sh
-```
-
-
-## 了解更多
-
-你可以通过我们的[官方文档](https://iot.mi.com/vela/quickapp)熟悉和了解快应用。
+原作：独门，游戏在steam上有详情页，预计于1月发布，若感兴趣的话可以点个愿望单，助力游戏顺利出生！
