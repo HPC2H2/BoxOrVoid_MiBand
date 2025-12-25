@@ -11,7 +11,9 @@
     <!-- 画布 -->
     <div class="gameArea">
       <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5, 6]">
-        <div class="cell" style="background-color: {{ getCellBg(y, x) }}; border-color: {{ getCellBorder(y, x) }}">
+        <div class="cell" style="background-color: {{ getCellBg(y, x) }}; 
+        border-color: {{ getCellBorder(y, x) }}"
+        for="(x, indexX) in [0, 1, 2, 3, 4]">
           <block if="{{ iconParts = getIconParts(y, x) }}">
             <block if="{{ !iconParts.single && iconParts.src1 && iconParts.src2 }}">
               <div class="combined-icon">
@@ -20,7 +22,7 @@
               </div>
             </block>
             <block elif="{{ iconParts.single && iconParts.src }}">
-              <image class="icon" src="{{ iconParts.src }}" style="width: 16px; height: 16px;" />
+              <image class="icon" src="{{ iconParts.src }}" style="width: 20px; height: 20px;" />
             </block>
             <!-- 如果 src 为空或 null，不渲染任何内容 -->
           </block>
@@ -88,7 +90,7 @@ export default {
     blackX: 2,
     blackY: 3,
     currentPlayer: 7, // 黑
-    moveCount: 0,
+
     // 按钮颜色
     DEFAULT_SWITCH_COLOR: "#3498DB",
     DEFAULT_RESET_COLOR: "#E74C3C",
@@ -455,29 +457,53 @@ export default {
   },
 
   getIconType(y, x) {
-    // 角色
-    if (y === this.whiteY && x === this.whiteX) return "white-player";
-    if (y === this.blackY && x === this.blackX) return "black-player";
+    // console.log(`getIconType called for (${y},${x})`);
+    // console.log(`白角色位置: (${this.whiteY},${this.whiteX})`);
+    // console.log(`黑角色位置: (${this.blackY},${this.blackX})`);
+    // 角色：白角色
+    if (y === this.whiteY && x === this.whiteX) {
+      return "white-player";
+    }
+    // 角色：黑角色
+    if (y === this.blackY && x === this.blackX) {
+      return "black-player";
+    }
 
-    // 箱子
-    const hasWhiteBox = this.whiteBoxes.some(b => b.x === x && b.y === y);
-    const hasBlackBox = this.blackBoxes.some(b => b.x === x && b.y === y);
-    if (hasWhiteBox) return "white-box";
-    if (hasBlackBox) return "black-box";
+    // 白箱子
+    const whiteBox = this.whiteBoxes.find(b => b.x === x && b.y === y);
+    if (whiteBox) {
+      return "white-box";
+    }
 
-    // 箱子目标点
+    // 黑箱子
+    const blackBox = this.blackBoxes.find(b => b.x === x && b.y === y);
+    if (blackBox) {
+      return "black-box";
+    }
+
+    // 箱子目标点（仅当无箱子时才显示）
     const isWhiteBoxTarget = this.whiteBoxTargets.some(t => t.x === x && t.y === y);
+    if (isWhiteBoxTarget) {
+      return "white-box-white-target";
+    }
+
     const isBlackBoxTarget = this.blackBoxTargets.some(t => t.x === x && t.y === y);
-    if (isWhiteBoxTarget) return "white-box-white-target";
-    if (isBlackBoxTarget) return "black-box-black-target";
+    if (isBlackBoxTarget) {
+      return "black-box-black-target";
+    }
 
-    // 角色目标点
-    const whitePosition = {x: 1, y: 5};
-    const blackPosition = {x: 4, y: 2};
-    if (y === whitePosition.y && x === whitePosition.x) return "white-player-white-target";
-    if (y === blackPosition.y && x === blackPosition.x) return "black-player-black-target";
+    // 角色目标点（仅当无角色时才显示）
+    const whitePosition = { x: 1, y: 5 };
+    if (y === whitePosition.y && x === whitePosition.x) {
+      return "white-player-white-target";
+    }
 
-    return null; // 无图标
+    const blackPosition = { x: 4, y: 2 };
+    if (y === blackPosition.y && x === blackPosition.x) {
+      return "black-player-black-target";
+    }
+
+    return null;
   },
 
   // 返回 { single: true, src: "..." } 或 { single: false, src1: "...", src2: "..." }
@@ -607,11 +633,6 @@ export default {
   display: flex;
 }
 
-.icon {
-  font-size: 16px;
-  font-weight: bold;
-}
-
 .switchArea {
   margin-bottom: 10px;
 }
@@ -695,8 +716,8 @@ export default {
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 
 </style>
