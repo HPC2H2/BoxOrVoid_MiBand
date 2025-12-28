@@ -10,24 +10,21 @@
 
     <!-- 画布 -->
     <div class="gameArea">
-      <div class="row" for="(y, indexY) in [0, 1, 2, 3, 4, 5, 6]">
+      <div class="row" for="(y, indexY) in [0,1,2,3,4,5,6]">
         <div
           class="cell"
-          style="background-color: {{ getCellBg(y, x) }};  
-        border-color: {{ getCellBorder(y, x) }}"
-          for="(x, indexX) in [0, 1, 2, 3, 4]"
+          style="background-color: {{ getCellBg(y, x) }}; border-color: {{ getCellBorder(y, x) }}"
+          for="(x, indexX) in [0,1,2,3,4]"
         >
-          <block if="{{ iconParts = getIconParts(y, x) }}">
-            <block if="{{ !iconParts.single && iconParts.src1 && iconParts.src2 }}">
-              <div class="combined-icon">
-                <image class="icon" src="{{ iconParts.src1 }}" style="width: 16px; height: 16px" />
-                <image class="icon" src="{{ iconParts.src2 }}" style="width: 16px; height: 16px" />
-              </div>
-            </block>
-            <block elif="{{ iconParts.single && iconParts.src }}">
-              <image class="icon" src="{{ iconParts.src }}" style="width: 20px; height: 20px" />
-            </block>
-            <!-- 如果 src 为空或 null，不渲染任何内容 -->
+          <!-- 直接从预计算的数据中取 -->
+          <block if="{{ cellIcons[y + ',' + x] && !cellIcons[y + ',' + x].single && cellIcons[y + ',' + x].src1 && cellIcons[y + ',' + x].src2 }}">
+            <div class="combined-icon">
+              <image class="icon" src="{{ cellIcons[y + ',' + x].src1 }}" style="width: 16px; height: 16px" />
+              <image class="icon" src="{{ cellIcons[y + ',' + x].src2 }}" style="width: 16px; height: 16px" />
+            </div>
+          </block>
+          <block elif="{{ cellIcons[y + ',' + x] && cellIcons[y + ',' + x].single && cellIcons[y + ',' + x].src }}">
+            <image class="icon" src="{{ cellIcons[y + ',' + x].src }}" style="width: 20px; height: 20px" />
           </block>
         </div>
       </div>
@@ -140,11 +137,27 @@ export default {
 
     // 角色目标点
     whitePlayerTarget: [],
-    blackPlayerTarget: []
+    blackPlayerTarget: [],
+
+    cellIcons: {},
+  },
+
+  // 新增方法：刷新所有单元格的图标数据
+  updateCellIcons() {
+    const icons = {};
+    for (let y = 0; y < 7; y++) {
+      for (let x = 0; x < 5; x++) {
+        const parts = this.getIconParts(y, x);
+        // 注意：即使 src 为 null，也要存，否则模板可能无法响应变化
+        icons[`${y},${x}`] = parts;
+      }
+    }
+    this.cellIcons = icons; // 触发视图更新
   },
 
   onInit() {
     this.initLevel()
+    this.updateCellIcons(); // 初始化图标
   },
 
   initLevel() {
@@ -266,6 +279,8 @@ export default {
     setTimeout(() => {
       this.resetBtnColor = this.DEFAULT_RESET_COLOR
     }, 500)
+
+    this.updateCellIcons(); // 重置后也要更新图标显示
   },
 
   // 切换角色
@@ -461,6 +476,8 @@ export default {
     }
 
     this.checkWinCondition()
+
+    this.updateCellIcons(); // 更新图标显示
   },
 
   getIconColor(y, x) {
