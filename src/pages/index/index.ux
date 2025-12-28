@@ -49,10 +49,10 @@
           </div>
           <div class="icon-row">
             <image class="icon" src="/common/game/icons/white-dao.png" />
-            <block if="{{ currentPlayer === 6 }}">
+            <block if="{{ currentPlayer === 7 }}">
               <image class="icon" src="/common/game/icons/white-white.png" />
             </block>
-            <block if="{{ currentPlayer === 7 }}">
+            <block if="{{ currentPlayer === 6 }}">
               <image class="icon" src="/common/game/icons/white-black.png" />
             </block>
           </div>
@@ -563,7 +563,9 @@ export default {
       }
     } else {
       // 单图标
-      // console.log(`单图标类型: ${type}`);
+      // console.log(`黑角色位置匹配: (${y},${x}),${this.blackY}, ${this.blackX})`);
+      console.log(`获取图标类型: (${y},${x}) => ${type}`);
+      console.log(`图标路径: ${this.getIconImagePath(type)}`);
       return {
         single: true,
         src: this.getIconImagePath(type)
