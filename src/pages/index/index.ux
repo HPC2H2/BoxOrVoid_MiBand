@@ -96,6 +96,22 @@
         />
       </div>
     </div>
+    <!--  胜利弹窗 -->
+    <block if="{{ showWinDialog }}">
+      <div class="win-dialog" @click="closeWinDialog">
+        <image class="win-img" src="{{ winDialogImage }}"/>
+        <text class="win-title">{{ winDialogTitle }}</text>
+        <text class="win-msg">{{ winDialogMessage }}</text>
+        <div class="win-buttons">
+          <div class="dialog-btn continue-btn" @click="continueGame">
+            <image src="/common/game/icons/white-continue.png"/>
+          </div>
+          <div class="dialog-btn restart-btn" @click="restartGame">
+            <image src="/common/game/icons/white-restart.png"/>
+          </div>
+        </div>
+      </div>
+    </block>
   </div>
 </template>
 
@@ -139,7 +155,14 @@ export default {
     whitePlayerTarget: [],
     blackPlayerTarget: [],
 
+    // 预计算的单元格图标数据
     cellIcons: {},
+
+    showWinDialog: false,
+    winDialogTitle: "恭喜通关！",
+    winDialogMessage: "你成功将所有箱子推到目标点，并让角色回到各自的位置！",
+    winDialogImage: "/common/game/icons/white-tongguan.png", 
+
   },
 
   // 新增方法：刷新所有单元格的图标数据
@@ -168,11 +191,10 @@ export default {
   initBoxes() {
     // 白箱子只能在黑色地形上移动
     this.whiteBoxes = [
-      {x: 1, y: 2},
-      {x: 2, y: 1}
+      {x: 2, y: 6},
     ]
     // 黑箱子只能在白色地形上移动
-    this.blackBoxes = [{x: 1, y: 4}]
+    this.blackBoxes = [{x: 3, y: 4},]
   },
 
   initTargets() {
@@ -180,7 +202,6 @@ export default {
     // 白箱子目标点(在黑色位置)
     this.whiteBoxTargets = [
       {x: 1, y: 6},
-      {x: 3, y: 6}
     ]
     // 黑箱子目标点
     this.blackBoxTargets = [{x: 3, y: 3}]
@@ -348,17 +369,20 @@ export default {
     const hasWhiteBox = this.whiteBoxes.some((b) => b.x === nx && b.y === ny)
     const hasBlackBox = this.blackBoxes.some((b) => b.x === nx && b.y === ny)
 
+    const isWhitePlayerTarget = this.whitePlayerTarget.some((t) => t.x === nx && t.y === ny)
+    const isBlackPlayerTarget = this.blackPlayerTarget.some((t) => t.x === nx && t.y === ny)
+
     // 3. 地形合法性检查（角色只能走特定地形）
     if (isWhite) {
-      // 白角色可以走：黑地（1）、黑箱子、黑目标点、对方角色位置
-      if (targetValue !== 1 && !hasBlackBox && !isBlackBoxTarget && !isTargetOppositePlayer) {
-        prompt.showToast({message: "白角色只能走黑色地形！", duration: 1000})
+      // 白角色可以走：黑地（1）、黑箱子、黑箱子目标点、白角色目标点、对方角色位置
+      if (targetValue !== 1 && !hasBlackBox && !isBlackBoxTarget && !isWhitePlayerTarget && !isTargetOppositePlayer) {
+        prompt.showToast({message: "白角色只能走黑色地形或白位！", duration: 1000})
         return
       }
     } else {
-      // 黑角色可以走：白地（0）、白箱子、白目标点、对方角色位置
-      if (targetValue !== 0 && !hasWhiteBox && !isWhiteBoxTarget && !isTargetOppositePlayer) {
-        prompt.showToast({message: "黑角色只能走白色地形！", duration: 1000})
+      // 黑角色可以走：白地（0）、白箱子、白箱子目标点、黑角色目标点、对方角色位置
+      if (targetValue !== 0 && !hasWhiteBox && !isWhiteBoxTarget && !isBlackPlayerTarget && !isTargetOppositePlayer) {
+        prompt.showToast({message: "黑角色只能走白色地形或黑位！", duration: 1000})
         return
       }
     }
@@ -602,7 +626,7 @@ export default {
     return icons[type] || ""
   },
 
-  checkWinCondition() {
+    checkWinCondition() {
     // 检查所有白箱子是否在白目标点上
     const whiteWin = this.whiteBoxes.every((box) =>
       this.whiteBoxTargets.some((target) => target.x === box.x && target.y === box.y)
@@ -613,23 +637,41 @@ export default {
       this.blackBoxTargets.some((target) => target.x === box.x && target.y === box.y)
     )
 
-    // 所有箱子都到位
-    if (whiteWin && blackWin && (this.whiteBoxes.length > 0 || this.blackBoxes.length > 0)) {
-      prompt.showDialog({
-        title: "恭喜通关！",
-        message: "你成功将所有箱子推到目标点！",
-        buttons: [
-          {text: "继续", color: "#667eea"},
-          {text: "重玩", color: "#FF416C"}
-        ],
-        success: (data) => {
-          if (data.index === 1) {
-            this.initLevel()
-          }
-        }
-      })
+    // 检查白角色是否在白角色目标点上
+    const whitePlayerOnTarget = this.whitePlayerTarget.some(pos =>
+      pos.x === this.whiteX && pos.y === this.whiteY
+    )
+
+    // 检查黑角色是否在黑角色目标点上
+    const blackPlayerOnTarget = this.blackPlayerTarget.some(pos =>
+      pos.x === this.blackX && pos.y === this.blackY
+    )
+
+    // 所有条件都满足才通关
+    if (
+      whiteWin &&
+      blackWin &&
+      whitePlayerOnTarget &&
+      blackPlayerOnTarget &&
+      (this.whiteBoxes.length > 0 || this.blackBoxes.length > 0)
+    ) {
+      this.showWinDialog = true
     }
-  }
+  },
+
+  closeWinDialog() {
+    this.showWinDialog = false
+  },
+
+  continueGame() {
+    this.showWinDialog = false
+  },
+
+  restartGame() {
+    this.showWinDialog = false
+    this.onReset()
+  },
+  
 }
 </script>
 
@@ -782,4 +824,53 @@ export default {
   width: 20px;
   height: 20px;
 }
+
+.win-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;            /* 占满整个容器，由父级 flex 居中 */
+  background-color: rgba(0,0,0,0.85); /* 半透明遮罩（手环支持 rgba） */
+}
+
+.win-img {
+  width: 48px;             /* 手环建议不超过 48px */
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.win-title {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.win-msg {
+  font-size: 12px;
+  color: #CCCCCC;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.win-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.dialog-btn {               /* 公共样式 */
+  width: 40px;
+  height: 40px;
+  background-color: #667eea;   /* “继续”默认颜色 */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*  “重玩” 按钮 */
+.restart-btn { background-color: #ff416c; }
+
+
 </style>
