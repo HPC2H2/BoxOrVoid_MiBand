@@ -1,0 +1,39 @@
+<template>
+    <div class="icon-display">
+      <block if="{{ iconParts && !iconParts.single && iconParts.src1 && iconParts.src2 }}">
+        <div class="combined-icon">
+          <image class="icon" src="{{ iconParts.src1 }}" style="width: 16px; height: 16px" />
+          <image class="icon" src="{{ iconParts.src2 }}" style="width: 16px; height: 16px" />
+        </div>
+      </block>
+      <block elif="{{ iconParts && iconParts.single && iconParts.src }}">
+        <image class="icon" src="{{ iconParts.src }}" style="width: 20px; height: 20px" />
+      </block>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: ['iconParts']
+  }
+  </script>
+  
+  <style scoped>
+  .icon-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .combined-icon {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+  
+  .icon {
+    display: flex;
+  }
+  </style>

@@ -1,0 +1,68 @@
+<template>
+    <div class="game-grid">
+      <div class="row" for="(y, indexY) in rows">
+        <div
+          class="cell"
+          style="background-color: {{ getCellBg(y, x) }}; border-color: {{ getCellBorder(y, x) }}"
+          for="(x, indexX) in columns"
+        >
+          <!-- 直接渲染图标 -->
+          <block if="{{ icons[y + ',' + x] && !icons[y + ',' + x].single && icons[y + ',' + x].src1 && icons[y + ',' + x].src2 }}">
+            <div class="combined-icon">
+              <image class="icon" src="{{ icons[y + ',' + x].src1 }}" style="width: 16px; height: 16px" />
+              <image class="icon" src="{{ icons[y + ',' + x].src2 }}" style="width: 16px; height: 16px" />
+            </div>
+          </block>
+          <block elif="{{ icons[y + ',' + x] && icons[y + ',' + x].single && icons[y + ',' + x].src }}">
+            <image class="icon" src="{{ icons[y + ',' + x].src }}" style="width: 20px; height: 20px" />
+          </block>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: [
+      'rows',
+      'columns',
+      'icons',
+      'getCellBg',
+      'getCellBorder'
+    ]
+  }
+  </script>
+  
+  <style scoped>
+  .game-grid {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a2530;
+    padding: 2px;
+    margin: 8px 0;
+    border-radius: 4px;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .cell {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333333;
+  }
+  
+  .combined-icon {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+  
+  .icon {
+    display: flex;
+  }
+  </style>

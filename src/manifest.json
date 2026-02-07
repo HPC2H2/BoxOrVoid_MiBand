@@ -1,17 +1,10 @@
 {
-  "package": "com.application.watch.demo",
-  "name": "BoxOrVoid_GameForMiBand9",
+  "package": "com.boxorvoid.demo",
+  "name": "箱即是空",
   "versionName": "1.0.0",
   "versionCode": 1,
-  "minPlatformVersion": 1000,
   "icon": "/common/logo.png",
-  "deviceTypeList": [
-    "watch"
-  ],
   "features": [
-    {
-      "name": "system.router"
-    },
     {
       "name": "system.prompt"
     }
@@ -21,14 +14,15 @@
     "designWidth": "device-width"
   },
   "router": {
-    "entry": "pages/index",
+    "entry": "levels/level01",
     "pages": {
-      "pages/index": {
-        "component": "index"
-      },
-      "pages/detail": {
-        "component": "detail"
+      "levels/level01": {
+        "component": "level01"
       }
     }
+  },
+
+  "display": {
+    "backgroundColor": "#1a1a1a"
   }
 }

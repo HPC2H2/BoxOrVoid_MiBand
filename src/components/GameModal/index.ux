@@ -1,0 +1,98 @@
+<template>
+    <block if="{{ show }}">
+      <div class="modal-overlay" @click="handleOverlayClick">
+        <div class="modal-content" @click="handleOverlayClick">
+          <image class="modal-icon" src="{{ icon }}" if="{{ icon }}" />
+          <text class="modal-title" if="{{ title }}">{{ title }}</text>
+          <text class="modal-message" if="{{ message }}">{{ message }}</text>
+          <div class="modal-buttons">
+            <div 
+              class="modal-button {{ button.className }}" 
+              for="{{ button in buttons }}"
+              @click="{{ button.onClick }}"
+            >
+              <image if="{{ button.icon }}" src="{{ button.icon }}" />
+              <text if="{{ button.text }}">{{ button.text }}</text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </block>
+  </template>
+  
+  <script>
+  export default {
+    props: [
+      'show',
+      'title',
+      'message',
+      'icon',
+      'buttons',
+      'closeOnOverlayClick',
+      'onClose'
+    ],
+    
+    handleOverlayClick() {
+      if (this.closeOnOverlayClick && this.onClose) {
+        this.$emit(this.onClose)
+      }
+    }
+  }
+  </script>
+  
+  <style scoped>
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+  }
+  
+  .modal-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+  
+  .modal-title {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+  
+  .modal-message {
+    font-size: 12px;
+    color: #cccccc;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .modal-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  </style>

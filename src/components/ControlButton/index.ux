@@ -1,0 +1,60 @@
+<template>
+    <div class="control-button" style="background-color: {{ color }}" onclick="{{ onClick }}">
+      <block if="{{ type === 'arrow' }}">
+        <image src="{{ arrowIcon }}" style="width: 20px; height: 20px" />
+      </block>
+      <block elif="{{ type === 'switch' }}">
+        <div class="icon-row">
+          <image class="icon" src="/common/image/icons/white-qie.png" />
+          <image class="icon" src="/common/image/icons/white-huan.png" />
+        </div>
+        <div class="icon-row">
+          <image class="icon" src="/common/image/icons/white-dao.png" />
+          <block if="{{ isWhite }}">
+            <image class="icon" src="/common/image/icons/white-white.png" />
+          </block>
+          <block if="{{ !isWhite }}">
+            <image class="icon" src="/common/image/icons/white-black.png" />
+          </block>
+        </div>
+      </block>
+      <block elif="{{ type === 'reset' }}">
+        <image class="icon" src="/common/image/icons/white-chong.png" style="width: 20px; height: 20px" />
+        <image class="icon" src="/common/image/icons/white-zhi.png" style="width: 20px; height: 20px" />
+      </block>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: [
+      'type', // 'arrow', 'switch', 'reset'
+      'color',
+      'onClick',
+      'arrowIcon',
+      'isWhite'
+    ]
+  }
+  </script>
+  
+  <style scoped>
+  .control-button {
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-row {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin: 2px 0;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  </style>

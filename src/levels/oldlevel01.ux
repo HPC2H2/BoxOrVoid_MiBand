@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <image class="title" src="/common/game/title.png" />
+    <image class="title" src="/common/image/title.png" />
 
     <!-- 游戏信息 -->
     <div class="info">
-      <image class="infoText" src="/common/game/infoText.png" />
-      <image class="hint" src="/common/game/hint.png" />
+      <image class="infoText" src="/common/image/infoText.png" />
+      <image class="hint" src="/common/image/hint.png" />
     </div>
 
     <!-- 画布 -->
@@ -41,16 +41,16 @@
           onclick="onSwitch"
         >
           <div class="icon-row">
-            <image class="icon" src="/common/game/icons/white-qie.png" />
-            <image class="icon" src="/common/game/icons/white-huan.png" />
+            <image class="icon" src="/common/image/icons/white-qie.png" />
+            <image class="icon" src="/common/image/icons/white-huan.png" />
           </div>
           <div class="icon-row">
-            <image class="icon" src="/common/game/icons/white-dao.png" />
+            <image class="icon" src="/common/image/icons/white-dao.png" />
             <block if="{{ currentPlayer === 7 }}">
-              <image class="icon" src="/common/game/icons/white-white.png" />
+              <image class="icon" src="/common/image/icons/white-white.png" />
             </block>
             <block if="{{ currentPlayer === 6 }}">
-              <image class="icon" src="/common/game/icons/white-black.png" />
+              <image class="icon" src="/common/image/icons/white-black.png" />
             </block>
           </div>
         </div>
@@ -60,21 +60,21 @@
       <div class="controlPanel">
         <div class="btnRow1">
           <div class="btnArrow" style="background-color: {{ upBtnColor }}" onclick="onUp">
-            <image src="/common/game/icons/white-up-arrow.png" style="width: 20px; height: 20px" />
+            <image src="/common/image/icons/white-up-arrow.png" style="width: 20px; height: 20px" />
             <!-- <text class="btnText">↑</text> -->
           </div>
         </div>
         <div class="btnRow2">
           <div class="btnArrow" style="background-color: {{ leftBtnColor }}" onclick="onLeft">
-            <image src="/common/game/icons/white-left-arrow.png" style="width: 20px; height: 20px" />
+            <image src="/common/image/icons/white-left-arrow.png" style="width: 20px; height: 20px" />
             <!-- <text class="btnText">←</text> -->
           </div>
           <div class="btnArrow" style="background-color: {{ downBtnColor }}" onclick="onDown">
-            <image src="/common/game/icons/white-down-arrow.png" style="width: 20px; height: 20px" />
+            <image src="/common/image/icons/white-down-arrow.png" style="width: 20px; height: 20px" />
             <!-- <text class="btnText">↓</text> -->
           </div>
           <div class="btnArrow" style="background-color: {{ rightBtnColor }}" onclick="onRight">
-            <image src="/common/game/icons/white-right-arrow.png" style="width: 20px; height: 20px" />
+            <image src="/common/image/icons/white-right-arrow.png" style="width: 20px; height: 20px" />
             <!-- <text class="btnText">→</text> -->
           </div>
         </div>
@@ -86,12 +86,12 @@
       <div class="btnReset" style="background-color: {{ resetBtnColor }}" onclick="onReset">
         <image
           class="resetImage"
-          src="/common/game/icons/white-chong.png"
+          src="/common/image/icons/white-chong.png"
           style="width: 20px; height: 20px"
         />
         <image
           class="resetImage"
-          src="/common/game/icons/white-zhi.png"
+          src="/common/image/icons/white-zhi.png"
           style="width: 20px; height: 20px"
         />
       </div>
@@ -104,10 +104,10 @@
         <text class="win-msg">{{ winDialogMessage }}</text>
         <div class="win-buttons">
           <div class="dialog-btn continue-btn" @click="continueGame">
-            <image src="/common/game/icons/white-continue.png"/>
+            <image src="/common/image/icons/white-continue.png"/>
           </div>
           <div class="dialog-btn restart-btn" @click="restartGame">
-            <image src="/common/game/icons/white-restart.png"/>
+            <image src="/common/image/icons/white-restart.png"/>
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@ export default {
     showWinDialog: false,
     winDialogTitle: "恭喜通关！",
     winDialogMessage: "你成功将所有箱子推到目标点，并让角色回到各自的位置！",
-    winDialogImage: "/common/game/icons/white-tongguan.png", 
+    winDialogImage: "/common/image/icons/white-tongguan.png", 
 
   },
 
@@ -616,12 +616,12 @@ export default {
 
   getIconImagePath(type) {
     const icons = {
-      "white-player": "/common/game/icons/grey-white.png",
-      "black-player": "/common/game/icons/white-black.png",
-      "white-box": "/common/game/icons/grey-box.png",
-      "black-box": "/common/game/icons/white-box.png",
-      "white-target": "/common/game/icons/grey-target.png",
-      "black-target": "/common/game/icons/white-target.png"
+      "white-player": "/common/image/icons/grey-white.png",
+      "black-player": "/common/image/icons/white-black.png",
+      "white-box": "/common/image/icons/grey-box.png",
+      "black-box": "/common/image/icons/white-box.png",
+      "white-target": "/common/image/icons/grey-target.png",
+      "black-target": "/common/image/icons/white-target.png"
     }
     return icons[type] || ""
   },
