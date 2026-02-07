@@ -14,15 +14,17 @@
     "designWidth": "device-width"
   },
   "router": {
-    "entry": "levels/level01",
+    "entry": "levels",
     "pages": {
-      "levels/level01": {
+      "levels": {
         "component": "level01"
       }
     }
   },
-
   "display": {
     "backgroundColor": "#1a1a1a"
-  }
+  },
+  "deviceTypeList": [
+    "watch"
+  ]
 }
