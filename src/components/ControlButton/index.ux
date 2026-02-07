@@ -1,60 +1,102 @@
 <template>
-    <div class="control-button" style="background-color: {{ color }}" onclick="{{ onClick }}">
-      <block if="{{ type === 'arrow' }}">
-        <image src="{{ arrowIcon }}" style="width: 20px; height: 20px" />
-      </block>
-      <block elif="{{ type === 'switch' }}">
-        <div class="icon-row">
-          <image class="icon" src="/common/image/icons/white-qie.png" />
-          <image class="icon" src="/common/image/icons/white-huan.png" />
-        </div>
-        <div class="icon-row">
-          <image class="icon" src="/common/image/icons/white-dao.png" />
-          <block if="{{ isWhite }}">
-            <image class="icon" src="/common/image/icons/white-white.png" />
-          </block>
-          <block if="{{ !isWhite }}">
-            <image class="icon" src="/common/image/icons/white-black.png" />
-          </block>
-        </div>
-      </block>
-      <block elif="{{ type === 'reset' }}">
-        <image class="icon" src="/common/image/icons/white-chong.png" style="width: 20px; height: 20px" />
-        <image class="icon" src="/common/image/icons/white-zhi.png" style="width: 20px; height: 20px" />
-      </block>
-    </div>
-  </template>
+  <div class="{{btnClass}}" style="background-color: {{ color }}">
+    <block if="{{ type === 'arrow' }}">
+      <image src="{{ arrowIcon }}" style="width: 20px; height: 20px" />
+    </block>
+    <block elif="{{ type === 'switch' }}">
+      <div class="icon-row">
+        <image class="icon" src="/common/image/icons/white-qie.png" />
+        <image class="icon" src="/common/image/icons/white-huan.png" />
+      </div>
+      <div class="icon-row">
+        <image class="icon" src="/common/image/icons/white-dao.png" />
+        <block if="{{ isWhite }}">
+          <image class="icon" src="/common/image/icons/white-white.png" />
+        </block>
+        <block if="{{ !isWhite }}">
+          <image class="icon" src="/common/image/icons/white-black.png" />
+        </block>
+      </div>
+    </block>
+    <block elif="{{ type === 'reset' }}">
+      <image class="resetImage" src="/common/image/icons/white-chong.png" style="width: 20px; height: 20px" />
+      <image class="resetImage" src="/common/image/icons/white-zhi.png" style="width: 20px; height: 20px" />
+    </block>
+  </div>
+</template>
+
+<script>
+export default {
+  props: [
+    'type',
+    'color',
+    'arrowIcon',
+    'isWhite'
+  ],
   
-  <script>
-  export default {
-    props: [
-      'type', // 'arrow', 'switch', 'reset'
-      'color',
-      'onClick',
-      'arrowIcon',
-      'isWhite'
-    ]
+  computed: {
+    btnClass() {
+      if (this.type === 'arrow') return 'btnArrow'
+      if (this.type === 'switch') return 'btnSwitch'
+      if (this.type === 'reset') return 'btnReset'
+      return 'control-button'
+    }
   }
-  </script>
-  
-  <style scoped>
-  .control-button {
-    border: none;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon-row {
-    display: flex;
-    justify-content: center;
-    gap: 2px;
-    margin: 2px 0;
-  }
-  
-  .icon {
-    width: 20px;
-    height: 20px;
-  }
-  </style>
+}
+</script>
+
+<style scoped>
+.btnSwitch {
+  width: 50px;
+  height: 60px;
+  border: none;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 4px;
+  flex-direction: column;
+}
+
+.btnArrow {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  margin: 1px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnReset {
+  width: 55px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 4px;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+}
+
+.icon-row {
+  justify-content: center;
+  gap: 2px;
+  margin: 2px 0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.resetImage {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  padding: 2px;
+}
+</style>

@@ -8,8 +8,8 @@
       
       <!-- 游戏信息 -->
       <div class="info">
-        <text>步数: {{ stepCount }}</text>
-        <text>当前玩家: {{ currentPlayerName }}</text>
+        <image class="infoText" src="/common/image/infoText.png" />
+        <image class="hint" src="/common/image/hint.png" />
       </div>
       
       <!-- 画布 -->
@@ -17,59 +17,64 @@
         rows="{{rows}}"
         columns="{{columns}}"
         icons="{{cellIcons}}"
-        get-cell-bg="{{getCellBg}}"
-        get-cell-border="{{getCellBorder}}"
+        cell-styles="{{cellStyles}}"
       ></game-grid>
       
       <!-- 控制区域 -->
       <div class="controlArea">
         <div class="switchArea">
-          <control-button
-            type="switch"
-            color="{{switchBtnColor}}"
-            is-white="{{currentPlayer === 6}}"
-            onclick="onSwitch"
-          ></control-button>
+          <div onclick="onSwitch">
+            <control-button
+              type="switch"
+              color="{{switchBtnColor}}"
+              is-white="{{currentPlayer === 6}}"
+            ></control-button>
+          </div>
         </div>
         
         <div class="controlPanel">
           <div class="btnRow1">
-            <control-button
-              type="arrow"
-              color="{{upBtnColor}}"
-              arrow-icon="/common/image/icons/white-up-arrow.png"
-              onclick="onUp"
-            ></control-button>
+            <div onclick="onUp">
+              <control-button
+                type="arrow"
+                color="{{upBtnColor}}"
+                arrow-icon="/common/image/icons/white-up-arrow.png"
+              ></control-button>
+            </div>
           </div>
           <div class="btnRow2">
-            <control-button
-              type="arrow"
-              color="{{leftBtnColor}}"
-              arrow-icon="/common/image/icons/white-left-arrow.png"
-              onclick="onLeft"
-            ></control-button>
-            <control-button
-              type="arrow"
-              color="{{downBtnColor}}"
-              arrow-icon="/common/image/icons/white-down-arrow.png"
-              onclick="onDown"
-            ></control-button>
-            <control-button
-              type="arrow"
-              color="{{rightBtnColor}}"
-              arrow-icon="/common/image/icons/white-right-arrow.png"
-              onclick="onRight"
-            ></control-button>
+            <div onclick="onLeft">
+              <control-button
+                type="arrow"
+                color="{{leftBtnColor}}"
+                arrow-icon="/common/image/icons/white-left-arrow.png"
+              ></control-button>
+            </div>
+            <div onclick="onDown">
+              <control-button
+                type="arrow"
+                color="{{downBtnColor}}"
+                arrow-icon="/common/image/icons/white-down-arrow.png"
+              ></control-button>
+            </div>
+            <div onclick="onRight">
+              <control-button
+                type="arrow"
+                color="{{rightBtnColor}}"
+                arrow-icon="/common/image/icons/white-right-arrow.png"
+              ></control-button>
+            </div>
           </div>
         </div>
       </div>
       
       <div class="controlArea2">
-        <control-button
-          type="reset"
-          color="{{resetBtnColor}}"
-          onclick="onReset"
-        ></control-button>
+        <div onclick="onReset">
+          <control-button
+            type="reset"
+            color="{{resetBtnColor}}"
+          ></control-button>
+        </div>
       </div>
       
       <!-- 通关弹窗 -->
@@ -80,7 +85,7 @@
         icon="/common/image/icons/white-tongguan.png"
         buttons="{{winButtons}}"
         close-on-overlay-click="{{true}}"
-        onclick="onCloseDialog"
+        onclick="closeWinDialog"
       ></game-modal>
     </div>
   </template>
@@ -95,16 +100,17 @@
       rows: [0, 1, 2, 3, 4, 5, 6],
       columns: [0, 1, 2, 3, 4],
       cellIcons: {},
+      cellStyles: {},
       showWinDialog: false,
       stepCount: 0,
       currentPlayerName: '白方',
       currentPlayer: 7,
-      switchBtnColor: '#555555',
-      upBtnColor: '#555555',
-      downBtnColor: '#555555',
-      leftBtnColor: '#555555',
-      rightBtnColor: '#555555',
-      resetBtnColor: '#555555',
+      switchBtnColor: '#3498DB',
+      upBtnColor: '#2ECC71',
+      downBtnColor: '#2ECC71',
+      leftBtnColor: '#2ECC71',
+      rightBtnColor: '#2ECC71',
+      resetBtnColor: '#E74C3C',
       winButtons: [
         {
           icon: "/common/image/icons/white-continue.png",
@@ -167,27 +173,32 @@
         rules[y + "," + (width - 1)] = 1
       }
       
-      // 3. 内部黑地
-      rules["1,1"] = 1
+      // 3. 内部黑墙
       rules["1,2"] = 1
       rules["2,2"] = 1
-      rules["2,3"] = 1
-      rules["3,1"] = 1
-      rules["3,2"] = 1
-      rules["4,2"] = 1
-      rules["4,3"] = 1
-      rules["5,1"] = 1
-      rules["5,2"] = 1
-      rules["5,3"] = 1
+      rules["1,4"] = 1
+      rules["2,4"] = 1
       
       return rules
     },
     
     updateDisplay() {
-      this.cellIcons = this.game.iconManager.getCellIcons()
+      this.cellIcons = this.game.iconManager.updateCellIcons()
       this.stepCount = this.game.state.stepCount
       this.currentPlayer = this.game.state.currentPlayer
       this.currentPlayerName = this.currentPlayer === 6 ? '白方' : '黑方'
+      
+      // 计算所有单元格样式
+      const styles = {}
+      for (let y = 0; y < 7; y++) {
+        for (let x = 0; x < 5; x++) {
+          styles[`${y},${x}`] = {
+            bg: this.getCellBg(y, x),
+            border: this.getCellBorder(y, x)
+          }
+        }
+      }
+      this.cellStyles = styles
     },
     
     onUp() {
@@ -294,44 +305,50 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: #0f1419;
+    background-color: #1a1a1a;
     padding: 8px;
+    height: 100%;
+    width: 100%;
   }
   
   .title {
-    width: 150px;
-    height: 40px;
-    margin-bottom: 8px;
+    background-color: #1a1a1a;
+    height: 30px;
+    width: 70%;
+    object-fit: fill;
+    margin: 6px 0 3px 0;
   }
   
   .info {
+    background-color: #ffffff;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
-    padding: 4px 8px;
-    margin-bottom: 4px;
+    margin: 2px;
+    border-radius: 6px;
+    overflow: hidden;
   }
   
-  .info text {
-    font-size: 12px;
-    color: #ffffff;
+  .infoText, .hint {
+    height: 40px;
+    width: 100%;
+    object-fit: fill;
+    border-radius: inherit;
   }
   
   .controlArea {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 4px;
   }
   
   .switchArea {
-    margin-right: 8px;
+    margin-bottom: 10px;
   }
   
   .controlPanel {
     flex-direction: column;
     align-items: center;
+    margin: 4px;
   }
   
   .btnRow1, .btnRow2 {
@@ -345,8 +362,9 @@
   }
   
   .controlArea2 {
-    margin-top: 8px;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
-    align-items: center;
+    margin-top: 4px;
   }
   </style>

@@ -3,7 +3,7 @@
       <div class="row" for="(y, indexY) in rows">
         <div
           class="cell"
-          style="background-color: {{ getCellBg(y, x) }}; border-color: {{ getCellBorder(y, x) }}"
+          style="background-color: {{ cellStyles[y + ',' + x].bg }}; border-color: {{ cellStyles[y + ',' + x].border }}"
           for="(x, indexX) in columns"
         >
           <!-- 直接渲染图标 -->
@@ -27,8 +27,7 @@
       'rows',
       'columns',
       'icons',
-      'getCellBg',
-      'getCellBorder'
+      'cellStyles'
     ]
   }
   </script>
