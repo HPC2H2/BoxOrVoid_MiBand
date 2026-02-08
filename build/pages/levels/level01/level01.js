@@ -1047,6 +1047,9 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 this.state.switchPlayer();
                                 return this.state.currentPlayer;
                             }
+                            checkWin() {
+                                return this.winChecker.checkWin();
+                            }
                             resetButtonColors() {
                                 this.state.switchBtnColor = _constants.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH;
                                 this.state.upBtnColor = _constants.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW;
@@ -1450,8 +1453,12 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 });
                                 this.flashButton(buttonType);
                                 this.updateDisplay();
-                                if (true) _system.default.push({
-                                    uri: 'pages/win'
+                                if (this.game.checkWin()) _system.default.push({
+                                    uri: 'pages/win',
+                                    params: {
+                                        levelId: 'level01',
+                                        levelPath: 'pages/levels/level01'
+                                    }
                                 });
                             },
                             onSwitch () {

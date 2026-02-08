@@ -143,6 +143,11 @@ export class Game {
     return this.state.currentPlayer
   }
   
+  // 检查是否通关
+  checkWin() {
+    return this.winChecker.checkWin()
+  }
+  
   // 重置按钮颜色
   resetButtonColors() {
     this.state.switchBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH

@@ -170,18 +170,27 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                         };
                     }
                     var _default = exports.default = {
+                        private: {
+                            levelId: '',
+                            levelPath: ''
+                        },
+                        onInit () {
+                            const { levelId, levelPath } = this.$page.options;
+                            this.levelId = levelId || 'level01';
+                            this.levelPath = levelPath || 'pages/levels/level01/index.ux';
+                        },
                         onBackPress () {
                             this.restartLevel();
                             return true;
                         },
                         nextLevel () {
                             _system.default.replace({
-                                uri: '/levels'
+                                uri: `/${this.levelPath}`
                             });
                         },
                         restartLevel () {
                             _system.default.replace({
-                                uri: '/levels'
+                                uri: `/${this.levelPath}`
                             });
                         }
                     };

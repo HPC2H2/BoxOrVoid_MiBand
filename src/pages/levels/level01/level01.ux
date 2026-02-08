@@ -208,12 +208,16 @@
       this.updateDisplay()
       
       // test 跳转
-      if (1){
+      // if (1){
       // 检查通关
-      // if (this.game.checkWin()) {
+      if (this.game.checkWin()) {
         // 跳转到通关页面
         router.push({
           uri: 'pages/win',
+          params: {
+            levelId: 'level01',
+            levelPath: 'pages/levels/level01',
+          }
         })
       }
     },

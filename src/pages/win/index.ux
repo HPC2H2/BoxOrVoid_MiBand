@@ -16,9 +16,24 @@
 </template>
 
 <script>
-import router from '@system.router'
+import router from '@system.router' 
+// 当一关游戏结束后，跳转到这个页面。这个页面有三个按钮：下一关、重玩和返回主菜单。
+// 点击下一关会跳转到下一关的页面，点击重玩会重新加载当前关卡。
+// 返回主菜单暂时没有，后续可以添加一个按钮实现这个功能。
 
 export default {
+  private: {
+    levelId: '',
+    levelPath: '',
+  },
+
+  onInit() {
+    // 获取当前关卡信息
+    const { levelId, levelPath } = this.$page.options
+    this.levelId = levelId || 'level01'
+    this.levelPath = levelPath || 'pages/levels/level01/index.ux'
+  },
+
   onBackPress() {
     // 拦截返回键
     this.restartLevel()
@@ -26,17 +41,19 @@ export default {
   },
   
   nextLevel() {
-    // TODO: 跳转到下一关
+    // 跳转到下一关
     router.replace({
-      uri: '/levels'
+      uri: `/${this.levelPath}`
     })
   },
   
   restartLevel() {
     router.replace({
-      uri: '/levels'
+      uri: `/${this.levelPath}`
     })
   }
+
+  
 }
 </script>
 
