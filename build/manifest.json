@@ -7,6 +7,9 @@
   "features": [
     {
       "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
     }
   ],
   "config": {
@@ -14,10 +17,13 @@
     "designWidth": "device-width"
   },
   "router": {
-    "entry": "levels",
+    "entry": "pages/levels/level01",
     "pages": {
-      "levels": {
+      "pages/levels/level01": {
         "component": "level01"
+      },
+      "pages/win": {
+        "component": "index"
       }
     }
   },
@@ -30,7 +36,7 @@
   "minAPILevel": 1,
   "packageInfo": {
     "toolkit": "2.0.5",
-    "timeStamp": "2026-02-07T17:21:16.481Z",
+    "timeStamp": "2026-02-08T08:05:58.687Z",
     "node": "v22.13.0",
     "platform": "win32",
     "arch": "x64",

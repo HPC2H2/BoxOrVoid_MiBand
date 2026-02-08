@@ -37,12 +37,26 @@ export class IconManager {
   
   // 获取图标类型
   getIconType(y, x) {
+    // 检查两个角色是否都在这个位置
+    const hasWhitePlayer = (y === this.state.whiteY && x === this.state.whiteX)
+    const hasBlackPlayer = (y === this.state.blackY && x === this.state.blackX)
+    
+    // 如果两个角色都在同一位置，显示最后移动到这里的角色
+    if (hasWhitePlayer && hasBlackPlayer) {
+      const lastPlayer = this.state.lastPlayerAt[`${y},${x}`]
+      if (lastPlayer === GAME_CONSTANTS.PLAYER_TYPES.WHITE) {
+        return "white-player"
+      } else {
+        return "black-player"
+      }
+    }
+    
     // 角色：白角色
-    if (y === this.state.whiteY && x === this.state.whiteX) {
+    if (hasWhitePlayer) {
       return "white-player"
     }
     // 角色：黑角色
-    if (y === this.state.blackY && x === this.state.blackX) {
+    if (hasBlackPlayer) {
       return "black-player"
     }
 

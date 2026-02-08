@@ -574,338 +574,6 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                             $app_exports$.default.style = $app_style$;
                         };
                     },
-                    "./src/components/GameModal/index.ux" (module) {
-                        var $app_style$ = [
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-overlay"
-                                    ]
-                                ],
-                                {
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    backgroundColor: "rgba(0, 0, 0, 0.85)",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-content"
-                                    ]
-                                ],
-                                {
-                                    backgroundColor: "#2a2a2a",
-                                    borderRadius: "8px",
-                                    paddingTop: "16px",
-                                    paddingRight: "16px",
-                                    paddingBottom: "16px",
-                                    paddingLeft: "16px",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    minWidth: "140px"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-icon"
-                                    ]
-                                ],
-                                {
-                                    width: "48px",
-                                    height: "48px",
-                                    marginBottom: "8px"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-title"
-                                    ]
-                                ],
-                                {
-                                    fontSize: "14px",
-                                    color: "#ffffff",
-                                    marginBottom: "4px"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-message"
-                                    ]
-                                ],
-                                {
-                                    fontSize: "12px",
-                                    color: "#cccccc",
-                                    marginBottom: "12px",
-                                    textAlign: "center"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-buttons"
-                                    ]
-                                ],
-                                {
-                                    display: "flex",
-                                    gap: "12px"
-                                }
-                            ],
-                            [
-                                [
-                                    [
-                                        0,
-                                        "modal-button"
-                                    ]
-                                ],
-                                {
-                                    width: "40px",
-                                    height: "40px",
-                                    borderRadius: "4px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }
-                            ]
-                        ];
-                        var $app_script$ = function __scriptModule__(module, exports, $app_require$1) {
-                            "use strict";
-                            Object.defineProperty(exports, "__esModule", {
-                                value: true
-                            });
-                            exports.default = void 0;
-                            var _default = exports.default = {
-                                props: [
-                                    'show',
-                                    'title',
-                                    'message',
-                                    'icon',
-                                    'buttons',
-                                    'closeOnOverlayClick',
-                                    'onClose'
-                                ],
-                                handleOverlayClick () {
-                                    if (this.closeOnOverlayClick && this.onClose) this.$emit(this.onClose);
-                                }
-                            };
-                        };
-                        var $app_template$ = function(vm) {
-                            const _vm_ = vm || this;
-                            return aiot.__ci__({
-                                __vm__: _vm_,
-                                __opts__: {
-                                    shown: function() {
-                                        return _vm_.show;
-                                    }
-                                }
-                            }, function() {
-                                return [
-                                    aiot.__cb__({
-                                        __vm__: _vm_,
-                                        __opts__: {
-                                            if: function() {
-                                                return _vm_.show;
-                                            }
-                                        }
-                                    }, function() {
-                                        return [
-                                            aiot.__ce__("div", {
-                                                __vm__: _vm_,
-                                                __opts__: {
-                                                    classList: [
-                                                        "modal-overlay"
-                                                    ],
-                                                    events: {
-                                                        click: function(evt) {
-                                                            return _vm_.handleOverlayClick(evt);
-                                                        }
-                                                    }
-                                                }
-                                            }, [
-                                                aiot.__ce__("div", {
-                                                    __vm__: _vm_,
-                                                    __opts__: {
-                                                        classList: [
-                                                            "modal-content"
-                                                        ],
-                                                        events: {
-                                                            click: function(evt) {
-                                                                return _vm_.handleOverlayClick(evt);
-                                                            }
-                                                        }
-                                                    }
-                                                }, [
-                                                    aiot.__ci__({
-                                                        __vm__: _vm_,
-                                                        __opts__: {
-                                                            shown: function() {
-                                                                return _vm_.icon;
-                                                            }
-                                                        }
-                                                    }, function() {
-                                                        return [
-                                                            aiot.__ce__("image", {
-                                                                __vm__: _vm_,
-                                                                __opts__: {
-                                                                    classList: [
-                                                                        "modal-icon"
-                                                                    ],
-                                                                    src: function() {
-                                                                        return _vm_.icon;
-                                                                    }
-                                                                }
-                                                            }, [])
-                                                        ];
-                                                    }),
-                                                    aiot.__ci__({
-                                                        __vm__: _vm_,
-                                                        __opts__: {
-                                                            shown: function() {
-                                                                return _vm_.title;
-                                                            }
-                                                        }
-                                                    }, function() {
-                                                        return [
-                                                            aiot.__ce__("text", {
-                                                                __vm__: _vm_,
-                                                                __opts__: {
-                                                                    classList: [
-                                                                        "modal-title"
-                                                                    ],
-                                                                    value: function() {
-                                                                        return _vm_.title;
-                                                                    }
-                                                                }
-                                                            }, [])
-                                                        ];
-                                                    }),
-                                                    aiot.__ci__({
-                                                        __vm__: _vm_,
-                                                        __opts__: {
-                                                            shown: function() {
-                                                                return _vm_.message;
-                                                            }
-                                                        }
-                                                    }, function() {
-                                                        return [
-                                                            aiot.__ce__("text", {
-                                                                __vm__: _vm_,
-                                                                __opts__: {
-                                                                    classList: [
-                                                                        "modal-message"
-                                                                    ],
-                                                                    value: function() {
-                                                                        return _vm_.message;
-                                                                    }
-                                                                }
-                                                            }, [])
-                                                        ];
-                                                    }),
-                                                    aiot.__ce__("div", {
-                                                        __vm__: _vm_,
-                                                        __opts__: {
-                                                            classList: [
-                                                                "modal-buttons"
-                                                            ]
-                                                        }
-                                                    }, [
-                                                        aiot.__cf__({
-                                                            __vm__: _vm_,
-                                                            __opts__: {
-                                                                exp: function() {
-                                                                    return _vm_.buttons;
-                                                                },
-                                                                key: "$idx",
-                                                                value: "button"
-                                                            }
-                                                        }, function($idx, button) {
-                                                            return [
-                                                                aiot.__ce__("div", {
-                                                                    __vm__: _vm_,
-                                                                    __opts__: {
-                                                                        classList: function() {
-                                                                            const $classValue$ = "modal-button " + button.className;
-                                                                            if ('string' == typeof $classValue$) return $classValue$.split(' ').map((item)=>item.trim()).filter(Boolean);
-                                                                            return $classValue$;
-                                                                        },
-                                                                        events: {
-                                                                            click: function(evt) {
-                                                                                return button.onClick(evt);
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }, [
-                                                                    aiot.__ci__({
-                                                                        __vm__: _vm_,
-                                                                        __opts__: {
-                                                                            shown: function() {
-                                                                                return button.icon;
-                                                                            }
-                                                                        }
-                                                                    }, function() {
-                                                                        return [
-                                                                            aiot.__ce__("image", {
-                                                                                __vm__: _vm_,
-                                                                                __opts__: {
-                                                                                    src: function() {
-                                                                                        return button.icon;
-                                                                                    }
-                                                                                }
-                                                                            }, [])
-                                                                        ];
-                                                                    }),
-                                                                    aiot.__ci__({
-                                                                        __vm__: _vm_,
-                                                                        __opts__: {
-                                                                            shown: function() {
-                                                                                return button.text;
-                                                                            }
-                                                                        }
-                                                                    }, function() {
-                                                                        return [
-                                                                            aiot.__ce__("text", {
-                                                                                __vm__: _vm_,
-                                                                                __opts__: {
-                                                                                    value: function() {
-                                                                                        return button.text;
-                                                                                    }
-                                                                                }
-                                                                            }, [])
-                                                                        ];
-                                                                    })
-                                                                ])
-                                                            ];
-                                                        })
-                                                    ])
-                                                ])
-                                            ])
-                                        ];
-                                    })
-                                ];
-                            });
-                        };
-                        module.exports = function($app_exports$) {
-                            $app_script$({}, $app_exports$, $app_require$1);
-                            $app_exports$.default.template = $app_template$;
-                            $app_exports$.default.style = $app_style$;
-                        };
-                    },
                     "./src/game/GameState.js" (__unused_rspack_module, exports, __webpack_require__) {
                         "use strict";
                         Object.defineProperty(exports, "__esModule", {
@@ -925,6 +593,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 this.whiteY = 0;
                                 this.blackX = 0;
                                 this.blackY = 0;
+                                this.lastPlayerAt = {};
                                 this.whiteBoxes = [];
                                 this.blackBoxes = [];
                                 this.whiteBoxTargets = [];
@@ -967,6 +636,9 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 this.currentPlayer = this.currentPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE ? _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK : _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE;
                                 return this.currentPlayer;
                             }
+                            recordPlayerMove(x, y, playerType) {
+                                this.lastPlayerAt[`${y},${x}`] = playerType;
+                            }
                         }
                         exports.GameState = GameState;
                     },
@@ -1003,8 +675,15 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 }
                             }
                             getIconType(y, x) {
-                                if (y === this.state.whiteY && x === this.state.whiteX) return "white-player";
-                                if (y === this.state.blackY && x === this.state.blackX) return "black-player";
+                                const hasWhitePlayer = y === this.state.whiteY && x === this.state.whiteX;
+                                const hasBlackPlayer = y === this.state.blackY && x === this.state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = this.state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "white-player";
+                                    return "black-player";
+                                }
+                                if (hasWhitePlayer) return "white-player";
+                                if (hasBlackPlayer) return "black-player";
                                 const whiteBox = this.state.whiteBoxes.find((b)=>b.x === x && b.y === y);
                                 if (whiteBox) return "white-box";
                                 const blackBox = this.state.blackBoxes.find((b)=>b.x === x && b.y === y);
@@ -1293,10 +972,12 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 if (levelData.whitePlayer) {
                                     this.state.whiteX = levelData.whitePlayer.x;
                                     this.state.whiteY = levelData.whitePlayer.y;
+                                    this.state.recordPlayerMove(levelData.whitePlayer.x, levelData.whitePlayer.y, _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE);
                                 }
                                 if (levelData.blackPlayer) {
                                     this.state.blackX = levelData.blackPlayer.x;
                                     this.state.blackY = levelData.blackPlayer.y;
+                                    this.state.recordPlayerMove(levelData.blackPlayer.x, levelData.blackPlayer.y, _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK);
                                 }
                                 if (levelData.whiteBoxes) this.state.whiteBoxes = [
                                     ...levelData.whiteBoxes
@@ -1335,6 +1016,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 };
                             }
                             movePlayer(isWhite, x, y) {
+                                const playerType = isWhite ? _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE : _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK;
                                 if (isWhite) {
                                     this.state.whiteX = x;
                                     this.state.whiteY = y;
@@ -1342,6 +1024,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                     this.state.blackX = x;
                                     this.state.blackY = y;
                                 }
+                                this.state.recordPlayerMove(x, y, playerType);
                             }
                             pushBox(isWhite, playerPos, boxPos, boxIndex, boxType) {
                                 this.movePlayer(isWhite, playerPos.nx, playerPos.ny);
@@ -1378,8 +1061,15 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 const isBlackBoxTarget = state.blackBoxTargets.some((t)=>t.x === x && t.y === y);
                                 const hasWhiteBox = state.whiteBoxes.some((b)=>b.x === x && b.y === y);
                                 const hasBlackBox = state.blackBoxes.some((b)=>b.x === x && b.y === y);
-                                if (y === state.whiteY && x === state.whiteX) return "#FFFFFF";
-                                if (y === state.blackY && x === state.blackX) return "#000000";
+                                const hasWhitePlayer = y === state.whiteY && x === state.whiteX;
+                                const hasBlackPlayer = y === state.blackY && x === state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "#FFFFFF";
+                                    return "#000000";
+                                }
+                                if (hasWhitePlayer) return "#FFFFFF";
+                                if (hasBlackPlayer) return "#000000";
                                 if (hasWhiteBox) return "#E0E0E0";
                                 if (hasBlackBox) return "#1A1A1A";
                                 if (isWhiteBoxTarget) return "#FCD3D3";
@@ -1392,8 +1082,15 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                             }
                             getCellBorder(y, x) {
                                 const state = this.state;
-                                if (y === state.whiteY && x === state.whiteX) return "#3498DB";
-                                if (y === state.blackY && x === state.blackX) return "#E74C3C";
+                                const hasWhitePlayer = y === state.whiteY && x === state.whiteX;
+                                const hasBlackPlayer = y === state.blackY && x === state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "#3498DB";
+                                    return "#E74C3C";
+                                }
+                                if (hasWhitePlayer) return "#3498DB";
+                                if (hasBlackPlayer) return "#E74C3C";
                                 return "#333333";
                             }
                         }
@@ -1430,7 +1127,6 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                 (()=>{
                     $app_exports$['game-grid'] = __webpack_require__("./src/components/GameGrid/index.ux");
                     $app_exports$['control-button'] = __webpack_require__("./src/components/ControlButton/index.ux");
-                    $app_exports$['game-modal'] = __webpack_require__("./src/components/GameModal/index.ux");
                     var $app_style$ = [
                         [
                             [
@@ -1606,6 +1302,12 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                         });
                         exports.default = void 0;
                         var _index = __webpack_require__("./src/game/index.js");
+                        var _system = _interopRequireDefault($app_require$1("@app-module/system.router"));
+                        function _interopRequireDefault(e) {
+                            return e && e.__esModule ? e : {
+                                default: e
+                            };
+                        }
                         const prompt = $app_require$1("@app-module/system.prompt");
                         var _default = exports.default = {
                             private: {
@@ -1628,7 +1330,6 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 ],
                                 cellIcons: {},
                                 cellStyles: {},
-                                showWinDialog: false,
                                 stepCount: 0,
                                 currentPlayerName: '白方',
                                 currentPlayer: 7,
@@ -1637,19 +1338,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 downBtnColor: '#2ECC71',
                                 leftBtnColor: '#2ECC71',
                                 rightBtnColor: '#2ECC71',
-                                resetBtnColor: '#E74C3C',
-                                winButtons: [
-                                    {
-                                        icon: "/common/image/icons/white-continue.png",
-                                        className: "continue-btn",
-                                        onClick: "continueGame"
-                                    },
-                                    {
-                                        icon: "/common/image/icons/white-restart.png",
-                                        className: "restart-btn",
-                                        onClick: "restartGame"
-                                    }
-                                ]
+                                resetBtnColor: '#E74C3C'
                             },
                             onInit () {
                                 this.game = new _index.Game();
@@ -1761,7 +1450,9 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                 });
                                 this.flashButton(buttonType);
                                 this.updateDisplay();
-                                if (this.game.checkWin()) this.showWinDialog = true;
+                                if (true) _system.default.push({
+                                    uri: 'pages/win'
+                                });
                             },
                             onSwitch () {
                                 this.game.switchPlayer();
@@ -1802,16 +1493,6 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                             },
                             getCellBorder (y, x) {
                                 return this.game.getCellBorder(y, x);
-                            },
-                            closeWinDialog () {
-                                this.showWinDialog = false;
-                            },
-                            continueGame () {
-                                this.showWinDialog = false;
-                            },
-                            restartGame () {
-                                this.showWinDialog = false;
-                                this.onReset();
                             }
                         };
                         const moduleOwn = exports.default || module.exports;
@@ -2080,29 +1761,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                                         }
                                     }, [])
                                 ])
-                            ]),
-                            aiot.__cc__("game-modal", {
-                                __vm__: _vm_,
-                                __opts__: {
-                                    show: function() {
-                                        return _vm_.showWinDialog;
-                                    },
-                                    title: "恭喜通关！",
-                                    message: "你成功将所有箱子推到目标点，并让角色回到各自的位置！",
-                                    icon: "/common/image/icons/white-tongguan.png",
-                                    buttons: function() {
-                                        return _vm_.winButtons;
-                                    },
-                                    closeOnOverlayClick: function() {
-                                        return true;
-                                    },
-                                    events: {
-                                        click: function(evt) {
-                                            return _vm_.closeWinDialog(evt);
-                                        }
-                                    }
-                                }
-                            }, [])
+                            ])
                         ]);
                     };
                     $app_exports$['entry'] = function($app_exports$) {

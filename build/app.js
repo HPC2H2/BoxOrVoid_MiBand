@@ -11,7 +11,7 @@ export default function(global, globalThis, window, $app_exports$, $app_evaluate
                 var __webpack_modules__ = {
                     "./src/manifest.json" (module) {
                         "use strict";
-                        module.exports = JSON.parse('{"package":"com.boxorvoid.demo","name":"箱即是空","versionName":"1.0.0","versionCode":1,"icon":"/common/logo.png","features":[{"name":"system.prompt"}],"config":{"logLevel":"log","designWidth":"device-width"},"router":{"entry":"levels","pages":{"levels":{"component":"level01"}}},"display":{"backgroundColor":"#1a1a1a"},"deviceTypeList":["watch"]}');
+                        module.exports = JSON.parse('{"package":"com.boxorvoid.demo","name":"箱即是空","versionName":"1.0.0","versionCode":1,"icon":"/common/logo.png","features":[{"name":"system.prompt"},{"name":"system.router"}],"config":{"logLevel":"log","designWidth":"device-width"},"router":{"entry":"pages/levels/level01","pages":{"pages/levels/level01":{"component":"level01"},"pages/win":{"component":"index"}}},"display":{"backgroundColor":"#1a1a1a"},"deviceTypeList":["watch"]}');
                     }
                 };
                 var __webpack_module_cache__ = {};

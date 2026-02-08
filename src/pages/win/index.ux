@@ -1,0 +1,101 @@
+<template>
+  <div class="container">
+    <text class="icon">🎉</text>
+    <text class="title">恭喜通关！</text>
+    <text class="message">成功将所有箱子推到目标点！</text>
+    
+    <div class="buttons">
+      <div class="button next-btn" onclick="nextLevel">
+        <text class="button-text">下一关</text>
+      </div>
+      <div class="button restart-btn" onclick="restartLevel">
+        <text class="button-text">重玩</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+
+export default {
+  onBackPress() {
+    // 拦截返回键
+    this.restartLevel()
+    return true
+  },
+  
+  nextLevel() {
+    // TODO: 跳转到下一关
+    router.replace({
+      uri: '/levels'
+    })
+  },
+  
+  restartLevel() {
+    router.replace({
+      uri: '/levels'
+    })
+  }
+}
+</script>
+
+<style scoped>
+.container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  lines: 1;
+}
+
+.title {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.message {
+  font-size: 14px;
+  color: #cccccc;
+  margin-bottom: 30px;
+  text-align: center;
+  lines: 2;
+}
+
+.buttons {
+  flex-direction: row;
+}
+
+.button {
+  min-width: 70px;
+  height: 40px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  margin: 0 8px;
+}
+
+.button-text {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.next-btn {
+  background-color: #667eea;
+}
+
+.restart-btn {
+  background-color: #ff416c;
+}
+</style>

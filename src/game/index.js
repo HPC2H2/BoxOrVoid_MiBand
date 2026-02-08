@@ -25,10 +25,14 @@ export class Game {
     if (levelData.whitePlayer) {
       this.state.whiteX = levelData.whitePlayer.x
       this.state.whiteY = levelData.whitePlayer.y
+      // 初始化时记录白角色位置
+      this.state.recordPlayerMove(levelData.whitePlayer.x, levelData.whitePlayer.y, GAME_CONSTANTS.PLAYER_TYPES.WHITE)
     }
     if (levelData.blackPlayer) {
       this.state.blackX = levelData.blackPlayer.x
       this.state.blackY = levelData.blackPlayer.y
+      // 初始化时记录黑角色位置
+      this.state.recordPlayerMove(levelData.blackPlayer.x, levelData.blackPlayer.y, GAME_CONSTANTS.PLAYER_TYPES.BLACK)
     }
     
     // 设置箱子
@@ -93,6 +97,8 @@ export class Game {
   
   // 移动玩家
   movePlayer(isWhite, x, y) {
+    const playerType = isWhite ? GAME_CONSTANTS.PLAYER_TYPES.WHITE : GAME_CONSTANTS.PLAYER_TYPES.BLACK
+    
     if (isWhite) {
       this.state.whiteX = x
       this.state.whiteY = y
@@ -100,6 +106,9 @@ export class Game {
       this.state.blackX = x
       this.state.blackY = y
     }
+    
+    // 记录这个角色最后到达这个位置
+    this.state.recordPlayerMove(x, y, playerType)
   }
   
   // 推动箱子
@@ -152,10 +161,24 @@ export class Game {
         const isBlackBoxTarget = state.blackBoxTargets.some(t => t.x === x && t.y === y)
         const hasWhiteBox = state.whiteBoxes.some(b => b.x === x && b.y === y)
         const hasBlackBox = state.blackBoxes.some(b => b.x === x && b.y === y)
+        
+        // 检查是否有角色
+        const hasWhitePlayer = (y === state.whiteY && x === state.whiteX)
+        const hasBlackPlayer = (y === state.blackY && x === state.blackX)
+        
+        // 如果两个角色都在同一位置，根据最后移动的角色显示背景色
+        if (hasWhitePlayer && hasBlackPlayer) {
+          const lastPlayer = state.lastPlayerAt[`${y},${x}`]
+          if (lastPlayer === GAME_CONSTANTS.PLAYER_TYPES.WHITE) {
+            return "#FFFFFF"
+          } else {
+            return "#000000"
+          }
+        }
     
         // 优先级: 角色 > 箱子 > 箱子目标点 > 地图
-        if (y === state.whiteY && x === state.whiteX) return "#FFFFFF"
-        if (y === state.blackY && x === state.blackX) return "#000000"
+        if (hasWhitePlayer) return "#FFFFFF"
+        if (hasBlackPlayer) return "#000000"
         if (hasWhiteBox) return "#E0E0E0"
         if (hasBlackBox) return "#1A1A1A"
         if (isWhiteBoxTarget) return "#FCD3D3"
@@ -174,8 +197,21 @@ export class Game {
     // 获取单元格边界颜色
     getCellBorder(y, x) {
         const state = this.state
-        if (y === state.whiteY && x === state.whiteX) return "#3498DB"
-        if (y === state.blackY && x === state.blackX) return "#E74C3C"
+        const hasWhitePlayer = (y === state.whiteY && x === state.whiteX)
+        const hasBlackPlayer = (y === state.blackY && x === state.blackX)
+        
+        // 如果两个角色都在同一位置，根据最后移动的角色显示边框色
+        if (hasWhitePlayer && hasBlackPlayer) {
+          const lastPlayer = state.lastPlayerAt[`${y},${x}`]
+          if (lastPlayer === GAME_CONSTANTS.PLAYER_TYPES.WHITE) {
+            return "#3498DB"
+          } else {
+            return "#E74C3C"
+          }
+        }
+        
+        if (hasWhitePlayer) return "#3498DB"
+        if (hasBlackPlayer) return "#E74C3C"
         return "#333333"
     }
 }

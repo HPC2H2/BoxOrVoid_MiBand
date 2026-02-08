@@ -19,6 +19,9 @@ export class GameState {
     this.blackX = 0
     this.blackY = 0
     
+    // 记录每个位置最后到达的角色（用于两个角色重叠时的显示优先级）
+    this.lastPlayerAt = {} // key: "y,x", value: PLAYER_TYPES.WHITE or BLACK
+    
     // 箱子
     this.whiteBoxes = []
     this.blackBoxes = []
@@ -87,5 +90,10 @@ export class GameState {
       ? GAME_CONSTANTS.PLAYER_TYPES.BLACK 
       : GAME_CONSTANTS.PLAYER_TYPES.WHITE
     return this.currentPlayer
+  }
+  
+  // 记录角色移动到某位置
+  recordPlayerMove(x, y, playerType) {
+    this.lastPlayerAt[`${y},${x}`] = playerType
   }
 }

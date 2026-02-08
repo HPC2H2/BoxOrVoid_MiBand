@@ -7,6 +7,9 @@
   "features": [
     {
       "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
     }
   ],
   "config": {
@@ -14,10 +17,13 @@
     "designWidth": "device-width"
   },
   "router": {
-    "entry": "levels",
+    "entry": "pages/levels/level01",
     "pages": {
-      "levels": {
+      "pages/levels/level01": {
         "component": "level01"
+      },
+      "pages/win": {
+        "component": "index"
       }
     }
   },

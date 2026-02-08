@@ -1,6 +1,5 @@
-<import name="game-grid" src="../components/GameGrid/index"></import>
-<import name="control-button" src="../components/ControlButton/index"></import>
-<import name="game-modal" src="../components/GameModal/index"></import>
+<import name="game-grid" src="../../../components/GameGrid/index"></import>
+<import name="control-button" src="../../../components/ControlButton/index"></import>
 
 <template>
     <div class="container">
@@ -76,22 +75,12 @@
           ></control-button>
         </div>
       </div>
-      
-      <!-- 通关弹窗 -->
-      <game-modal
-        show="{{showWinDialog}}"
-        title="恭喜通关！"
-        message="你成功将所有箱子推到目标点，并让角色回到各自的位置！"
-        icon="/common/image/icons/white-tongguan.png"
-        buttons="{{winButtons}}"
-        close-on-overlay-click="{{true}}"
-        onclick="closeWinDialog"
-      ></game-modal>
     </div>
   </template>
   
   <script>
-  import { Game } from '../game/index'
+  import { Game } from '../../../game/index'
+  import router from '@system.router'
   const prompt = require("@system.prompt")
   
   export default {
@@ -101,7 +90,6 @@
       columns: [0, 1, 2, 3, 4],
       cellIcons: {},
       cellStyles: {},
-      showWinDialog: false,
       stepCount: 0,
       currentPlayerName: '白方',
       currentPlayer: 7,
@@ -110,19 +98,7 @@
       downBtnColor: '#2ECC71',
       leftBtnColor: '#2ECC71',
       rightBtnColor: '#2ECC71',
-      resetBtnColor: '#E74C3C',
-      winButtons: [
-        {
-          icon: "/common/image/icons/white-continue.png",
-          className: "continue-btn",
-          onClick: "continueGame"
-        },
-        {
-          icon: "/common/image/icons/white-restart.png",
-          className: "restart-btn",
-          onClick: "restartGame"
-        }
-      ]
+      resetBtnColor: '#E74C3C'
     },
     
     onInit() {
@@ -231,9 +207,14 @@
       // 更新UI
       this.updateDisplay()
       
+      // test 跳转
+      if (1){
       // 检查通关
-      if (this.game.checkWin()) {
-        this.showWinDialog = true
+      // if (this.game.checkWin()) {
+        // 跳转到通关页面
+        router.push({
+          uri: 'pages/win',
+        })
       }
     },
     
@@ -283,19 +264,6 @@
     
     getCellBorder(y, x) {
       return this.game.getCellBorder(y, x)
-    },
-    
-    closeWinDialog() {
-      this.showWinDialog = false
-    },
-    
-    continueGame() {
-      this.showWinDialog = false
-    },
-    
-    restartGame() {
-      this.showWinDialog = false
-      this.onReset()
     }
   }
   </script>
