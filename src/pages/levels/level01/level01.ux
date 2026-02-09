@@ -2,341 +2,352 @@
 <import name="control-button" src="../../../components/ControlButton/index"></import>
 
 <template>
-    <div class="container">
-      <image class="title" src="/common/image/title.png" />
-      
-      <!-- 游戏信息 -->
-      <div class="info">
-        <image class="infoText" src="/common/image/infoText.png" />
-        <image class="hint" src="/common/image/hint.png" />
-      </div>
-      
-      <!-- 画布 -->
-      <game-grid
-        rows="{{rows}}"
-        columns="{{columns}}"
-        icons="{{cellIcons}}"
-        cell-styles="{{cellStyles}}"
-      ></game-grid>
-      
-      <!-- 控制区域 -->
-      <div class="controlArea">
-        <div class="switchArea">
-          <div onclick="onSwitch">
-            <control-button
-              type="switch"
-              color="{{switchBtnColor}}"
-              is-white="{{currentPlayer === 6}}"
-            ></control-button>
-          </div>
-        </div>
-        
-        <div class="controlPanel">
-          <div class="btnRow1">
-            <div onclick="onUp">
-              <control-button
-                type="arrow"
-                color="{{upBtnColor}}"
-                arrow-icon="/common/image/icons/white-up-arrow.png"
-              ></control-button>
-            </div>
-          </div>
-          <div class="btnRow2">
-            <div onclick="onLeft">
-              <control-button
-                type="arrow"
-                color="{{leftBtnColor}}"
-                arrow-icon="/common/image/icons/white-left-arrow.png"
-              ></control-button>
-            </div>
-            <div onclick="onDown">
-              <control-button
-                type="arrow"
-                color="{{downBtnColor}}"
-                arrow-icon="/common/image/icons/white-down-arrow.png"
-              ></control-button>
-            </div>
-            <div onclick="onRight">
-              <control-button
-                type="arrow"
-                color="{{rightBtnColor}}"
-                arrow-icon="/common/image/icons/white-right-arrow.png"
-              ></control-button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="controlArea2">
-        <div onclick="onReset">
+  <div class="container">
+    <image class="title" src="/common/image/title.png" />
+
+    <!-- 游戏信息 -->
+    <div class="info">
+      <image class="infoText" src="/common/image/infoText.png" />
+      <image class="hint" src="/common/image/hint.png" />
+    </div>
+
+    <!-- 画布 -->
+    <game-grid
+      rows="{{ rows }}"
+      columns="{{ columns }}"
+      icons="{{ cellIcons }}"
+      cell-styles="{{ cellStyles }}"
+    ></game-grid>
+
+    <!-- 控制区域 -->
+    <div class="controlArea">
+      <div class="switchArea">
+        <div onclick="onSwitch">
           <control-button
-            type="reset"
-            color="{{resetBtnColor}}"
+            type="switch"
+            color="{{ switchBtnColor }}"
+            is-white="{{ currentPlayer === 6 }}"
           ></control-button>
         </div>
       </div>
+
+      <div class="controlPanel">
+        <div class="btnRow1">
+          <div onclick="onUp">
+            <control-button
+              type="arrow"
+              color="{{ upBtnColor }}"
+              arrow-icon="/common/image/icons/white-up-arrow.png"
+            ></control-button>
+          </div>
+        </div>
+        <div class="btnRow2">
+          <div onclick="onLeft">
+            <control-button
+              type="arrow"
+              color="{{ leftBtnColor }}"
+              arrow-icon="/common/image/icons/white-left-arrow.png"
+            ></control-button>
+          </div>
+          <div onclick="onDown">
+            <control-button
+              type="arrow"
+              color="{{ downBtnColor }}"
+              arrow-icon="/common/image/icons/white-down-arrow.png"
+            ></control-button>
+          </div>
+          <div onclick="onRight">
+            <control-button
+              type="arrow"
+              color="{{ rightBtnColor }}"
+              arrow-icon="/common/image/icons/white-right-arrow.png"
+            ></control-button>
+          </div>
+        </div>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  import { Game } from '../../../game/index'
-  import router from '@system.router'
-  const prompt = require("@system.prompt")
-  
-  export default {
-    private: {
-      game: null,
-      rows: [0, 1, 2, 3, 4, 5, 6],
-      columns: [0, 1, 2, 3, 4],
-      cellIcons: {},
-      cellStyles: {},
-      stepCount: 0,
-      currentPlayerName: '白方',
+
+    <div class="controlArea2">
+      <div onclick="onReset">
+        <control-button type="reset" color="{{ resetBtnColor }}"></control-button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {Game} from "../../../game/index"
+import router from "@system.router"
+const prompt = require("@system.prompt")
+
+export default {
+  private: {
+    game: null,
+    rows: [0, 1, 2, 3, 4, 5, 6],
+    columns: [0, 1, 2, 3, 4],
+    cellIcons: {},
+    cellStyles: {},
+    stepCount: 0,
+    currentPlayerName: "白方",
+    currentPlayer: 7,
+    switchBtnColor: "#3498DB",
+    upBtnColor: "#2ECC71",
+    downBtnColor: "#2ECC71",
+    leftBtnColor: "#2ECC71",
+    rightBtnColor: "#2ECC71",
+    resetBtnColor: "#E74C3C"
+  },
+
+  onInit() {
+    // 初始化游戏
+    this.game = new Game()
+
+    // 加载关卡数据
+    const levelData = this.getLevel1Data()
+    this.game.initLevel(levelData)
+
+    // 更新UI
+    this.updateDisplay()
+  },
+
+  getLevel1Data() {
+    return {
+      whitePlayer: {x: 4, y: 1},
+      blackPlayer: {x: 2, y: 3},
+      whiteBoxes: [{x: 2, y: 6}],
+      blackBoxes: [{x: 3, y: 4}],
+      whiteBoxTargets: [{x: 1, y: 6}],
+      blackBoxTargets: [{x: 3, y: 3}],
+      whitePlayerTarget: [{x: 1, y: 5}],
+      blackPlayerTarget: [{x: 4, y: 2}],
       currentPlayer: 7,
-      switchBtnColor: '#3498DB',
-      upBtnColor: '#2ECC71',
-      downBtnColor: '#2ECC71',
-      leftBtnColor: '#2ECC71',
-      rightBtnColor: '#2ECC71',
-      resetBtnColor: '#E74C3C'
-    },
-    
-    onInit() {
-      // 初始化游戏
-      this.game = new Game()
-      
-      // 加载关卡数据
-      const levelData = this.getLevel1Data()
-      this.game.initLevel(levelData)
-      
-      // 更新UI
-      this.updateDisplay()
-    },
-    
-    getLevel1Data() {
-      return {
-        whitePlayer: { x: 4, y: 1 },
-        blackPlayer: { x: 2, y: 3 },
-        whiteBoxes: [{x: 2, y: 6}],
-        blackBoxes: [{x: 3, y: 4}],
-        whiteBoxTargets: [{x: 1, y: 6}],
-        blackBoxTargets: [{x: 3, y: 3}],
-        whitePlayerTarget: [{x: 1, y: 5}],
-        blackPlayerTarget: [{x: 4, y: 2}],
-        currentPlayer: 7,
-        mapRules: this.createMapRules()
-      }
-    },
-    
-    createMapRules() {
-      const width = 5, height = 7
-      const rules = {}
-      
-      // 1. 默认白地（0）
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          rules[y + "," + x] = 0
-        }
-      }
-      
-      // 2. 四周黑墙(1)
-      for (let x = 0; x < width; x++) {
-        rules["0," + x] = 1
-        rules[(height - 1) + "," + x] = 1
-      }
-      for (let y = 0; y < height; y++) {
-        rules[y + ",0"] = 1
-        rules[y + "," + (width - 1)] = 1
-      }
-      
-      // 3. 内部黑墙
-      rules["1,2"] = 1
-      rules["2,2"] = 1
-      rules["1,4"] = 1
-      rules["2,4"] = 1
-      
-      return rules
-    },
-    
-    updateDisplay() {
-      this.cellIcons = this.game.iconManager.updateCellIcons()
-      this.stepCount = this.game.state.stepCount
-      this.currentPlayer = this.game.state.currentPlayer
-      this.currentPlayerName = this.currentPlayer === 6 ? '白方' : '黑方'
-      
-      // 计算所有单元格样式
-      const styles = {}
-      for (let y = 0; y < 7; y++) {
-        for (let x = 0; x < 5; x++) {
-          styles[`${y},${x}`] = {
-            bg: this.getCellBg(y, x),
-            border: this.getCellBorder(y, x)
-          }
-        }
-      }
-      this.cellStyles = styles
-    },
-    
-    onUp() {
-      this.handleMove(0, -1, 'up')
-    },
-    
-    onDown() {
-      this.handleMove(0, 1, 'down')
-    },
-    
-    onLeft() {
-      this.handleMove(-1, 0, 'left')
-    },
-    
-    onRight() {
-      this.handleMove(1, 0, 'right')
-    },
-    
-    handleMove(dx, dy, buttonType) {
-      const result = this.game.move(dx, dy)
-      
-      if (!result.success) {
-        prompt.showToast({ message: result.message, duration: 800 })
-        return
-      }
-      
-      // 按钮闪动效果
-      this.flashButton(buttonType)
-      
-      // 更新UI
-      this.updateDisplay()
-      
-      // test 跳转
-      // if (1){
-      // 检查通关
-      if (this.game.checkWin()) {
-        // 跳转到通关页面
-        router.push({
-          uri: 'pages/win',
-          params: {
-            levelId: 'level01',
-            levelPath: 'pages/levels/level01',
-          }
-        })
-      }
-    },
-    
-    onSwitch() {
-      this.game.switchPlayer()
-      this.flashButton('switch')
-      this.updateDisplay()
-    },
-    
-    onReset() {
-      const levelData = this.getLevel1Data()
-      this.game.initLevel(levelData)
-      this.flashButton('reset')
-      this.updateDisplay()
-    },
-    
-    flashButton(type) {
-      const colorMap = {
-        'up': '#36D1DC',
-        'down': '#36D1DC',
-        'left': '#36D1DC',
-        'right': '#36D1DC',
-        'switch': '#FF416C',
-        'reset': '#FF6B6B'
-      }
-      
-      const defaultColorMap = {
-        'up': '#2ECC71',
-        'down': '#2ECC71',
-        'left': '#2ECC71',
-        'right': '#2ECC71',
-        'switch': '#3498DB',
-        'reset': '#E74C3C'
-      }
-      
-      const colorKey = type + 'BtnColor'
-      this[colorKey] = colorMap[type]
-      
-      setTimeout(() => {
-        this[colorKey] = defaultColorMap[type]
-      }, type === 'switch' || type === 'reset' ? 500 : 200)
-    },
-    
-    getCellBg(y, x) {
-      return this.game.getCellBg(y, x)
-    },
-    
-    getCellBorder(y, x) {
-      return this.game.getCellBorder(y, x)
+      mapRules: this.createMapRules()
     }
+  },
+
+  createMapRules() {
+    const width = 5,
+      height = 7
+    const rules = {}
+
+    // 1. 默认白地（0）
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        rules[y + "," + x] = 0
+      }
+    }
+
+    // 2. 四周黑墙(1)
+    for (let x = 0; x < width; x++) {
+      rules["0," + x] = 1
+      rules[height - 1 + "," + x] = 1
+    }
+    for (let y = 0; y < height; y++) {
+      rules[y + ",0"] = 1
+      rules[y + "," + (width - 1)] = 1
+    }
+
+    // 3. 内部黑墙
+    rules["1,2"] = 1
+    rules["2,2"] = 1
+    rules["1,4"] = 1
+    rules["2,4"] = 1
+
+    return rules
+  },
+
+  updateDisplay() {
+    this.cellIcons = this.game.iconManager.updateCellIcons()
+    this.stepCount = this.game.state.stepCount
+    this.currentPlayer = this.game.state.currentPlayer
+    this.currentPlayerName = this.currentPlayer === 6 ? "白方" : "黑方"
+
+    // 计算所有单元格样式
+    const styles = {}
+    for (let y = 0; y < 7; y++) {
+      for (let x = 0; x < 5; x++) {
+        styles[`${y},${x}`] = {
+          bg: this.getCellBg(y, x),
+          border: this.getCellBorder(y, x)
+        }
+      }
+    }
+    this.cellStyles = styles
+  },
+
+  onUp() {
+    this.handleMove(0, -1, "up")
+  },
+
+  onDown() {
+    this.handleMove(0, 1, "down")
+  },
+
+  onLeft() {
+    this.handleMove(-1, 0, "left")
+  },
+
+  onRight() {
+    this.handleMove(1, 0, "right")
+  },
+
+  handleMove(dx, dy, buttonType) {
+    const result = this.game.move(dx, dy)
+
+    if (!result.success) {
+      prompt.showToast({message: result.message, duration: 800})
+      return
+    }
+
+    // 按钮闪动效果
+    this.flashButton(buttonType)
+
+    // 更新UI
+    this.updateDisplay()
+
+    // test 跳转
+    // if (1){
+    // 检查通关
+    if (this.game.checkWin()) {
+      // 跳转到通关页面
+      router.push({
+        uri: "pages/win",
+        params: {
+          levelId: "level01",
+          levelPath: "pages/levels/level01"
+        }
+      })
+    }
+  },
+
+  onSwitch() {
+    this.game.switchPlayer()
+    this.flashButton("switch")
+    this.updateDisplay()
+  },
+
+  onReset() {
+    const levelData = this.getLevel1Data()
+    this.game.initLevel(levelData)
+    this.flashButton("reset")
+    this.updateDisplay()
+  },
+
+  flashButton(type) {
+    const colorMap = {
+      up: "#36D1DC",
+      down: "#36D1DC",
+      left: "#36D1DC",
+      right: "#36D1DC",
+      switch: "#FF416C",
+      reset: "#FF6B6B"
+    }
+
+    const defaultColorMap = {
+      up: "#2ECC71",
+      down: "#2ECC71",
+      left: "#2ECC71",
+      right: "#2ECC71",
+      switch: "#3498DB",
+      reset: "#E74C3C"
+    }
+
+    const colorKey = type + "BtnColor"
+    this[colorKey] = colorMap[type]
+
+    setTimeout(
+      () => {
+        this[colorKey] = defaultColorMap[type]
+      },
+      type === "switch" || type === "reset" ? 500 : 200
+    )
+  },
+
+  getCellBg(y, x) {
+    return this.game.getCellBg(y, x)
+  },
+
+  getCellBorder(y, x) {
+    return this.game.getCellBorder(y, x)
   }
-  </script>
-  
-  <style scoped>
-  .container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #1a1a1a;
-    padding: 8px;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .title {
-    background-color: #1a1a1a;
-    height: 30px;
-    width: 70%;
-    object-fit: fill;
-    margin: 6px 0 3px 0;
-  }
-  
-  .info {
-    background-color: #ffffff;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 2px;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  
-  .infoText, .hint {
-    height: 40px;
-    width: 100%;
-    object-fit: fill;
-    border-radius: inherit;
-  }
-  
-  .controlArea {
-    flex-direction: row;
-    width: 100%;
-    margin-top: 4px;
-  }
-  
-  .switchArea {
-    margin-bottom: 10px;
-  }
-  
-  .controlPanel {
-    flex-direction: column;
-    align-items: center;
-    margin: 4px;
-  }
-  
-  .btnRow1, .btnRow2 {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .btnRow1 {
-    margin-bottom: 4px;
-  }
-  
-  .controlArea2 {
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    margin-top: 4px;
-  }
-  </style>
+}
+</script>
+
+<style scoped>
+.container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #1a1a1a;
+  padding: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  background-color: #1a1a1a;
+  height: 30px;
+  width: 70%;
+  object-fit: fill;
+  margin: 6px 0 3px 0;
+}
+
+.info {
+  background-color: #ffffff;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 2px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.infoText {
+  height: 40px;
+  flex-direction: row;
+  justify-content: flex-start;
+  object-fit: fill;
+  border-radius: inherit;
+}
+
+.hint {
+  height: 40px;
+  flex-direction: row;
+  justify-content: flex-start;
+  object-fit: fill;
+  border-radius: inherit;
+}
+
+.controlArea {
+  flex-direction: row;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.switchArea {
+  margin-bottom: 10px;
+}
+
+.controlPanel {
+  flex-direction: column;
+  align-items: center;
+  margin: 4px;
+}
+
+.btnRow1,
+.btnRow2 {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnRow1 {
+  margin-bottom: 4px;
+}
+
+.controlArea2 {
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 4px;
+}
+</style>
