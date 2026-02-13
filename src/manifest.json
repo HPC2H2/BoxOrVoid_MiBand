@@ -3,7 +3,7 @@
   "name": "箱即是空",
   "versionName": "1.0.0",
   "versionCode": 1,
-  "icon": "/common/logo.png",
+  "icon": "/common/image/icons/white-box.png",
   "features": [
     {
       "name": "system.prompt"
