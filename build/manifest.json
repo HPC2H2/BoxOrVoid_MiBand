@@ -1,7 +1,7 @@
 {
   "package": "com.boxorvoid.demo",
   "name": "箱即是空",
-  "versionName": "1.0.0",
+  "versionName": "1.1.0",
   "versionCode": 1,
   "icon": "/common/image/icons/white-box.png",
   "features": [
@@ -10,6 +10,9 @@
     },
     {
       "name": "system.router"
+    },
+    {
+      "name": "system.device"
     }
   ],
   "config": {
@@ -36,7 +39,7 @@
   "minAPILevel": 1,
   "packageInfo": {
     "toolkit": "2.0.5",
-    "timeStamp": "2026-02-13T12:34:24.456Z",
+    "timeStamp": "2026-03-14T16:33:36.089Z",
     "node": "v18.19.0",
     "platform": "win32",
     "arch": "x64",

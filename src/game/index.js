@@ -67,11 +67,14 @@ export class Game {
   move(dx, dy) {
     const isWhite = this.state.currentPlayer === GAME_CONSTANTS.PLAYER_TYPES.WHITE
     const result = this.validator.validateMove(dx, dy, isWhite)
-    
+
     if (!result.valid) {
       return { success: false, message: result.message }
     }
-    
+
+    // 保存当前状态到历史记录（用于撤销）
+    this.state.saveState()
+
     // 执行移动
     if (result.action === 'move') {
       this.movePlayer(result.data.isWhite, result.data.nx, result.data.ny)
@@ -84,15 +87,29 @@ export class Game {
         result.data.boxType
       )
     }
-    
+
     // 检查是否通关
     const isWin = this.winChecker.checkWin()
-    
-    return { 
-      success: true, 
+
+    return {
+      success: true,
       isWin,
       updatedIcons: this.updateCellIcons()
     }
+  }
+
+  // 撤销上一步
+  undo() {
+    const result = this.state.undo()
+    if (result) {
+      return { success: true }
+    }
+    return { success: false, message: "无法撤销" }
+  }
+
+  // 检查是否可以撤销
+  canUndo() {
+    return this.state.canUndo()
   }
   
   // 移动玩家

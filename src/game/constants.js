@@ -14,9 +14,11 @@ export const GAME_CONSTANTS = {
       DEFAULT_SWITCH: "#3498DB",
       DEFAULT_ARROW: "#2ECC71",
       DEFAULT_RESET: "#E74C3C",
+      DEFAULT_UNDO: "#9B59B6",
       PRESSED_SWITCH: "#FF416C",
       PRESSED_ARROW: "#36D1DC",
-      PRESSED_RESET: "#9B59B6",
+      PRESSED_RESET: "#FF6B6B",
+      PRESSED_UNDO: "#8E44AD",
     },
     
     // 于IconManager.js里定义：

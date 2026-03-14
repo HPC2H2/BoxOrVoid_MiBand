@@ -2,13 +2,25 @@
 <import name="control-button" src="../../../components/ControlButton/index"></import>
 
 <template>
-  <div class="container">
-    <image class="title" src="/common/image/title.png" />
+  <div class="container" style="padding: {{ adaptedSizes.padding || 8 }}px">
+    <image
+      class="title"
+      src="/common/image/title.png"
+      style="height: {{ adaptedSizes.titleHeight || 30 }}px; margin: {{ adaptedSizes.marginTop || 6 }}px 0 3px 0"
+    />
 
     <!-- 游戏信息 -->
     <div class="info">
-      <image class="infoText" src="/common/image/infoText.png" />
-      <image class="hint" src="/common/image/hint.png" />
+      <image
+        class="infoText"
+        src="/common/image/infoText.png"
+        style="height: {{ adaptedSizes.infoHeight || 40 }}px"
+      />
+      <image
+        class="hint"
+        src="/common/image/hint.png"
+        style="height: {{ adaptedSizes.infoHeight || 40 }}px"
+      />
     </div>
 
     <!-- 画布 -->
@@ -17,27 +29,30 @@
       columns="{{ columns }}"
       icons="{{ cellIcons }}"
       cell-styles="{{ cellStyles }}"
+      size-config="{{ adaptedSizes }}"
     ></game-grid>
 
     <!-- 控制区域 -->
-    <div class="controlArea">
-      <div class="switchArea">
+    <div class="controlArea" style="margin-top: {{ adaptedSizes.marginTop || 4 }}px">
+      <div class="switchArea" style="margin-bottom: {{ adaptedSizes.marginBottom || 10 }}px">
         <div onclick="onSwitch">
           <control-button
             type="switch"
             color="{{ switchBtnColor }}"
-            is-white="{{ currentPlayer === 6 }}"
+            is-white="{{ currentPlayer === 7 }}"
+            size-config="{{ adaptedSizes }}"
           ></control-button>
         </div>
       </div>
 
-      <div class="controlPanel">
-        <div class="btnRow1">
+      <div class="controlPanel" style="margin: {{ adaptedSizes.controlPanelMargin || 4 }}px">
+        <div class="btnRow1" style="margin-bottom: {{ adaptedSizes.btnRowMargin || 4 }}px">
           <div onclick="onUp">
             <control-button
               type="arrow"
               color="{{ upBtnColor }}"
               arrow-icon="/common/image/icons/white-up-arrow.png"
+              size-config="{{ adaptedSizes }}"
             ></control-button>
           </div>
         </div>
@@ -47,6 +62,7 @@
               type="arrow"
               color="{{ leftBtnColor }}"
               arrow-icon="/common/image/icons/white-left-arrow.png"
+              size-config="{{ adaptedSizes }}"
             ></control-button>
           </div>
           <div onclick="onDown">
@@ -54,6 +70,7 @@
               type="arrow"
               color="{{ downBtnColor }}"
               arrow-icon="/common/image/icons/white-down-arrow.png"
+              size-config="{{ adaptedSizes }}"
             ></control-button>
           </div>
           <div onclick="onRight">
@@ -61,15 +78,31 @@
               type="arrow"
               color="{{ rightBtnColor }}"
               arrow-icon="/common/image/icons/white-right-arrow.png"
+              size-config="{{ adaptedSizes }}"
             ></control-button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="controlArea2">
-      <div onclick="onReset">
-        <control-button type="reset" color="{{ resetBtnColor }}"></control-button>
+    <div class="controlArea2" style="gap: {{ adaptedSizes.controlAreaGap || 40 }}px">
+      <div class="undoArea">
+        <div onclick="onUndo">
+          <control-button
+            type="undo"
+            color="{{ undoBtnColor }}"
+            size-config="{{ adaptedSizes }}"
+          ></control-button>
+        </div>
+      </div>
+      <div class="resetArea">
+        <div onclick="onReset">
+          <control-button
+            type="reset"
+            color="{{ resetBtnColor }}"
+            size-config="{{ adaptedSizes }}"
+          ></control-button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,7 +111,8 @@
 <script>
 import {Game} from "../../../game/index"
 import router from "@system.router"
-const prompt = require("@system.prompt")
+import device from "@system.device"
+import {getAdaptedSizes, getStyles} from "../../../common/screenAdapter"
 
 export default {
   private: {
@@ -95,10 +129,17 @@ export default {
     downBtnColor: "#2ECC71",
     leftBtnColor: "#2ECC71",
     rightBtnColor: "#2ECC71",
-    resetBtnColor: "#E74C3C"
+    resetBtnColor: "#E74C3C",
+    undoBtnColor: "#9B59B6",
+    // 适配尺寸
+    adaptedSizes: {},
+    styles: {}
   },
 
   onInit() {
+    // 获取屏幕信息并计算适配尺寸
+    this.initScreenAdapter()
+
     // 初始化游戏
     this.game = new Game()
 
@@ -108,6 +149,28 @@ export default {
 
     // 更新UI
     this.updateDisplay()
+  },
+
+  initScreenAdapter() {
+    // 尝试获取设备屏幕宽度，如果失败则使用 Mi Band 9 默认值
+    try {
+      device.getInfo({
+        success: (data) => {
+          const screenWidth = data.width || 192
+          this.adaptedSizes = getAdaptedSizes(screenWidth)
+          this.styles = getStyles(this.adaptedSizes)
+        },
+        fail: () => {
+          // 使用默认 Mi Band 9 尺寸
+          this.adaptedSizes = getAdaptedSizes(192)
+          this.styles = getStyles(this.adaptedSizes)
+        }
+      })
+    } catch (e) {
+      // 使用默认 Mi Band 9 尺寸
+      this.adaptedSizes = getAdaptedSizes(192)
+      this.styles = getStyles(this.adaptedSizes)
+    }
   },
 
   getLevel1Data() {
@@ -233,6 +296,16 @@ export default {
     this.updateDisplay()
   },
 
+  onUndo() {
+    const result = this.game.undo()
+    if (!result.success) {
+      prompt.showToast({message: result.message, duration: 800})
+      return
+    }
+    this.flashButton("undo")
+    this.updateDisplay()
+  },
+
   flashButton(type) {
     const colorMap = {
       up: "#36D1DC",
@@ -240,7 +313,8 @@ export default {
       left: "#36D1DC",
       right: "#36D1DC",
       switch: "#FF416C",
-      reset: "#FF6B6B"
+      reset: "#FF6B6B",
+      undo: "#8E44AD"
     }
 
     const defaultColorMap = {
@@ -249,7 +323,8 @@ export default {
       left: "#2ECC71",
       right: "#2ECC71",
       switch: "#3498DB",
-      reset: "#E74C3C"
+      reset: "#E74C3C",
+      undo: "#9B59B6"
     }
 
     const colorKey = type + "BtnColor"
@@ -349,5 +424,14 @@ export default {
   justify-content: center;
   width: 100%;
   margin-top: 4px;
+  gap: 40px;
+}
+
+.undoArea {
+  align-items: center;
+}
+
+.resetArea {
+  align-items: center;
 }
 </style>

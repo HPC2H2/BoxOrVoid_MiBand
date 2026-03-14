@@ -1,45 +1,86 @@
 <template>
-  <div class="{{btnClass}}" style="background-color: {{ color }}">
+  <div
+    class="{{ btnClass }}"
+    style="background-color: {{ color }};{{ btnStyle }}"
+  >
     <block if="{{ type === 'arrow' }}">
-      <image src="{{ arrowIcon }}" style="width: 20px; height: 20px" />
+      <image src="{{ arrowIcon }}" style="{{ iconStyle }}" />
     </block>
     <block elif="{{ type === 'switch' }}">
       <div class="icon-row">
-        <image class="icon" src="/common/image/icons/white-qie.png" />
-        <image class="icon" src="/common/image/icons/white-huan.png" />
+        <image class="icon" src="/common/image/icons/white-qie.png" style="{{ iconStyle }}" />
+        <image class="icon" src="/common/image/icons/white-huan.png" style="{{ iconStyle }}" />
       </div>
       <div class="icon-row">
-        <image class="icon" src="/common/image/icons/white-dao.png" />
+        <image class="icon" src="/common/image/icons/white-dao.png" style="{{ iconStyle }}" />
         <block if="{{ isWhite }}">
-          <image class="icon" src="/common/image/icons/white-white.png" />
+          <image class="icon" src="/common/image/icons/white-white.png" style="{{ iconStyle }}" />
         </block>
         <block if="{{ !isWhite }}">
-          <image class="icon" src="/common/image/icons/white-black.png" />
+          <image class="icon" src="/common/image/icons/white-black.png" style="{{ iconStyle }}" />
         </block>
       </div>
     </block>
+    <block elif="{{ type === 'undo' }}">
+      <image
+        class="undoImage"
+        src="/common/image/icons/white-che.png"
+        style="{{ iconStyle }}"
+      />
+      <image
+        class="undoImage"
+        src="/common/image/icons/white-xiao.png"
+        style="{{ iconStyle }}"
+      />
+    </block>
     <block elif="{{ type === 'reset' }}">
-      <image class="resetImage" src="/common/image/icons/white-chong.png" style="width: 20px; height: 20px" />
-      <image class="resetImage" src="/common/image/icons/white-zhi.png" style="width: 20px; height: 20px" />
+      <image
+        class="resetImage"
+        src="/common/image/icons/white-chong.png"
+        style="{{ iconStyle }}"
+      />
+      <image
+        class="resetImage"
+        src="/common/image/icons/white-zhi.png"
+        style="{{ iconStyle }}"
+      />
     </block>
   </div>
 </template>
 
 <script>
 export default {
-  props: [
-    'type',
-    'color',
-    'arrowIcon',
-    'isWhite'
-  ],
-  
+  props: ["type", "color", "arrowIcon", "isWhite", "sizeConfig"],
+
   computed: {
     btnClass() {
-      if (this.type === 'arrow') return 'btnArrow'
-      if (this.type === 'switch') return 'btnSwitch'
-      if (this.type === 'reset') return 'btnReset'
-      return 'control-button'
+      if (this.type === "arrow") return "btnArrow"
+      if (this.type === "switch") return "btnSwitch"
+      if (this.type === "undo") return "btnUndo"
+      if (this.type === "reset") return "btnReset"
+      return "control-button"
+    },
+    btnStyle() {
+      if (!this.sizeConfig) return ""
+      const s = this.sizeConfig
+      if (this.type === "arrow") {
+        return `width: ${s.arrowBtnSize}px; height: ${s.arrowBtnSize}px; margin: 1px;`
+      }
+      if (this.type === "switch") {
+        return `width: ${s.switchBtnWidth}px; height: ${s.switchBtnHeight}px; margin: ${s.btnMargin}px;`
+      }
+      if (this.type === "undo") {
+        return `width: ${s.undoBtnWidth}px; height: ${s.undoBtnHeight}px; margin: ${s.btnMargin}px;`
+      }
+      if (this.type === "reset") {
+        return `width: ${s.resetBtnWidth}px; height: ${s.resetBtnHeight}px; margin: ${s.btnMargin}px;`
+      }
+      return ""
+    },
+    iconStyle() {
+      if (!this.sizeConfig) return "width: 20px; height: 20px"
+      const s = this.sizeConfig
+      return `width: ${s.btnIconSize}px; height: ${s.btnIconSize}px`
     }
   }
 }
@@ -68,11 +109,22 @@ export default {
   justify-content: center;
 }
 
-.btnReset {
-  width: 55px;
+.btnUndo {
+  width: 50px;
   height: 40px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 4px;
+}
+
+.btnReset {
+  width: 50px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
   align-items: center;
   justify-content: center;
   padding: 2px;
@@ -94,6 +146,13 @@ export default {
 }
 
 .resetImage {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  padding: 2px;
+}
+
+.undoImage {
   width: 20px;
   height: 20px;
   margin: 2px;

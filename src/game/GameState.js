@@ -4,37 +4,37 @@ export class GameState {
   constructor() {
     this.mapWidth = 5
     this.mapHeight = 7
-    
+
     // 初始化状态
     this.reset()
   }
-  
+
   reset() {
     // 地图规则
     this.mapRules = {}
-    
+
     // 角色位置
     this.whiteX = 0
     this.whiteY = 0
     this.blackX = 0
     this.blackY = 0
-    
+
     // 记录每个位置最后到达的角色（用于两个角色重叠时的显示优先级）
     this.lastPlayerAt = {} // key: "y,x", value: PLAYER_TYPES.WHITE or BLACK
-    
+
     // 箱子
     this.whiteBoxes = []
     this.blackBoxes = []
-    
+
     // 目标点
     this.whiteBoxTargets = []
     this.blackBoxTargets = []
     this.whitePlayerTarget = []
     this.blackPlayerTarget = []
-    
+
     // 当前玩家
     this.currentPlayer = GAME_CONSTANTS.PLAYER_TYPES.BLACK
-    
+
     // 按钮颜色
     this.switchBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH
     this.upBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
@@ -42,6 +42,51 @@ export class GameState {
     this.leftBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
     this.rightBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
     this.resetBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_RESET
+    this.undoBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_UNDO
+
+    // 历史记录（用于撤销）
+    this.history = []
+  }
+
+  // 保存当前状态到历史记录
+  saveState() {
+    const stateSnapshot = {
+      whiteX: this.whiteX,
+      whiteY: this.whiteY,
+      blackX: this.blackX,
+      blackY: this.blackY,
+      whiteBoxes: JSON.parse(JSON.stringify(this.whiteBoxes)),
+      blackBoxes: JSON.parse(JSON.stringify(this.blackBoxes)),
+      currentPlayer: this.currentPlayer,
+      lastPlayerAt: JSON.parse(JSON.stringify(this.lastPlayerAt))
+    }
+    this.history.push(stateSnapshot)
+    // 最多保存50步历史
+    if (this.history.length > 50) {
+      this.history.shift()
+    }
+  }
+
+  // 撤销上一步
+  undo() {
+    if (this.history.length === 0) {
+      return false
+    }
+    const prevState = this.history.pop()
+    this.whiteX = prevState.whiteX
+    this.whiteY = prevState.whiteY
+    this.blackX = prevState.blackX
+    this.blackY = prevState.blackY
+    this.whiteBoxes = prevState.whiteBoxes
+    this.blackBoxes = prevState.blackBoxes
+    this.currentPlayer = prevState.currentPlayer
+    this.lastPlayerAt = prevState.lastPlayerAt
+    return true
+  }
+
+  // 检查是否可以撤销
+  canUndo() {
+    return this.history.length > 0
   }
   
   // 获取地图值
