@@ -14,6 +14,7 @@ function createRuntime(options = {}) {
   let deviceRequest
   const context = vm.createContext({
     console,
+    Date: class extends Date { static now() { return now } },
     setTimeout(fn, delay) {
       timers.set(++timerId, { fn, at: now + delay })
       return timerId
@@ -79,13 +80,17 @@ function createRuntime(options = {}) {
     return instance
   }
   function advance(milliseconds) {
-    now += milliseconds
-    for (const [id, timer] of timers) {
-      if (timer.at <= now) {
-        timers.delete(id)
-        timer.fn()
-      }
+    const until = now + milliseconds
+    let calls = 0
+    while (timers.size) {
+      const next = [...timers].sort((a, b) => a[1].at - b[1].at)[0]
+      if (next[1].at > until) break
+      if (++calls > 10000) throw new Error('Timer loop did not settle')
+      now = next[1].at
+      timers.delete(next[0])
+      next[1].fn()
     }
+    now = until
   }
   return { load, page, advance, timers, toasts, routes, get deviceRequest() { return deviceRequest } }
 }

@@ -146,7 +146,7 @@ test('winning move routes once; replay and back return to a registered level', a
   assert.equal(restarted._game.canUndo(), false)
   const winAgain = await runtime.page('src/pages/win/index.ux')
   assert.equal(winAgain.onBackPress(), true)
-  assert.equal(runtime.routes[2].uri, '/pages/levels/level01')
+  assert.equal(runtime.routes[2].uri, '/pages/select')
 })
 
 test('win page handles missing, legacy and invalid route parameters without $page.options', async () => {

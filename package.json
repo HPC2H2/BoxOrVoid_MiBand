@@ -1,6 +1,6 @@
 {
   "name": "box-or-void",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "engines": {
     "node": ">=18.18"
@@ -10,6 +10,7 @@
     "build": "aiot build",
     "release": "aiot release",
     "assets:sync": "node scripts/sync-glyphs.cjs",
+    "assets:mobius": "node scripts/generate-mobius.cjs",
     "lint": "eslint --ext .ux,.js,.cjs src/ scripts/ tests/",
     "lint:fix": "npm run lint -- --fix",
     "test": "node --experimental-vm-modules --test",

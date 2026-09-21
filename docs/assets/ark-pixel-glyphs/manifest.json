@@ -8,9 +8,9 @@
     "white": "#FFFFFF",
     "grey": "#4B4B4B"
   },
-  "glyphCount": 61,
-  "pngCount": 122,
-  "totalPngBytes": 22031,
+  "glyphCount": 66,
+  "pngCount": 132,
+  "totalPngBytes": 23946,
   "glyphs": {
     "0": {
       "white": "white/white-u0030.png",
@@ -255,6 +255,26 @@
     "则": {
       "white": "white/white-u5219.png",
       "grey": "grey/grey-u5219.png"
+    },
+    "变": {
+      "white": "white/white-u53d8.png",
+      "grey": "grey/grey-u53d8.png"
+    },
+    "化": {
+      "white": "white/white-u5316.png",
+      "grey": "grey/grey-u5316.png"
+    },
+    "前": {
+      "white": "white/white-u524d.png",
+      "grey": "grey/grey-u524d.png"
+    },
+    "进": {
+      "white": "white/white-u8fdb.png",
+      "grey": "grey/grey-u8fdb.png"
+    },
+    "动": {
+      "white": "white/white-u52a8.png",
+      "grey": "grey/grey-u52a8.png"
     }
   }
 }

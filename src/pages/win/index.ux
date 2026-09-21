@@ -1,13 +1,17 @@
+<import name="pixel-label" src="../../components/PixelLabel/index"></import>
 <template>
   <div class="container">
     <text class="title">恭喜通关！</text>
     <text class="message">所有目标均已完成</text>
-    <text class="level-info">当前版本共 1 关</text>
+    <text class="level-info">{{ levelName }}</text>
     
     <div class="buttons">
       <div class="button restart-btn" onclick="restartLevel">
         <image class="button-glyph" src="/common/image/icons/white-chong.png"></image>
         <image class="button-glyph" src="/common/image/icons/white-wan.png"></image>
+      </div>
+      <div class="button select-btn" onclick="goToSelection">
+        <pixel-label value="选关" size="20"></pixel-label>
       </div>
     </div>
   </div>
@@ -15,10 +19,12 @@
 
 <script>
 import router from '@system.router'
+import {SELECT_PATH, MODES} from '../../common/modes'
 
 const LEVEL_PATH = '/pages/levels/level01'
 
 export default {
+  private: { levelName: '经典 · 第 1 关' },
   protected: {
     levelId: 'level01',
     levelPath: LEVEL_PATH,
@@ -27,13 +33,15 @@ export default {
   onInit() {
     // 只接受当前已注册的关卡路由，同时兼容不带前导斜杠的参数。
     const path = '/' + String(this.levelPath || '').replace(/^\/+/, '')
-    this.levelPath = path === LEVEL_PATH ? path : LEVEL_PATH
+    const mode = MODES.find(item => item.path === path) || MODES[0]
+    this.levelPath = mode.path
+    this.levelName = mode.title + ' · 第 1 关'
     this._leaving = false
   },
 
   onBackPress() {
     // 拦截返回键
-    this.restartLevel()
+    this.goToSelection()
     return true
   },
   
@@ -43,6 +51,12 @@ export default {
     router.replace({
       uri: this.levelPath
     })
+  },
+
+  goToSelection() {
+    if (this._leaving) return
+    this._leaving = true
+    router.replace({ uri: SELECT_PATH })
   }
 
   
@@ -105,5 +119,9 @@ export default {
 
 .restart-btn {
   background-color: #ff416c;
+}
+.select-btn {
+  background-color: #3498DB;
+  margin-top: 10px;
 }
 </style>

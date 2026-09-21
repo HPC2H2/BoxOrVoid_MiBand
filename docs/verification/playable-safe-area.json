@@ -1,0 +1,110 @@
+[
+  {
+    "model": "Mi Band 9",
+    "page": "select",
+    "filename": "playable-miband9-select.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "timed",
+    "filename": "playable-miband9-timed.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "timed-b",
+    "filename": "playable-miband9-timed-b.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "timed-win",
+    "filename": "playable-miband9-timed-win.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "mobius-flat",
+    "filename": "playable-miband9-mobius-flat.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "mobius-ring",
+    "filename": "playable-miband9-mobius-ring.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "mobius-seam",
+    "filename": "playable-miband9-mobius-seam.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "mobius-win",
+    "filename": "playable-miband9-mobius-win.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 9",
+    "page": "classic-win",
+    "filename": "playable-miband9-classic-win.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "select",
+    "filename": "playable-miband10-select.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "timed",
+    "filename": "playable-miband10-timed.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "timed-b",
+    "filename": "playable-miband10-timed-b.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "timed-win",
+    "filename": "playable-miband10-timed-win.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "mobius-flat",
+    "filename": "playable-miband10-mobius-flat.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "mobius-ring",
+    "filename": "playable-miband10-mobius-ring.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "mobius-seam",
+    "filename": "playable-miband10-mobius-seam.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "mobius-win",
+    "filename": "playable-miband10-mobius-win.png",
+    "coveredPixels": 0
+  },
+  {
+    "model": "Mi Band 10",
+    "page": "classic-win",
+    "filename": "playable-miband10-classic-win.png",
+    "coveredPixels": 0
+  }
+]

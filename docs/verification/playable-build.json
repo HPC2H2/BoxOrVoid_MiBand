@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-21",
+  "package": "dist/com.boxorvoid.demo.debug.1.1.0.rpk",
+  "bytes": 249645,
+  "sha256": "d1151e7b95e844f6024dd433babb7aed882c2e7fe9a979a4acc81be727fc0e5f",
+  "unitTests": 38,
+  "lint": "passed",
+  "build": "passed",
+  "emulators": [
+    {
+      "model": "Mi Band 9",
+      "resolution": "192x490",
+      "timed": "completed by touch",
+      "mobius": "completed by touch",
+      "classic": "completed by touch"
+    },
+    {
+      "model": "Mi Band 10",
+      "resolution": "212x520",
+      "timed": "completed by touch",
+      "mobius": "completed by touch",
+      "classic": "completed by touch"
+    }
+  ],
+  "safeAreaChecks": 18,
+  "coveredPixels": 0,
+  "physicalDeviceTested": false
+}

@@ -1,0 +1,4 @@
+[
+  { "wait": 8000 }, "onRight", "onSwitch", "onLeft",
+  { "wait": 8000 }, "onLeft", "onLeft", "onSwitch", "onRight", "onRight"
+]

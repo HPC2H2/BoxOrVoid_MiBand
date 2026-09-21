@@ -6,6 +6,7 @@
     <image
       class="title"
       src="/common/image/title.png"
+      onclick="goToSelection"
       style="width: {{ adaptedSizes.titleWidth }}px; height: {{ adaptedSizes.titleHeight }}px; margin: {{ adaptedSizes.marginTop }}px 0 3px 0"
     />
 
@@ -115,6 +116,7 @@ import device from "@system.device"
 import prompt from "@system.prompt"
 import {getAdaptedSizes} from "../../../common/screenAdapter"
 import {GAME_CONSTANTS} from "../../../game/constants"
+import {SELECT_PATH} from "../../../common/modes"
 
 const BUTTON_COLORS = GAME_CONSTANTS.BUTTON_COLORS
 const BUTTON_FEEDBACK = {
@@ -344,6 +346,18 @@ export default {
 
   onHide() {
     this.clearButtonFeedback()
+  },
+
+  goToSelection() {
+    if (this._leaving || this._destroyed) return
+    this._leaving = true
+    this.clearButtonFeedback()
+    router.replace({ uri: SELECT_PATH })
+  },
+
+  onBackPress() {
+    this.goToSelection()
+    return true
   },
 
   onDestroy() {

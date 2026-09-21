@@ -1,0 +1,73 @@
+<import name="pixel-label" src="../../components/PixelLabel/index"></import>
+<import name="game-grid" src="../../components/GameGrid/index"></import>
+<import name="control-button" src="../../components/ControlButton/index"></import>
+<template>
+  <div class="page" style="padding-top: {{ layout.top }}px">
+    <div onclick="goBack"><pixel-label value="{{ title }}" size="23"></pixel-label></div>
+    <text class="subtitle">{{ levelName }} · 点击标题选关</text>
+    <div class="status" style="width: {{ layout.width }}px">
+      <text class="status-text">{{ statusText }}</text>
+      <block if="{{ mode === 'timed' }}">
+        <text class="clock">{{ phase === 0 ? 'A' : 'B' }} · {{ seconds }}秒</text>
+        <div class="small-button blue" onclick="togglePause"><pixel-label value="{{ paused ? '继续' : '暂停' }}" size="17"></pixel-label></div>
+      </block>
+      <block else>
+        <div class="small-button purple" onclick="toggleView"><pixel-label value="{{ unfolded ? '环视图' : '展开' }}" size="14"></pixel-label></div>
+        <div class="small-button blue" onclick="rotateView"><pixel-label value="转动" size="17"></pixel-label></div>
+      </block>
+    </div>
+    <div class="visual" style="width: {{ layout.panel }}px; height: {{ layout.panel }}px">
+      <game-grid if="{{ mode === 'timed' || unfolded }}" rows="{{ rows }}" columns="{{ columns }}"
+        icons="{{ cellIcons }}" cell-styles="{{ cellStyles }}" size-config="{{ layout.grid }}"></game-grid>
+      <div else class="ring" style="width: {{ layout.panel }}px; height: {{ layout.panel }}px">
+        <image src="{{ ringImage }}" class="ring-image" style="width: {{ layout.panel }}px; height: {{ layout.panel }}px" />
+        <div class="marker" for="{{ markers }}" style="left: {{ $item.left }}px; top: {{ $item.top }}px; background-color: {{ $item.bg }}; border-color: {{ $item.border }}">
+          <image src="{{ $item.src }}" class="marker-glyph" />
+        </div>
+      </div>
+    </div>
+    <text class="goal" style="width: {{ layout.width }}px">{{ goalText }}</text>
+    <text class="hint" style="width: {{ layout.width }}px">{{ hintText }}</text>
+    <div class="controls">
+      <div onclick="onSwitch"><control-button type="switch" color="{{ paused ? '#555555' : '#3498DB' }}" is-white="{{ currentPlayer === 7 }}" size-config="{{ layout.controls }}"></control-button></div>
+      <div class="directions">
+        <div onclick="onUp"><control-button type="arrow" color="{{ pressed === 'up' ? '#36D1DC' : '#2ECC71' }}" arrow-icon="/common/image/icons/white-up-arrow.png" size-config="{{ layout.controls }}"></control-button></div>
+        <div class="row">
+          <div onclick="onLeft"><control-button type="arrow" color="{{ pressed === 'left' ? '#36D1DC' : '#2ECC71' }}" arrow-icon="/common/image/icons/white-left-arrow.png" size-config="{{ layout.controls }}"></control-button></div>
+          <div onclick="onDown"><control-button type="arrow" color="{{ pressed === 'down' ? '#36D1DC' : '#2ECC71' }}" arrow-icon="/common/image/icons/white-down-arrow.png" size-config="{{ layout.controls }}"></control-button></div>
+          <div onclick="onRight"><control-button type="arrow" color="{{ pressed === 'right' ? '#36D1DC' : '#2ECC71' }}" arrow-icon="/common/image/icons/white-right-arrow.png" size-config="{{ layout.controls }}"></control-button></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div onclick="onUndo"><control-button type="undo" color="#9B59B6" size-config="{{ layout.controls }}"></control-button></div>
+      <div onclick="onReset"><control-button type="reset" color="#E74C3C" size-config="{{ layout.controls }}"></control-button></div>
+    </div>
+  </div>
+</template>
+<script>
+import { createChallengePage } from '../../common/challengePage'
+export default createChallengePage('mobius')
+</script>
+<style scoped>
+.page { width: 100%; height: 100%; background-color: #1a1a1a; flex-direction: column; align-items: center; padding-bottom: 32px; }
+.subtitle { font-size: 11px; color: #aaaaaa; margin-top: 4px; }
+.status { height: 32px; margin-top: 8px; align-items: center; justify-content: space-between; }
+.status-text { font-size: 12px; color: #ffffff; }
+.clock { font-size: 13px; color: #5bb9f5; }
+.small-button { min-width: 36px; height: 28px; padding: 0 3px; border-radius: 4px; align-items: center; justify-content: center; }
+.blue { background-color: #3498DB; }
+.purple { background-color: #9B59B6; }
+.visual { margin-top: 6px; align-items: center; justify-content: center; background-color: #202630; border-radius: 4px; }
+.ring { position: relative; }
+.ring-image { object-fit: contain; }
+.marker { position: absolute; width: 16px; height: 16px; border-width: 1px; align-items: center; justify-content: center; }
+.marker-glyph { width: 14px; height: 14px; object-fit: contain; }
+.goal { margin-top: 7px; font-size: 10px; color: #cccccc; text-align: center; }
+.hint { font-size: 11px; color: #a5c7ec; height: 29px; lines: 2; margin-top: 4px; text-align: center; }
+.controls { align-items: center; margin-top: 5px; }
+.directions { flex-direction: column; align-items: center; margin-left: 2px; }
+.row { flex-direction: row; margin-top: 2px; }
+.bottom { flex-direction: row; margin-top: 7px; }
+</style>
+

@@ -1,0 +1,26 @@
+<template>
+  <div class="label">
+    <image for="{{ glyphs }}" src="{{ $item }}" style="width: {{ size || 20 }}px; height: {{ size || 20 }}px" />
+  </div>
+</template>
+<script>
+export default {
+  props: ['value', 'size'],
+  computed: {
+    glyphs() {
+      return String(this.value || '').split('').map(character =>
+        '/common/image/glyphs/white-u' + character.charCodeAt(0).toString(16).padStart(4, '0') + '.png')
+    }
+  }
+}
+</script>
+<style scoped>
+.label {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+image {
+  object-fit: contain;
+}
+</style>

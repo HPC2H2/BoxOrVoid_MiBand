@@ -1,0 +1,54 @@
+<import name="pixel-label" src="../../components/PixelLabel/index"></import>
+<template>
+  <div class="page" style="padding-top: {{ layout.top }}px">
+    <image class="title" src="/common/image/title.png" />
+    <div class="heading"><pixel-label value="选关" size="24"></pixel-label></div>
+    <div class="card" for="{{ modes }}" onclick="openMode($item.id)"
+      style="width: {{ layout.width }}px; height: {{ layout.cardHeight }}px; border-color: {{ $item.color }}">
+      <div class="card-top">
+        <text class="number" style="color: {{ $item.color }}">{{ $item.number }}</text>
+        <pixel-label value="{{ $item.title }}" size="20"></pixel-label>
+      </div>
+      <text class="description">{{ $item.description }}</text>
+      <div class="card-bottom">
+        <text class="tag" style="color: {{ $item.color }}">{{ $item.tag }}</text>
+        <image class="arrow" src="/common/image/icons/white-right-arrow.png" />
+      </div>
+    </div>
+    <text class="note" style="width: {{ layout.width }}px">经典关卡点击标题返回选关</text>
+  </div>
+</template>
+<script>
+import router from '@system.router'
+import { MODES, getMode } from '../../common/modes'
+import { getDemoLayout, initDemoLayout } from '../../common/demoLayout'
+
+export default {
+  private: { modes: MODES, layout: getDemoLayout(192, 490) },
+  onInit() {
+    this._leaving = false
+    this._destroyed = false
+    initDemoLayout(this)
+  },
+  openMode(id) {
+    const mode = getMode(id)
+    if (!mode || this._leaving || this._destroyed) return
+    this._leaving = true
+    router.replace({ uri: mode.path })
+  },
+  onDestroy() { this._destroyed = true }
+}
+</script>
+<style scoped>
+.page { width: 100%; height: 100%; background-color: #1a1a1a; flex-direction: column; align-items: center; padding-bottom: 32px; }
+.title { width: 112px; height: 26px; object-fit: contain; }
+.heading { margin: 10px 0 12px; }
+.card { flex-direction: column; background-color: #222832; border-width: 1px; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+.card-top { flex-direction: row; align-items: center; }
+.number { width: 22px; font-size: 13px; margin-right: 4px; }
+.description { font-size: 11px; color: #cccccc; margin-top: 5px; }
+.card-bottom { flex-direction: row; justify-content: space-between; align-items: center; margin-top: 5px; }
+.tag { font-size: 11px; }
+.arrow { width: 16px; height: 16px; object-fit: contain; }
+.note { font-size: 10px; color: #999999; text-align: center; margin-top: 4px; }
+</style>

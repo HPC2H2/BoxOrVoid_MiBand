@@ -1,0 +1,42 @@
+[
+  {
+    "device": "miband9",
+    "page": "select",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband9",
+    "page": "timed",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband9",
+    "page": "mobius",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband9",
+    "page": "unfolded",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband10",
+    "page": "select",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband10",
+    "page": "timed",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband10",
+    "page": "mobius",
+    "occludedPixels": 0
+  },
+  {
+    "device": "miband10",
+    "page": "unfolded",
+    "occludedPixels": 0
+  }
+]
