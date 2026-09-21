@@ -34,18 +34,11 @@ export class GameState {
 
     // 当前玩家
     this.currentPlayer = GAME_CONSTANTS.PLAYER_TYPES.BLACK
-
-    // 按钮颜色
-    this.switchBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH
-    this.upBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.downBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.leftBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.rightBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.resetBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_RESET
-    this.undoBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_UNDO
+    this.stepCount = 0
 
     // 历史记录（用于撤销）
     this.history = []
+    this.buildCellLookupCache()
   }
 
   // 保存当前状态到历史记录
@@ -55,10 +48,11 @@ export class GameState {
       whiteY: this.whiteY,
       blackX: this.blackX,
       blackY: this.blackY,
-      whiteBoxes: JSON.parse(JSON.stringify(this.whiteBoxes)),
-      blackBoxes: JSON.parse(JSON.stringify(this.blackBoxes)),
+      whiteBoxes: this.whiteBoxes.map(b => ({ x: b.x, y: b.y })),
+      blackBoxes: this.blackBoxes.map(b => ({ x: b.x, y: b.y })),
       currentPlayer: this.currentPlayer,
-      lastPlayerAt: JSON.parse(JSON.stringify(this.lastPlayerAt))
+      stepCount: this.stepCount,
+      lastPlayerAt: { ...this.lastPlayerAt }
     }
     this.history.push(stateSnapshot)
     // 最多保存50步历史
@@ -80,7 +74,9 @@ export class GameState {
     this.whiteBoxes = prevState.whiteBoxes
     this.blackBoxes = prevState.blackBoxes
     this.currentPlayer = prevState.currentPlayer
+    this.stepCount = prevState.stepCount
     this.lastPlayerAt = prevState.lastPlayerAt
+    this.buildBoxLookupCache()
     return true
   }
 
@@ -99,34 +95,49 @@ export class GameState {
     this.mapRules[`${y},${x}`] = value
   }
   
+  // 构建坐标查找缓存（O(1)替代O(n)的.some()/.find()）
+  buildCellLookupCache() {
+    this.buildBoxLookupCache()
+    this._whiteBoxTargetSet = new Set(this.whiteBoxTargets.map(t => `${t.y},${t.x}`))
+    this._blackBoxTargetSet = new Set(this.blackBoxTargets.map(t => `${t.y},${t.x}`))
+    this._whitePlayerTargetSet = new Set(this.whitePlayerTarget.map(t => `${t.y},${t.x}`))
+    this._blackPlayerTargetSet = new Set(this.blackPlayerTarget.map(t => `${t.y},${t.x}`))
+  }
+
+  // 普通移动和切换角色不会改变箱子；目标点缓存整关复用。
+  buildBoxLookupCache() {
+    this._whiteBoxSet = new Set(this.whiteBoxes.map(b => `${b.y},${b.x}`))
+    this._blackBoxSet = new Set(this.blackBoxes.map(b => `${b.y},${b.x}`))
+  }
+
   // 检查位置是否有白箱子
   hasWhiteBox(x, y) {
-    return this.whiteBoxes.some(box => box.x === x && box.y === y)
+    return this._whiteBoxSet.has(`${y},${x}`)
   }
   
   // 检查位置是否有黑箱子
   hasBlackBox(x, y) {
-    return this.blackBoxes.some(box => box.x === x && box.y === y)
+    return this._blackBoxSet.has(`${y},${x}`)
   }
   
   // 检查是否是白箱子目标点
   isWhiteBoxTarget(x, y) {
-    return this.whiteBoxTargets.some(target => target.x === x && target.y === y)
+    return this._whiteBoxTargetSet.has(`${y},${x}`)
   }
   
   // 检查是否是黑箱子目标点
   isBlackBoxTarget(x, y) {
-    return this.blackBoxTargets.some(target => target.x === x && target.y === y)
+    return this._blackBoxTargetSet.has(`${y},${x}`)
   }
   
   // 检查是否是白角色目标点
   isWhitePlayerTarget(x, y) {
-    return this.whitePlayerTarget.some(target => target.x === x && target.y === y)
+    return this._whitePlayerTargetSet.has(`${y},${x}`)
   }
   
   // 检查是否是黑角色目标点
   isBlackPlayerTarget(x, y) {
-    return this.blackPlayerTarget.some(target => target.x === x && target.y === y)
+    return this._blackPlayerTargetSet.has(`${y},${x}`)
   }
   
   // 切换当前玩家

@@ -18,7 +18,7 @@ export class Game {
     
     // 设置地图
     if (levelData.mapRules) {
-      this.state.mapRules = levelData.mapRules
+      this.state.mapRules = { ...levelData.mapRules }
     }
     
     // 设置角色位置
@@ -37,30 +37,33 @@ export class Game {
     
     // 设置箱子
     if (levelData.whiteBoxes) {
-      this.state.whiteBoxes = [...levelData.whiteBoxes]
+      this.state.whiteBoxes = levelData.whiteBoxes.map(b => ({ x: b.x, y: b.y }))
     }
     if (levelData.blackBoxes) {
-      this.state.blackBoxes = [...levelData.blackBoxes]
+      this.state.blackBoxes = levelData.blackBoxes.map(b => ({ x: b.x, y: b.y }))
     }
     
     // 设置目标点
     if (levelData.whiteBoxTargets) {
-      this.state.whiteBoxTargets = [...levelData.whiteBoxTargets]
+      this.state.whiteBoxTargets = levelData.whiteBoxTargets.map(t => ({ x: t.x, y: t.y }))
     }
     if (levelData.blackBoxTargets) {
-      this.state.blackBoxTargets = [...levelData.blackBoxTargets]
+      this.state.blackBoxTargets = levelData.blackBoxTargets.map(t => ({ x: t.x, y: t.y }))
     }
     if (levelData.whitePlayerTarget) {
-      this.state.whitePlayerTarget = [...levelData.whitePlayerTarget]
+      this.state.whitePlayerTarget = levelData.whitePlayerTarget.map(t => ({ x: t.x, y: t.y }))
     }
     if (levelData.blackPlayerTarget) {
-      this.state.blackPlayerTarget = [...levelData.blackPlayerTarget]
+      this.state.blackPlayerTarget = levelData.blackPlayerTarget.map(t => ({ x: t.x, y: t.y }))
     }
     
     // 设置当前玩家
     if (levelData.currentPlayer !== undefined) {
       this.state.currentPlayer = levelData.currentPlayer
     }
+
+    // 预构建坐标查找缓存
+    this.state.buildCellLookupCache()
   }
   
   // 移动
@@ -88,13 +91,15 @@ export class Game {
       )
     }
 
+    this.state.stepCount++
+
     // 检查是否通关
     const isWin = this.winChecker.checkWin()
 
     return {
       success: true,
       isWin,
-      updatedIcons: this.updateCellIcons()
+      display: this.updateCellDisplay()
     }
   }
 
@@ -141,17 +146,30 @@ export class Game {
       this.state.blackBoxes[boxIndex].x = boxPos.x
       this.state.blackBoxes[boxIndex].y = boxPos.y
     }
+    this.state.buildBoxLookupCache()
   }
   
-  // 更新所有单元格图标
+  // 更新所有单元格图标（仅遍历一次）
   updateCellIcons() {
+    return this.updateCellDisplay()
+  }
+
+  // 合并图标和样式计算为一次遍历
+  updateCellDisplay() {
     const icons = {}
-    for (let y = 0; y < this.state.mapHeight; y++) {
-      for (let x = 0; x < this.state.mapWidth; x++) {
-        icons[`${y},${x}`] = this.iconManager.getIconParts(y, x)
+    const styles = {}
+    const state = this.state
+    for (let y = 0; y < state.mapHeight; y++) {
+      for (let x = 0; x < state.mapWidth; x++) {
+        const key = `${y},${x}`
+        icons[key] = this.iconManager.getIconParts(y, x)
+        styles[key] = {
+          bg: this.getCellBg(y, x),
+          border: this.getCellBorder(y, x)
+        }
       }
     }
-    return icons
+    return { icons, styles }
   }
   
   // 切换玩家
@@ -165,24 +183,14 @@ export class Game {
     return this.winChecker.checkWin()
   }
   
-  // 重置按钮颜色
-  resetButtonColors() {
-    this.state.switchBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH
-    this.state.upBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.state.downBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.state.leftBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.state.rightBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW
-    this.state.resetBtnColor = GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_RESET
-  }
-  
     // 获取单元格背景颜色
     getCellBg(y, x) {
         const state = this.state
         
-        const isWhiteBoxTarget = state.whiteBoxTargets.some(t => t.x === x && t.y === y)
-        const isBlackBoxTarget = state.blackBoxTargets.some(t => t.x === x && t.y === y)
-        const hasWhiteBox = state.whiteBoxes.some(b => b.x === x && b.y === y)
-        const hasBlackBox = state.blackBoxes.some(b => b.x === x && b.y === y)
+        const isWhiteBoxTarget = state.isWhiteBoxTarget(x, y)
+        const isBlackBoxTarget = state.isBlackBoxTarget(x, y)
+        const hasWhiteBox = state.hasWhiteBox(x, y)
+        const hasBlackBox = state.hasBlackBox(x, y)
         
         // 检查是否有角色
         const hasWhitePlayer = (y === state.whiteY && x === state.whiteX)
@@ -206,12 +214,12 @@ export class Game {
         if (isWhiteBoxTarget) return "#FCD3D3"
         if (isBlackBoxTarget) return "#333333"
     
-        // 角色目标点
-        const whitePlayerTarget = state.whitePlayerTarget.find(t => t.x === x && t.y === y)
-        const blackPlayerTarget = state.blackPlayerTarget.find(t => t.x === x && t.y === y)
+        // 角色目标点（使用 Set 缓存）
+        const hasWhitePlayerTarget = state.isWhitePlayerTarget(x, y)
+        const hasBlackPlayerTarget = state.isBlackPlayerTarget(x, y)
     
-        if (whitePlayerTarget) return "#D3D3D3" // 白位背景色
-        if (blackPlayerTarget) return "#555555" // 黑位背景色
+        if (hasWhitePlayerTarget) return "#D3D3D3" // 白位背景色
+        if (hasBlackPlayerTarget) return "#555555" // 黑位背景色
     
         return state.getMapValue(y, x) === 0 ? "#F8F9FA" : "#2D3748"
     }

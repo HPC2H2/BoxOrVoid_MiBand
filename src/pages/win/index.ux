@@ -1,13 +1,10 @@
 <template>
   <div class="container">
-    <text class="icon">🎉</text>
     <text class="title">恭喜通关！</text>
-    <text class="message">成功将所有箱子推到目标点！</text>
+    <text class="message">所有目标均已完成</text>
+    <text class="level-info">当前版本共 1 关</text>
     
     <div class="buttons">
-      <div class="button next-btn" onclick="nextLevel">
-        <text class="button-text">下一关</text>
-      </div>
       <div class="button restart-btn" onclick="restartLevel">
         <text class="button-text">重玩</text>
       </div>
@@ -16,22 +13,21 @@
 </template>
 
 <script>
-import router from '@system.router' 
-// 当一关游戏结束后，跳转到这个页面。这个页面有三个按钮：下一关、重玩和返回主菜单。
-// 点击下一关会跳转到下一关的页面，点击重玩会重新加载当前关卡。
-// 返回主菜单暂时没有，后续可以添加一个按钮实现这个功能。
+import router from '@system.router'
+
+const LEVEL_PATH = '/pages/levels/level01'
 
 export default {
-  private: {
-    levelId: '',
-    levelPath: '',
+  protected: {
+    levelId: 'level01',
+    levelPath: LEVEL_PATH,
   },
 
   onInit() {
-    // 获取当前关卡信息
-    const { levelId, levelPath } = this.$page.options
-    this.levelId = levelId || 'level01'
-    this.levelPath = levelPath || 'pages/levels/level01/index.ux'
+    // 只接受当前已注册的关卡路由，同时兼容不带前导斜杠的参数。
+    const path = '/' + String(this.levelPath || '').replace(/^\/+/, '')
+    this.levelPath = path === LEVEL_PATH ? path : LEVEL_PATH
+    this._leaving = false
   },
 
   onBackPress() {
@@ -40,16 +36,11 @@ export default {
     return true
   },
   
-  nextLevel() {
-    // 跳转到下一关
-    router.replace({
-      uri: `/${this.levelPath}`
-    })
-  },
-  
   restartLevel() {
+    if (this._leaving) return
+    this._leaving = true
     router.replace({
-      uri: `/${this.levelPath}`
+      uri: this.levelPath
     })
   }
 
@@ -68,12 +59,6 @@ export default {
   padding: 20px;
 }
 
-.icon {
-  font-size: 60px;
-  margin-bottom: 20px;
-  lines: 1;
-}
-
 .title {
   font-size: 18px;
   color: #ffffff;
@@ -84,13 +69,20 @@ export default {
 .message {
   font-size: 14px;
   color: #cccccc;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
   text-align: center;
   lines: 2;
 }
 
 .buttons {
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-info {
+  font-size: 12px;
+  color: #cccccc;
+  margin-bottom: 20px;
 }
 
 .button {
@@ -106,10 +98,6 @@ export default {
 .button-text {
   font-size: 16px;
   color: #ffffff;
-}
-
-.next-btn {
-  background-color: #667eea;
 }
 
 .restart-btn {

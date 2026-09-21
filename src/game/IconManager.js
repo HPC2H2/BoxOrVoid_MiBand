@@ -1,5 +1,14 @@
 import { GAME_CONSTANTS } from './constants'
 
+const ICON_PATHS = {
+  "white-player": "/common/image/icons/grey-white.png",
+  "black-player": "/common/image/icons/white-black.png",
+  "white-box": "/common/image/icons/grey-box.png",
+  "black-box": "/common/image/icons/white-box.png",
+  "white-target": "/common/image/icons/grey-target.png",
+  "black-target": "/common/image/icons/white-target.png"
+}
+
 export class IconManager {
   constructor(gameState) {
     this.state = gameState
@@ -9,7 +18,7 @@ export class IconManager {
   getIconParts(y, x) {
     const type = this.getIconType(y, x)
     if (!type) {
-      return { single: true, src: null }
+      return { single: true, src: '', src1: '', src2: '' }
     }
 
     const parts = type.split("-")
@@ -23,6 +32,7 @@ export class IconManager {
       
       return {
         single: false,
+        src: '',
         src1: this.getIconImagePath(firstPart),
         src2: this.getIconImagePath(secondPart)
       }
@@ -30,7 +40,9 @@ export class IconManager {
       // 单图标
       return {
         single: true,
-        src: this.getIconImagePath(type)
+        src: this.getIconImagePath(type),
+        src1: '',
+        src2: ''
       }
     }
   }
@@ -61,36 +73,36 @@ export class IconManager {
     }
 
     // 白箱子
-    const whiteBox = this.state.whiteBoxes.find(b => b.x === x && b.y === y)
-    if (whiteBox) {
+    const hasWhiteBox = this.state.hasWhiteBox(x, y)
+    if (hasWhiteBox) {
       return "white-box"
     }
 
     // 黑箱子
-    const blackBox = this.state.blackBoxes.find(b => b.x === x && b.y === y)
-    if (blackBox) {
+    const hasBlackBox = this.state.hasBlackBox(x, y)
+    if (hasBlackBox) {
       return "black-box"
     }
 
     // 箱子目标点（仅当无箱子时才显示）
-    const isWhiteBoxTarget = this.state.whiteBoxTargets.some(t => t.x === x && t.y === y)
+    const isWhiteBoxTarget = this.state.isWhiteBoxTarget(x, y)
     if (isWhiteBoxTarget) {
       return "white-box-white-target"
     }
 
-    const isBlackBoxTarget = this.state.blackBoxTargets.some(t => t.x === x && t.y === y)
+    const isBlackBoxTarget = this.state.isBlackBoxTarget(x, y)
     if (isBlackBoxTarget) {
       return "black-box-black-target"
     }
 
     // 角色目标点（仅当无角色时才显示）
-    const whitePosition = this.state.whitePlayerTarget.find(t => t.x === x && t.y === y)
-    if (whitePosition) {
+    const isWhitePlayerTarget = this.state.isWhitePlayerTarget(x, y)
+    if (isWhitePlayerTarget) {
       return "white-player-white-target"
     }
 
-    const blackPosition = this.state.blackPlayerTarget.find(t => t.x === x && t.y === y)
-    if (blackPosition) {
+    const isBlackPlayerTarget = this.state.isBlackPlayerTarget(x, y)
+    if (isBlackPlayerTarget) {
       return "black-player-black-target"
     }
 
@@ -99,16 +111,7 @@ export class IconManager {
   
   // 获取图标路径
   getIconImagePath(type) {
-    // 图标映射
-    const icons = {
-      "white-player": "/common/image/icons/grey-white.png",
-      "black-player": "/common/image/icons/white-black.png",
-      "white-box": "/common/image/icons/grey-box.png",
-      "black-box": "/common/image/icons/white-box.png",
-      "white-target": "/common/image/icons/grey-target.png",
-      "black-target": "/common/image/icons/white-target.png"
-    }
-    return icons[type] || ""
+    return ICON_PATHS[type] || ""
   }
   
   // 更新所有单元格图标
@@ -117,7 +120,7 @@ export class IconManager {
     for (let y = 0; y < this.state.mapHeight; y++) {
       for (let x = 0; x < this.state.mapWidth; x++) {
         const parts = this.getIconParts(y, x)
-        // 注意：即使 src 为 null，也要存，否则模板可能无法响应变化
+        // 空格子也保留所有字段，便于原地更新响应式数据。
         icons[`${y},${x}`] = parts
       }
     }

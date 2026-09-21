@@ -3,19 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": ">=8.10"
+    "node": ">=18.18"
   },
   "scripts": {
     "start": "aiot start --watch",
     "build": "aiot build",
     "release": "aiot release",
-    "lint": "eslint --format codeframe --fix --ext .ux,.js src/",
+    "lint": "eslint --ext .ux,.js,.cjs src/ scripts/ tests/",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "node --experimental-vm-modules --test",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{ux,js}": [
       "prettier --write",
-      "eslint --format codeframe --fix",
+      "eslint --fix",
       "git add"
     ],
     "*.{less,css}": [
@@ -27,6 +29,9 @@
   "devDependencies": {
     "@aiot-toolkit/jsc": "^1.0.3",
     "aiot-toolkit": "^2.0.5",
-    "husky": "^9.1.7"
+    "eslint": "8.57.1",
+    "eslint-plugin-html": "8.1.3",
+    "husky": "^9.1.7",
+    "sharp": "^0.33.5"
   }
 }

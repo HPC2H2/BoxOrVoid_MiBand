@@ -6,7 +6,6 @@
 
 // 基准设备尺寸（Mi Band 9）
 const BASE_WIDTH = 192
-const BASE_HEIGHT = 490
 
 /**
  * 获取屏幕缩放比例
@@ -14,7 +13,8 @@ const BASE_HEIGHT = 490
  * @returns {number} 缩放比例
  */
 export function getScale(screenWidth) {
-  return screenWidth / BASE_WIDTH
+  const width = Number(screenWidth)
+  return Number.isFinite(width) && width > 0 ? width / BASE_WIDTH : 1
 }
 
 /**
@@ -66,7 +66,6 @@ export const BASE_SIZES = {
   btnIconSize: 20,
 
   // 间距
-  controlAreaGap: 40,
   cellGap: 0,
   btnMargin: 4,
   btnRowMargin: 4,
@@ -107,7 +106,6 @@ export function getAdaptedSizes(screenWidth) {
     resetBtnHeight: adaptSize(BASE_SIZES.resetBtnHeight, scale),
     btnIconSize: adaptSize(BASE_SIZES.btnIconSize, scale),
 
-    controlAreaGap: adaptSize(BASE_SIZES.controlAreaGap, scale),
     cellGap: adaptSize(BASE_SIZES.cellGap, scale),
     btnMargin: adaptSize(BASE_SIZES.btnMargin, scale),
     btnRowMargin: adaptSize(BASE_SIZES.btnRowMargin, scale),
@@ -173,9 +171,6 @@ export function getStyles(sizes) {
     },
 
     // 间距样式
-    controlArea2: {
-      gap: `${sizes.controlAreaGap}px`
-    },
     controlPanel: {
       margin: `${sizes.controlPanelMargin}px`
     },

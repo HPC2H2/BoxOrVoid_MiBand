@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="controlArea2" style="gap: {{ adaptedSizes.controlAreaGap || 40 }}px">
+    <div class="controlArea2">
       <div class="undoArea">
         <div onclick="onUndo">
           <control-button
@@ -112,17 +112,27 @@
 import {Game} from "../../../game/index"
 import router from "@system.router"
 import device from "@system.device"
-import {getAdaptedSizes, getStyles} from "../../../common/screenAdapter"
+import prompt from "@system.prompt"
+import {getAdaptedSizes} from "../../../common/screenAdapter"
+import {GAME_CONSTANTS} from "../../../game/constants"
+
+const BUTTON_COLORS = GAME_CONSTANTS.BUTTON_COLORS
+const BUTTON_FEEDBACK = {
+  up: [BUTTON_COLORS.DEFAULT_ARROW, BUTTON_COLORS.PRESSED_ARROW, 200],
+  down: [BUTTON_COLORS.DEFAULT_ARROW, BUTTON_COLORS.PRESSED_ARROW, 200],
+  left: [BUTTON_COLORS.DEFAULT_ARROW, BUTTON_COLORS.PRESSED_ARROW, 200],
+  right: [BUTTON_COLORS.DEFAULT_ARROW, BUTTON_COLORS.PRESSED_ARROW, 200],
+  switch: [BUTTON_COLORS.DEFAULT_SWITCH, BUTTON_COLORS.PRESSED_SWITCH, 500],
+  reset: [BUTTON_COLORS.DEFAULT_RESET, BUTTON_COLORS.PRESSED_RESET, 500],
+  undo: [BUTTON_COLORS.DEFAULT_UNDO, BUTTON_COLORS.PRESSED_UNDO, 200]
+}
 
 export default {
   private: {
-    game: null,
     rows: [0, 1, 2, 3, 4, 5, 6],
     columns: [0, 1, 2, 3, 4],
     cellIcons: {},
     cellStyles: {},
-    stepCount: 0,
-    currentPlayerName: "白方",
     currentPlayer: 7,
     switchBtnColor: "#3498DB",
     upBtnColor: "#2ECC71",
@@ -132,20 +142,23 @@ export default {
     resetBtnColor: "#E74C3C",
     undoBtnColor: "#9B59B6",
     // 适配尺寸
-    adaptedSizes: {},
-    styles: {}
+    adaptedSizes: getAdaptedSizes(192)
   },
 
   onInit() {
+    this._destroyed = false
+    this._leaving = false
+    this._flashTimers = {}
     // 获取屏幕信息并计算适配尺寸
     this.initScreenAdapter()
 
     // 初始化游戏
-    this.game = new Game()
+    // 游戏状态和历史记录不参与模板的数据绑定。
+    this._game = new Game()
 
     // 加载关卡数据
     const levelData = this.getLevel1Data()
-    this.game.initLevel(levelData)
+    this._game.initLevel(levelData)
 
     // 更新UI
     this.updateDisplay()
@@ -156,20 +169,18 @@ export default {
     try {
       device.getInfo({
         success: (data) => {
-          const screenWidth = data.width || 192
-          this.adaptedSizes = getAdaptedSizes(screenWidth)
-          this.styles = getStyles(this.adaptedSizes)
+          if (!this._destroyed) {
+            this.adaptedSizes = getAdaptedSizes(data && data.screenWidth)
+          }
         },
         fail: () => {
           // 使用默认 Mi Band 9 尺寸
-          this.adaptedSizes = getAdaptedSizes(192)
-          this.styles = getStyles(this.adaptedSizes)
+          if (!this._destroyed) this.adaptedSizes = getAdaptedSizes(192)
         }
       })
     } catch (e) {
       // 使用默认 Mi Band 9 尺寸
       this.adaptedSizes = getAdaptedSizes(192)
-      this.styles = getStyles(this.adaptedSizes)
     }
   },
 
@@ -219,23 +230,26 @@ export default {
     return rules
   },
 
-  updateDisplay() {
-    this.cellIcons = this.game.iconManager.updateCellIcons()
-    this.stepCount = this.game.state.stepCount
-    this.currentPlayer = this.game.state.currentPlayer
-    this.currentPlayerName = this.currentPlayer === 6 ? "白方" : "黑方"
-
-    // 计算所有单元格样式
-    const styles = {}
-    for (let y = 0; y < 7; y++) {
-      for (let x = 0; x < 5; x++) {
-        styles[`${y},${x}`] = {
-          bg: this.getCellBg(y, x),
-          border: this.getCellBorder(y, x)
-        }
-      }
+  updateDisplay(display) {
+    const result = display || this._game.updateCellDisplay()
+    if (!this.cellIcons['0,0']) {
+      this.cellIcons = result.icons
+      this.cellStyles = result.styles
+    } else {
+      // 保留响应式对象，只修改发生变化的叶子属性。
+      Object.keys(result.icons).forEach(key => {
+        const icon = result.icons[key]
+        const currentIcon = this.cellIcons[key]
+        Object.keys(icon).forEach(field => {
+          if (currentIcon[field] !== icon[field]) currentIcon[field] = icon[field]
+        })
+        const style = result.styles[key]
+        const currentStyle = this.cellStyles[key]
+        if (currentStyle.bg !== style.bg) currentStyle.bg = style.bg
+        if (currentStyle.border !== style.border) currentStyle.border = style.border
+      })
     }
-    this.cellStyles = styles
+    this.currentPlayer = this._game.state.currentPlayer
   },
 
   onUp() {
@@ -255,10 +269,11 @@ export default {
   },
 
   handleMove(dx, dy, buttonType) {
-    const result = this.game.move(dx, dy)
+    if (this._leaving || this._destroyed) return
+    const result = this._game.move(dx, dy)
 
     if (!result.success) {
-      prompt.showToast({message: result.message, duration: 800})
+      prompt.showToast({message: result.message, duration: 1500})
       return
     }
 
@@ -266,40 +281,42 @@ export default {
     this.flashButton(buttonType)
 
     // 更新UI
-    this.updateDisplay()
+    this.updateDisplay(result.display)
 
-    // test 跳转
-    // if (1){
-    // 检查通关
-    if (this.game.checkWin()) {
-      // 跳转到通关页面
-      router.push({
-        uri: "pages/win",
+    if (result.isWin) {
+      this._leaving = true
+      this.clearButtonFeedback()
+      // 完成的棋盘不再留在页面栈里，重玩不会逐次堆积页面。
+      router.replace({
+        uri: "/pages/win",
         params: {
           levelId: "level01",
-          levelPath: "pages/levels/level01"
+          levelPath: "/pages/levels/level01"
         }
       })
     }
   },
 
   onSwitch() {
-    this.game.switchPlayer()
+    if (this._leaving || this._destroyed) return
+    this.currentPlayer = this._game.switchPlayer()
     this.flashButton("switch")
-    this.updateDisplay()
   },
 
   onReset() {
+    if (this._leaving || this._destroyed) return
+    this.clearButtonFeedback()
     const levelData = this.getLevel1Data()
-    this.game.initLevel(levelData)
+    this._game.initLevel(levelData)
     this.flashButton("reset")
     this.updateDisplay()
   },
 
   onUndo() {
-    const result = this.game.undo()
+    if (this._leaving || this._destroyed) return
+    const result = this._game.undo()
     if (!result.success) {
-      prompt.showToast({message: result.message, duration: 800})
+      prompt.showToast({message: result.message, duration: 1500})
       return
     }
     this.flashButton("undo")
@@ -307,43 +324,32 @@ export default {
   },
 
   flashButton(type) {
-    const colorMap = {
-      up: "#36D1DC",
-      down: "#36D1DC",
-      left: "#36D1DC",
-      right: "#36D1DC",
-      switch: "#FF416C",
-      reset: "#FF6B6B",
-      undo: "#8E44AD"
-    }
-
-    const defaultColorMap = {
-      up: "#2ECC71",
-      down: "#2ECC71",
-      left: "#2ECC71",
-      right: "#2ECC71",
-      switch: "#3498DB",
-      reset: "#E74C3C",
-      undo: "#9B59B6"
-    }
-
+    const feedback = BUTTON_FEEDBACK[type]
     const colorKey = type + "BtnColor"
-    this[colorKey] = colorMap[type]
-
-    setTimeout(
-      () => {
-        this[colorKey] = defaultColorMap[type]
-      },
-      type === "switch" || type === "reset" ? 500 : 200
-    )
+    this[colorKey] = feedback[1]
+    if (this._flashTimers[type]) clearTimeout(this._flashTimers[type])
+    this._flashTimers[type] = setTimeout(() => {
+      this[colorKey] = feedback[0]
+      delete this._flashTimers[type]
+    }, feedback[2])
   },
 
-  getCellBg(y, x) {
-    return this.game.getCellBg(y, x)
+  clearButtonFeedback() {
+    Object.keys(this._flashTimers).forEach(type => {
+      clearTimeout(this._flashTimers[type])
+      this[type + "BtnColor"] = BUTTON_FEEDBACK[type][0]
+    })
+    this._flashTimers = {}
   },
 
-  getCellBorder(y, x) {
-    return this.game.getCellBorder(y, x)
+  onHide() {
+    this.clearButtonFeedback()
+  },
+
+  onDestroy() {
+    this._destroyed = true
+    this.clearButtonFeedback()
+    this._game = null
   }
 }
 </script>
@@ -424,7 +430,6 @@ export default {
   justify-content: center;
   width: 100%;
   margin-top: 4px;
-  gap: 40px;
 }
 
 .undoArea {
