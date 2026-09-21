@@ -6,15 +6,22 @@
 
 // 基准设备尺寸（Mi Band 9）
 const BASE_WIDTH = 192
+const BASE_HEIGHT = 490
 
 /**
  * 获取屏幕缩放比例
  * @param {number} screenWidth 当前屏幕宽度
+ * @param {number} screenHeight 当前屏幕高度
  * @returns {number} 缩放比例
  */
-export function getScale(screenWidth) {
+export function getScale(screenWidth, screenHeight) {
   const width = Number(screenWidth)
-  return Number.isFinite(width) && width > 0 ? width / BASE_WIDTH : 1
+  const height = Number(screenHeight)
+  const validWidth = Number.isFinite(width) && width > 0 ? width : BASE_WIDTH
+  // 较宽的手环不一定按相同比例变高，不能仅按宽度放大整页。
+  const fallbackHeight = validWidth === 212 ? 520 : BASE_HEIGHT
+  const validHeight = Number.isFinite(height) && height > 0 ? height : fallbackHeight
+  return Math.min(validWidth / BASE_WIDTH, validHeight / BASE_HEIGHT)
 }
 
 /**
@@ -50,52 +57,59 @@ export function adaptFontSize(baseFontSize, scale) {
 // 预定义的基准尺寸（Mi Band 9）
 export const BASE_SIZES = {
   // 游戏格子
-  cellSize: 34,
+  cellSize: 32,
   cellIconSize: 20,
-  cellIconSmallSize: 16,
+  cellIconSmallSize: 15,
   cellBorder: 1,
 
   // 按钮
   switchBtnWidth: 50,
-  switchBtnHeight: 60,
+  switchBtnHeight: 56,
   arrowBtnSize: 30,
   undoBtnWidth: 50,
-  undoBtnHeight: 40,
+  undoBtnHeight: 36,
   resetBtnWidth: 50,
-  resetBtnHeight: 40,
+  resetBtnHeight: 36,
   btnIconSize: 20,
 
   // 间距
   cellGap: 0,
   btnMargin: 4,
-  btnRowMargin: 4,
+  btnRowMargin: 2,
 
   // 布局
-  titleHeight: 30,
-  titleWidth: '70%',
-  infoHeight: 40,
+  titleHeight: 28,
+  titleWidth: 120,
+  infoHeight: 36,
   padding: 8,
-  margin: 8,
+  // 顶部和底部位于胶囊屏圆弧内，使用独立安全留白。
+  paddingTop: 28,
+  paddingBottom: 32,
+  margin: 4,
   marginTop: 4,
-  marginBottom: 10,
+  marginBottom: 4,
   gridPadding: 2,
-  controlPanelMargin: 4,
+  controlPanelMargin: 2,
 }
 
 /**
  * 获取所有适配后的尺寸
  * @param {number} screenWidth 当前屏幕宽度
+ * @param {number} screenHeight 当前屏幕高度
  * @returns {object} 适配后的尺寸对象
  */
-export function getAdaptedSizes(screenWidth) {
-  const scale = getScale(screenWidth)
+export function getAdaptedSizes(screenWidth, screenHeight) {
+  const scale = getScale(screenWidth, screenHeight)
+  const cellSize = adaptSize(BASE_SIZES.cellSize, scale)
+  const cellBorder = Math.max(1, adaptSize(BASE_SIZES.cellBorder, scale))
 
   return {
     scale,
-    cellSize: adaptSize(BASE_SIZES.cellSize, scale),
+    cellSize,
     cellIconSize: adaptSize(BASE_SIZES.cellIconSize, scale),
-    cellIconSmallSize: adaptSize(BASE_SIZES.cellIconSmallSize, scale),
-    cellBorder: adaptSize(BASE_SIZES.cellBorder, scale),
+    // 双字目标标签必须放得进扣除边框后的格子。
+    cellIconSmallSize: Math.min(adaptSize(BASE_SIZES.cellIconSmallSize, scale), Math.floor((cellSize - 2 * cellBorder) / 2)),
+    cellBorder,
 
     switchBtnWidth: adaptSize(BASE_SIZES.switchBtnWidth, scale),
     switchBtnHeight: adaptSize(BASE_SIZES.switchBtnHeight, scale),
@@ -111,9 +125,11 @@ export function getAdaptedSizes(screenWidth) {
     btnRowMargin: adaptSize(BASE_SIZES.btnRowMargin, scale),
 
     titleHeight: adaptSize(BASE_SIZES.titleHeight, scale),
-    titleWidth: '70%',
+    titleWidth: adaptSize(BASE_SIZES.titleWidth, scale),
     infoHeight: adaptSize(BASE_SIZES.infoHeight, scale),
     padding: adaptSize(BASE_SIZES.padding, scale),
+    paddingTop: Math.ceil(BASE_SIZES.paddingTop * scale),
+    paddingBottom: Math.ceil(BASE_SIZES.paddingBottom * scale),
     margin: adaptSize(BASE_SIZES.margin, scale),
     marginTop: adaptSize(BASE_SIZES.marginTop, scale),
     marginBottom: adaptSize(BASE_SIZES.marginBottom, scale),
@@ -180,11 +196,11 @@ export function getStyles(sizes) {
 
     // 布局样式
     container: {
-      padding: `${sizes.padding}px`
+      padding: `${sizes.paddingTop}px ${sizes.padding}px ${sizes.paddingBottom}px`
     },
     title: {
       height: `${sizes.titleHeight}px`,
-      width: sizes.titleWidth,
+      width: `${sizes.titleWidth}px`,
       margin: `${sizes.marginTop}px 0 3px 0`
     },
     info: {

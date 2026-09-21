@@ -9,6 +9,7 @@
     "start": "aiot start --watch",
     "build": "aiot build",
     "release": "aiot release",
+    "assets:sync": "node scripts/sync-glyphs.cjs",
     "lint": "eslint --ext .ux,.js,.cjs src/ scripts/ tests/",
     "lint:fix": "npm run lint -- --fix",
     "test": "node --experimental-vm-modules --test",

@@ -1,1 +1,2432 @@
-export default function(t,e,i,n,a){var r,o,s=$app_require$;r=t.setTimeout,t.setInterval,t.clearTimeout,t.clearInterval,o=t.$app_require$||s,function(){(()=>{var t,a,s,l={987(t,e,i){var n=[[[[0,"btnSwitch"]],{width:"50px",height:"60px",borderStyle:"none",borderRadius:"6px",alignItems:"center",justifyContent:"center",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px",marginTop:"4px",marginRight:"4px",marginBottom:"4px",marginLeft:"4px",flexDirection:"column"}],[[[0,"btnArrow"]],{width:"30px",height:"30px",borderStyle:"none",borderRadius:"4px",marginTop:"1px",marginRight:"1px",marginBottom:"1px",marginLeft:"1px",alignItems:"center",justifyContent:"center"}],[[[0,"btnUndo"]],{width:"50px",height:"40px",borderStyle:"none",borderRadius:"6px",alignItems:"center",justifyContent:"center",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px",marginTop:"4px",marginRight:"4px",marginBottom:"4px",marginLeft:"4px"}],[[[0,"btnReset"]],{width:"50px",height:"40px",borderStyle:"none",borderRadius:"6px",alignItems:"center",justifyContent:"center",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px",marginTop:"4px",marginRight:"4px",marginBottom:"4px",marginLeft:"4px",fontSize:"12px",color:"white",textAlign:"center"}],[[[0,"icon-row"]],{justifyContent:"center",gap:"2px",marginTop:"2px",marginRight:"0",marginBottom:"2px",marginLeft:"0"}],[[[0,"icon"]],{width:"20px",height:"20px"}],[[[0,"resetImage"]],{width:"20px",height:"20px",marginTop:"2px",marginRight:"2px",marginBottom:"2px",marginLeft:"2px",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px"}],[[[0,"undoImage"]],{width:"20px",height:"20px",marginTop:"2px",marginRight:"2px",marginBottom:"2px",marginLeft:"2px",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px"}]],a=function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.default={props:["type","color","arrowIcon","isWhite","sizeConfig"],computed:{btnClass(){return"arrow"===this.type?"btnArrow":"switch"===this.type?"btnSwitch":"undo"===this.type?"btnUndo":"reset"===this.type?"btnReset":"control-button"},btnStyle(){if(!this.sizeConfig)return"";let t=this.sizeConfig;return"arrow"===this.type?`width: ${t.arrowBtnSize}px; height: ${t.arrowBtnSize}px; margin: 1px;`:"switch"===this.type?`width: ${t.switchBtnWidth}px; height: ${t.switchBtnHeight}px; margin: ${t.btnMargin}px;`:"undo"===this.type?`width: ${t.undoBtnWidth}px; height: ${t.undoBtnHeight}px; margin: ${t.btnMargin}px;`:"reset"===this.type?`width: ${t.resetBtnWidth}px; height: ${t.resetBtnHeight}px; margin: ${t.btnMargin}px;`:""},iconStyle(){if(!this.sizeConfig)return"width: 20px; height: 20px";let t=this.sizeConfig;return`width: ${t.btnIconSize}px; height: ${t.btnIconSize}px`}}}},r=function(t){let e=t||this;return aiot.__ce__("div",{__vm__:e,__opts__:{classList:function(){let t=e.btnClass;return"string"==typeof t?t.split(" ").map(t=>t.trim()).filter(Boolean):t},style:function(){return i.g.$translateStyle$("background-color: "+e.color+";"+e.btnStyle)}}},[aiot.__ci__({__vm__:e,__opts__:{shown:function(){return"arrow"===e.type}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{src:function(){return e.arrowIcon},style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]}),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return"arrow"!==e.type&&"switch"===e.type}}},function(){return[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["icon-row"]}},[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:"/common/image/icons/white-qie.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[]),aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:"/common/image/icons/white-huan.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["icon-row"]}},[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:"/common/image/icons/white-dao.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[]),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return e.isWhite}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:"/common/image/icons/white-white.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]}),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return!e.isWhite}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:"/common/image/icons/white-black.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]})])]}),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return"switch"!==e.type&&"arrow"!==e.type&&"undo"===e.type}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["undoImage"],src:"/common/image/icons/white-che.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[]),aiot.__ce__("image",{__vm__:e,__opts__:{classList:["undoImage"],src:"/common/image/icons/white-xiao.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]}),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return"undo"!==e.type&&"switch"!==e.type&&"arrow"!==e.type&&"reset"===e.type}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["resetImage"],src:"/common/image/icons/white-chong.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[]),aiot.__ce__("image",{__vm__:e,__opts__:{classList:["resetImage"],src:"/common/image/icons/white-zhi.png",style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]})])};t.exports=function(t){a({},t,o),t.default.template=r,t.default.style=n}},808(t,e,i){var n=[[[[0,"game-grid"]],{display:"flex",flexDirection:"column",backgroundColor:"#1a2530",paddingTop:"2px",paddingRight:"2px",paddingBottom:"2px",paddingLeft:"2px",marginTop:"8px",marginRight:"0",marginBottom:"8px",marginLeft:"0",borderRadius:"4px"}],[[[0,"row"]],{display:"flex"}],[[[0,"cell"]],{width:"34px",height:"34px",display:"flex",alignItems:"center",justifyContent:"center",borderTopColor:"#333333",borderRightColor:"#333333",borderBottomColor:"#333333",borderLeftColor:"#333333",borderStyle:"solid",borderTopWidth:"1px",borderRightWidth:"1px",borderBottomWidth:"1px",borderLeftWidth:"1px"}],[[[0,"combined-icon"]],{display:"flex",alignItems:"center",gap:"1px"}],[[[0,"icon"]],{display:"flex"}]],a=function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.default={props:["rows","columns","icons","cellStyles","sizeConfig"],computed:{gridStyle(){if(!this.sizeConfig)return"padding: 2px; margin: 8px 0;";let t=this.sizeConfig;return`padding: ${t.gridPadding}px; margin: ${t.margin}px 0;`},cellStyle(){if(!this.sizeConfig)return"width: 34px; height: 34px; border: 1px solid #333333";let t=this.sizeConfig;return`width: ${t.cellSize}px; height: ${t.cellSize}px; border: ${t.cellBorder}px solid #333333`},iconStyle(){if(!this.sizeConfig)return"width: 20px; height: 20px";let t=this.sizeConfig;return`width: ${t.cellIconSize}px; height: ${t.cellIconSize}px`},iconSmallStyle(){if(!this.sizeConfig)return"width: 16px; height: 16px";let t=this.sizeConfig;return`width: ${t.cellIconSmallSize}px; height: ${t.cellIconSmallSize}px`}}}},r=function(t){let e=t||this;return aiot.__ce__("div",{__vm__:e,__opts__:{classList:["game-grid"],style:function(){return i.g.$translateStyle$(e.gridStyle)}}},[aiot.__cf__({__vm__:e,__opts__:{exp:function(){return e.rows},key:"y",value:"indexY"}},function(t,n){return[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["row"]}},[aiot.__cf__({__vm__:e,__opts__:{exp:function(){return e.columns},key:"x",value:"indexX"}},function(n,a){return[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["cell"],style:function(){return i.g.$translateStyle$("background-color: "+e.cellStyles[t+","+n].bg+"; border-color: "+e.cellStyles[t+","+n].border+";"+e.cellStyle)}}},[aiot.__ci__({__vm__:e,__opts__:{shown:function(){return e.icons[t+","+n]&&!e.icons[t+","+n].single&&e.icons[t+","+n].src1&&e.icons[t+","+n].src2}}},function(){return[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["combined-icon"]}},[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:function(){return e.icons[t+","+n].src1},style:function(){return i.g.$translateStyle$(e.iconSmallStyle)}}},[]),aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:function(){return e.icons[t+","+n].src2},style:function(){return i.g.$translateStyle$(e.iconSmallStyle)}}},[])])]}),aiot.__ci__({__vm__:e,__opts__:{shown:function(){return!(e.icons[t+","+n]&&!e.icons[t+","+n].single&&e.icons[t+","+n].src1&&e.icons[t+","+n].src2)&&e.icons[t+","+n]&&e.icons[t+","+n].single&&e.icons[t+","+n].src}}},function(){return[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["icon"],src:function(){return e.icons[t+","+n].src},style:function(){return i.g.$translateStyle$(e.iconStyle)}}},[])]})])]})])]})])};t.exports=function(t){a({},t,o),t.default.template=r,t.default.style=n}},702(t,e){"use strict";function i(t){return t/192}function n(t,e){return Math.floor(t*e)}Object.defineProperty(e,"__esModule",{value:!0}),e.BASE_SIZES=void 0,e.adaptFontSize=function(t,e){return Math.floor(t*e)},e.adaptGap=function(t,e){return Math.floor(t*e)},e.adaptSize=n,e.getAdaptedSizes=function(t){let e=i(t);return{scale:e,cellSize:n(a.cellSize,e),cellIconSize:n(a.cellIconSize,e),cellIconSmallSize:n(a.cellIconSmallSize,e),cellBorder:n(a.cellBorder,e),switchBtnWidth:n(a.switchBtnWidth,e),switchBtnHeight:n(a.switchBtnHeight,e),arrowBtnSize:n(a.arrowBtnSize,e),undoBtnWidth:n(a.undoBtnWidth,e),undoBtnHeight:n(a.undoBtnHeight,e),resetBtnWidth:n(a.resetBtnWidth,e),resetBtnHeight:n(a.resetBtnHeight,e),btnIconSize:n(a.btnIconSize,e),controlAreaGap:n(a.controlAreaGap,e),cellGap:n(a.cellGap,e),btnMargin:n(a.btnMargin,e),btnRowMargin:n(a.btnRowMargin,e),titleHeight:n(a.titleHeight,e),titleWidth:"70%",infoHeight:n(a.infoHeight,e),padding:n(a.padding,e),margin:n(a.margin,e),marginTop:n(a.marginTop,e),marginBottom:n(a.marginBottom,e),gridPadding:n(a.gridPadding,e),controlPanelMargin:n(a.controlPanelMargin,e)}},e.getScale=i,e.getStyles=function(t){return{cell:{width:`${t.cellSize}px`,height:`${t.cellSize}px`,border:`${t.cellBorder}px solid #333333`},cellIcon:{width:`${t.cellIconSize}px`,height:`${t.cellIconSize}px`},cellIconSmall:{width:`${t.cellIconSmallSize}px`,height:`${t.cellIconSmallSize}px`},switchBtn:{width:`${t.switchBtnWidth}px`,height:`${t.switchBtnHeight}px`,margin:`${t.btnMargin}px`},arrowBtn:{width:`${t.arrowBtnSize}px`,height:`${t.arrowBtnSize}px`,margin:"1px"},undoBtn:{width:`${t.undoBtnWidth}px`,height:`${t.undoBtnHeight}px`,margin:`${t.btnMargin}px`},resetBtn:{width:`${t.resetBtnWidth}px`,height:`${t.resetBtnHeight}px`,margin:`${t.btnMargin}px`},btnIcon:{width:`${t.btnIconSize}px`,height:`${t.btnIconSize}px`},controlArea2:{gap:`${t.controlAreaGap}px`},controlPanel:{margin:`${t.controlPanelMargin}px`},btnRow1:{marginBottom:`${t.btnRowMargin}px`},container:{padding:`${t.padding}px`},title:{height:`${t.titleHeight}px`,width:t.titleWidth,margin:`${t.marginTop}px 0 3px 0`},info:{height:`${t.infoHeight}px`,margin:"2px"},gameGrid:{padding:`${t.gridPadding}px`,margin:`${t.margin}px 0`},controlArea:{marginTop:`${t.marginTop}px`},switchArea:{marginBottom:`${t.marginBottom}px`}}};let a=e.BASE_SIZES={cellSize:34,cellIconSize:20,cellIconSmallSize:16,cellBorder:1,switchBtnWidth:50,switchBtnHeight:60,arrowBtnSize:30,undoBtnWidth:50,undoBtnHeight:40,resetBtnWidth:50,resetBtnHeight:40,btnIconSize:20,controlAreaGap:40,cellGap:0,btnMargin:4,btnRowMargin:4,titleHeight:30,titleWidth:"70%",infoHeight:40,padding:8,margin:8,marginTop:4,marginBottom:10,gridPadding:2,controlPanelMargin:4}},217(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.GameState=void 0;var n=i(383);e.GameState=class{constructor(){this.mapWidth=5,this.mapHeight=7,this.reset()}reset(){this.mapRules={},this.whiteX=0,this.whiteY=0,this.blackX=0,this.blackY=0,this.lastPlayerAt={},this.whiteBoxes=[],this.blackBoxes=[],this.whiteBoxTargets=[],this.blackBoxTargets=[],this.whitePlayerTarget=[],this.blackPlayerTarget=[],this.currentPlayer=n.GAME_CONSTANTS.PLAYER_TYPES.BLACK,this.switchBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH,this.upBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.downBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.leftBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.rightBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.resetBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_RESET,this.undoBtnColor=n.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_UNDO,this.history=[]}saveState(){let t={whiteX:this.whiteX,whiteY:this.whiteY,blackX:this.blackX,blackY:this.blackY,whiteBoxes:JSON.parse(JSON.stringify(this.whiteBoxes)),blackBoxes:JSON.parse(JSON.stringify(this.blackBoxes)),currentPlayer:this.currentPlayer,lastPlayerAt:JSON.parse(JSON.stringify(this.lastPlayerAt))};this.history.push(t),this.history.length>50&&this.history.shift()}undo(){if(0===this.history.length)return!1;let t=this.history.pop();return this.whiteX=t.whiteX,this.whiteY=t.whiteY,this.blackX=t.blackX,this.blackY=t.blackY,this.whiteBoxes=t.whiteBoxes,this.blackBoxes=t.blackBoxes,this.currentPlayer=t.currentPlayer,this.lastPlayerAt=t.lastPlayerAt,!0}canUndo(){return this.history.length>0}getMapValue(t,e){return this.mapRules[`${t},${e}`]||n.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR}setMapValue(t,e,i){this.mapRules[`${t},${e}`]=i}hasWhiteBox(t,e){return this.whiteBoxes.some(i=>i.x===t&&i.y===e)}hasBlackBox(t,e){return this.blackBoxes.some(i=>i.x===t&&i.y===e)}isWhiteBoxTarget(t,e){return this.whiteBoxTargets.some(i=>i.x===t&&i.y===e)}isBlackBoxTarget(t,e){return this.blackBoxTargets.some(i=>i.x===t&&i.y===e)}isWhitePlayerTarget(t,e){return this.whitePlayerTarget.some(i=>i.x===t&&i.y===e)}isBlackPlayerTarget(t,e){return this.blackPlayerTarget.some(i=>i.x===t&&i.y===e)}switchPlayer(){return this.currentPlayer=this.currentPlayer===n.GAME_CONSTANTS.PLAYER_TYPES.WHITE?n.GAME_CONSTANTS.PLAYER_TYPES.BLACK:n.GAME_CONSTANTS.PLAYER_TYPES.WHITE,this.currentPlayer}recordPlayerMove(t,e,i){this.lastPlayerAt[`${e},${t}`]=i}}},30(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.IconManager=void 0;var n=i(383);e.IconManager=class{constructor(t){this.state=t}getIconParts(t,e){let i=this.getIconType(t,e);if(!i)return{single:!0,src:null};let n=i.split("-");if(4!==n.length)return{single:!0,src:this.getIconImagePath(i)};{let t=n[0]+"-"+n[1],e=n[2]+"-"+n[3];return{single:!1,src1:this.getIconImagePath(t),src2:this.getIconImagePath(e)}}}getIconType(t,e){let i=t===this.state.whiteY&&e===this.state.whiteX,a=t===this.state.blackY&&e===this.state.blackX;return i&&a?this.state.lastPlayerAt[`${t},${e}`]===n.GAME_CONSTANTS.PLAYER_TYPES.WHITE?"white-player":"black-player":i?"white-player":a?"black-player":this.state.whiteBoxes.find(i=>i.x===e&&i.y===t)?"white-box":this.state.blackBoxes.find(i=>i.x===e&&i.y===t)?"black-box":this.state.whiteBoxTargets.some(i=>i.x===e&&i.y===t)?"white-box-white-target":this.state.blackBoxTargets.some(i=>i.x===e&&i.y===t)?"black-box-black-target":this.state.whitePlayerTarget.find(i=>i.x===e&&i.y===t)?"white-player-white-target":this.state.blackPlayerTarget.find(i=>i.x===e&&i.y===t)?"black-player-black-target":null}getIconImagePath(t){return({"white-player":"/common/image/icons/grey-white.png","black-player":"/common/image/icons/white-black.png","white-box":"/common/image/icons/grey-box.png","black-box":"/common/image/icons/white-box.png","white-target":"/common/image/icons/grey-target.png","black-target":"/common/image/icons/white-target.png"})[t]||""}updateCellIcons(){let t={};for(let e=0;e<this.state.mapHeight;e++)for(let i=0;i<this.state.mapWidth;i++){let n=this.getIconParts(e,i);t[`${e},${i}`]=n}return t}}},947(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.MoveValidator=void 0;var n=i(383);e.MoveValidator=class{constructor(t){this.state=t}validateMove(t,e,i){let[n,a]=i?[this.state.whiteX,this.state.whiteY]:[this.state.blackX,this.state.blackY],[r,o]=[n+t,a+e];if(!this.checkBoundary(r,o))return{valid:!1,message:"不能越界！"};if(!this.checkTerrain(r,o,i))return{valid:!1,message:i?"白角色只能走黑色地形或白位！":"黑角色只能走白色地形或黑位！"};let s=this.state.whiteBoxes.findIndex(t=>t.x===r&&t.y===o),l=this.state.blackBoxes.findIndex(t=>t.x===r&&t.y===o);return -1!==s?this.validateWhiteBoxPush(t,e,i,s,r,o):-1!==l?this.validateBlackBoxPush(t,e,i,l,r,o):{valid:!0,action:"move",data:{isWhite:i,nx:r,ny:o}}}checkBoundary(t,e){return t>=0&&t<this.state.mapWidth&&e>=0&&e<this.state.mapHeight}checkTerrain(t,e,i){let a=this.state.getMapValue(e,t),r=i?this.state.blackX:this.state.whiteX,o=i?this.state.blackY:this.state.whiteY,s=t===r&&e===o,l=this.state.hasWhiteBox(t,e),c=this.state.hasBlackBox(t,e),_=this.state.isWhiteBoxTarget(t,e),h=this.state.isBlackBoxTarget(t,e),g=this.state.isWhitePlayerTarget(t,e),p=this.state.isBlackPlayerTarget(t,e);return i?a===n.GAME_CONSTANTS.CELL_TYPES.BLACK_WALL||c||h||g||s:a===n.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR||l||_||p||s}validateWhiteBoxPush(t,e,i,a,r,o){if(!i)return{valid:!0,action:"move",data:{isWhite:!1,nx:r,ny:o}};let s=r+t,l=o+e;if(!this.checkBoundary(s,l))return{valid:!1,message:"箱子不能越界！"};if(this.isBlocked(s,l,a,"white"))return{valid:!1,message:"箱子前方被阻挡！"};let c=this.state.getMapValue(l,s),_=this.state.isBlackBoxTarget(s,l);return c===n.GAME_CONSTANTS.CELL_TYPES.BLACK_WALL||_?{valid:!0,action:"push",data:{isWhite:!0,playerPos:{nx:r,ny:o},boxPos:{x:s,y:l},boxIndex:a,boxType:"white"}}:{valid:!1,message:"白箱子只能在黑色地形上移动！"}}validateBlackBoxPush(t,e,i,a,r,o){if(i)return{valid:!0,action:"move",data:{isWhite:!0,nx:r,ny:o}};let s=r+t,l=o+e;if(!this.checkBoundary(s,l))return{valid:!1,message:"箱子不能越界！"};if(this.isBlocked(s,l,a,"black"))return{valid:!1,message:"箱子前方被阻挡！"};let c=this.state.getMapValue(l,s),_=this.state.isWhiteBoxTarget(s,l);return c===n.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR||_?{valid:!0,action:"push",data:{isWhite:!1,playerPos:{nx:r,ny:o},boxPos:{x:s,y:l},boxIndex:a,boxType:"black"}}:{valid:!1,message:"黑箱子只能在白色地形上移动！"}}isBlocked(t,e,i,n){if("white"===n){let n=this.state.whiteBoxes.some((n,a)=>a!==i&&n.x===t&&n.y===e),a=this.state.blackBoxes.some(i=>i.x===t&&i.y===e);if(n||a)return!0}else{let n=this.state.blackBoxes.some((n,a)=>a!==i&&n.x===t&&n.y===e);if(this.state.whiteBoxes.some(i=>i.x===t&&i.y===e)||n)return!0}return t===this.state.whiteX&&e===this.state.whiteY||t===this.state.blackX&&e===this.state.blackY}}},397(t,e){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.WinChecker=void 0,e.WinChecker=class{constructor(t){this.state=t}checkWin(){let t=this.checkWhiteBoxes(),e=this.checkBlackBoxes(),i=this.checkWhitePlayerTarget(),n=this.checkBlackPlayerTarget();return t&&e&&i&&n&&(this.state.whiteBoxes.length>0||this.state.blackBoxes.length>0)}checkWhiteBoxes(){return this.state.whiteBoxes.every(t=>this.state.whiteBoxTargets.some(e=>e.x===t.x&&e.y===t.y))}checkBlackBoxes(){return this.state.blackBoxes.every(t=>this.state.blackBoxTargets.some(e=>e.x===t.x&&e.y===t.y))}checkWhitePlayerTarget(){return this.state.whitePlayerTarget.some(t=>t.x===this.state.whiteX&&t.y===this.state.whiteY)}checkBlackPlayerTarget(){return this.state.blackPlayerTarget.some(t=>t.x===this.state.blackX&&t.y===this.state.blackY)}}},383(t,e){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.GAME_CONSTANTS=void 0,e.GAME_CONSTANTS={CELL_TYPES:{WHITE_FLOOR:0,BLACK_WALL:1},PLAYER_TYPES:{WHITE:6,BLACK:7},BUTTON_COLORS:{DEFAULT_SWITCH:"#3498DB",DEFAULT_ARROW:"#2ECC71",DEFAULT_RESET:"#E74C3C",DEFAULT_UNDO:"#9B59B6",PRESSED_SWITCH:"#FF416C",PRESSED_ARROW:"#36D1DC",PRESSED_RESET:"#FF6B6B",PRESSED_UNDO:"#8E44AD"}}},134(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.Game=void 0;var n=i(217),a=i(947),r=i(397),o=i(30),s=i(383);e.Game=class{constructor(){this.state=new n.GameState,this.validator=new a.MoveValidator(this.state),this.winChecker=new r.WinChecker(this.state),this.iconManager=new o.IconManager(this.state)}initLevel(t){this.state.reset(),t.mapRules&&(this.state.mapRules=t.mapRules),t.whitePlayer&&(this.state.whiteX=t.whitePlayer.x,this.state.whiteY=t.whitePlayer.y,this.state.recordPlayerMove(t.whitePlayer.x,t.whitePlayer.y,s.GAME_CONSTANTS.PLAYER_TYPES.WHITE)),t.blackPlayer&&(this.state.blackX=t.blackPlayer.x,this.state.blackY=t.blackPlayer.y,this.state.recordPlayerMove(t.blackPlayer.x,t.blackPlayer.y,s.GAME_CONSTANTS.PLAYER_TYPES.BLACK)),t.whiteBoxes&&(this.state.whiteBoxes=[...t.whiteBoxes]),t.blackBoxes&&(this.state.blackBoxes=[...t.blackBoxes]),t.whiteBoxTargets&&(this.state.whiteBoxTargets=[...t.whiteBoxTargets]),t.blackBoxTargets&&(this.state.blackBoxTargets=[...t.blackBoxTargets]),t.whitePlayerTarget&&(this.state.whitePlayerTarget=[...t.whitePlayerTarget]),t.blackPlayerTarget&&(this.state.blackPlayerTarget=[...t.blackPlayerTarget]),void 0!==t.currentPlayer&&(this.state.currentPlayer=t.currentPlayer)}move(t,e){let i=this.state.currentPlayer===s.GAME_CONSTANTS.PLAYER_TYPES.WHITE,n=this.validator.validateMove(t,e,i);return n.valid?(this.state.saveState(),"move"===n.action?this.movePlayer(n.data.isWhite,n.data.nx,n.data.ny):"push"===n.action&&this.pushBox(n.data.isWhite,n.data.playerPos,n.data.boxPos,n.data.boxIndex,n.data.boxType),{success:!0,isWin:this.winChecker.checkWin(),updatedIcons:this.updateCellIcons()}):{success:!1,message:n.message}}undo(){return this.state.undo()?{success:!0}:{success:!1,message:"无法撤销"}}canUndo(){return this.state.canUndo()}movePlayer(t,e,i){let n=t?s.GAME_CONSTANTS.PLAYER_TYPES.WHITE:s.GAME_CONSTANTS.PLAYER_TYPES.BLACK;t?(this.state.whiteX=e,this.state.whiteY=i):(this.state.blackX=e,this.state.blackY=i),this.state.recordPlayerMove(e,i,n)}pushBox(t,e,i,n,a){this.movePlayer(t,e.nx,e.ny),"white"===a?(this.state.whiteBoxes[n].x=i.x,this.state.whiteBoxes[n].y=i.y):(this.state.blackBoxes[n].x=i.x,this.state.blackBoxes[n].y=i.y)}updateCellIcons(){let t={};for(let e=0;e<this.state.mapHeight;e++)for(let i=0;i<this.state.mapWidth;i++)t[`${e},${i}`]=this.iconManager.getIconParts(e,i);return t}switchPlayer(){return this.state.switchPlayer(),this.state.currentPlayer}checkWin(){return this.winChecker.checkWin()}resetButtonColors(){this.state.switchBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_SWITCH,this.state.upBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.state.downBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.state.leftBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.state.rightBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_ARROW,this.state.resetBtnColor=s.GAME_CONSTANTS.BUTTON_COLORS.DEFAULT_RESET}getCellBg(t,e){let i=this.state,n=i.whiteBoxTargets.some(i=>i.x===e&&i.y===t),a=i.blackBoxTargets.some(i=>i.x===e&&i.y===t),r=i.whiteBoxes.some(i=>i.x===e&&i.y===t),o=i.blackBoxes.some(i=>i.x===e&&i.y===t),l=t===i.whiteY&&e===i.whiteX,c=t===i.blackY&&e===i.blackX;if(l&&c)return i.lastPlayerAt[`${t},${e}`]===s.GAME_CONSTANTS.PLAYER_TYPES.WHITE?"#FFFFFF":"#000000";if(l)return"#FFFFFF";if(c)return"#000000";if(r)return"#E0E0E0";if(o)return"#1A1A1A";if(n)return"#FCD3D3";if(a)return"#333333";let _=i.whitePlayerTarget.find(i=>i.x===e&&i.y===t),h=i.blackPlayerTarget.find(i=>i.x===e&&i.y===t);return _?"#D3D3D3":h?"#555555":0===i.getMapValue(t,e)?"#F8F9FA":"#2D3748"}getCellBorder(t,e){let i=this.state,n=t===i.whiteY&&e===i.whiteX,a=t===i.blackY&&e===i.blackX;return n&&a?i.lastPlayerAt[`${t},${e}`]===s.GAME_CONSTANTS.PLAYER_TYPES.WHITE?"#3498DB":"#E74C3C":n?"#3498DB":a?"#E74C3C":"#333333"}}}},c={};function _(t){var e=c[t];if(void 0!==e)return e.exports;var i=c[t]={exports:{}};return l[t](i,i.exports,_),i.exports}_.g=(()=>{if("object"==typeof e)return e;try{return this||Function("return this")()}catch(t){if("object"==typeof i)return i}})(),_.rv=()=>"1.7.5",_.ruid="bundler=rspack@1.7.5",n["game-grid"]=_(808),n["control-button"]=_(987),t=[[[[0,"container"]],{flexDirection:"column",alignItems:"center",justifyContent:"flex-start",backgroundColor:"#1a1a1a",paddingTop:"8px",paddingRight:"8px",paddingBottom:"8px",paddingLeft:"8px",height:"100%",width:"100%"}],[[[0,"title"]],{backgroundColor:"#1a1a1a",height:"30px",width:"70%",objectFit:"fill",marginTop:"6px",marginRight:"0",marginBottom:"3px",marginLeft:"0"}],[[[0,"info"]],{backgroundColor:"#ffffff",flexDirection:"row",justifyContent:"flex-start",marginTop:"2px",marginRight:"2px",marginBottom:"2px",marginLeft:"2px",borderRadius:"6px",overflow:"hidden"}],[[[0,"infoText"]],{height:"40px",flexDirection:"row",justifyContent:"flex-start",objectFit:"fill",borderRadius:"inherit"}],[[[0,"hint"]],{height:"40px",flexDirection:"row",justifyContent:"flex-start",objectFit:"fill",borderRadius:"inherit"}],[[[0,"controlArea"]],{flexDirection:"row",width:"100%",marginTop:"4px"}],[[[0,"switchArea"]],{marginBottom:"10px"}],[[[0,"controlPanel"]],{flexDirection:"column",alignItems:"center",marginTop:"4px",marginRight:"4px",marginBottom:"4px",marginLeft:"4px"}],[[[0,"btnRow1"]],{flexDirection:"row",justifyContent:"center",alignItems:"center",marginBottom:"4px"}],[[[0,"btnRow2"]],{flexDirection:"row",justifyContent:"center",alignItems:"center"}],[[[0,"controlArea2"]],{flexDirection:"row",justifyContent:"center",width:"100%",marginTop:"4px",gap:"40px"}],[[[0,"undoArea"]],{alignItems:"center"}],[[[0,"resetArea"]],{alignItems:"center"}]],a=function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var n=_(134),a=l(i("@app-module/system.router")),o=l(i("@app-module/system.device")),s=_(702);function l(t){return t&&t.__esModule?t:{default:t}}e.default={private:{game:null,rows:[0,1,2,3,4,5,6],columns:[0,1,2,3,4],cellIcons:{},cellStyles:{},stepCount:0,currentPlayerName:"白方",currentPlayer:7,switchBtnColor:"#3498DB",upBtnColor:"#2ECC71",downBtnColor:"#2ECC71",leftBtnColor:"#2ECC71",rightBtnColor:"#2ECC71",resetBtnColor:"#E74C3C",undoBtnColor:"#9B59B6",adaptedSizes:{},styles:{}},onInit(){this.initScreenAdapter(),this.game=new n.Game;let t=this.getLevel1Data();this.game.initLevel(t),this.updateDisplay()},initScreenAdapter(){try{o.default.getInfo({success:t=>{let e=t.width||192;this.adaptedSizes=(0,s.getAdaptedSizes)(e),this.styles=(0,s.getStyles)(this.adaptedSizes)},fail:()=>{this.adaptedSizes=(0,s.getAdaptedSizes)(192),this.styles=(0,s.getStyles)(this.adaptedSizes)}})}catch(t){this.adaptedSizes=(0,s.getAdaptedSizes)(192),this.styles=(0,s.getStyles)(this.adaptedSizes)}},getLevel1Data(){return{whitePlayer:{x:4,y:1},blackPlayer:{x:2,y:3},whiteBoxes:[{x:2,y:6}],blackBoxes:[{x:3,y:4}],whiteBoxTargets:[{x:1,y:6}],blackBoxTargets:[{x:3,y:3}],whitePlayerTarget:[{x:1,y:5}],blackPlayerTarget:[{x:4,y:2}],currentPlayer:7,mapRules:this.createMapRules()}},createMapRules(){let t={};for(let e=0;e<7;e++)for(let i=0;i<5;i++)t[e+","+i]=0;for(let e=0;e<5;e++)t["0,"+e]=1,t["6,"+e]=1;for(let e=0;e<7;e++)t[e+",0"]=1,t[e+",4"]=1;return t["1,2"]=1,t["2,2"]=1,t["1,4"]=1,t["2,4"]=1,t},updateDisplay(){this.cellIcons=this.game.iconManager.updateCellIcons(),this.stepCount=this.game.state.stepCount,this.currentPlayer=this.game.state.currentPlayer,this.currentPlayerName=6===this.currentPlayer?"白方":"黑方";let t={};for(let e=0;e<7;e++)for(let i=0;i<5;i++)t[`${e},${i}`]={bg:this.getCellBg(e,i),border:this.getCellBorder(e,i)};this.cellStyles=t},onUp(){this.handleMove(0,-1,"up")},onDown(){this.handleMove(0,1,"down")},onLeft(){this.handleMove(-1,0,"left")},onRight(){this.handleMove(1,0,"right")},handleMove(t,e,i){let n=this.game.move(t,e);n.success?(this.flashButton(i),this.updateDisplay(),this.game.checkWin()&&a.default.push({uri:"pages/win",params:{levelId:"level01",levelPath:"pages/levels/level01"}})):prompt.showToast({message:n.message,duration:800})},onSwitch(){this.game.switchPlayer(),this.flashButton("switch"),this.updateDisplay()},onReset(){let t=this.getLevel1Data();this.game.initLevel(t),this.flashButton("reset"),this.updateDisplay()},onUndo(){let t=this.game.undo();t.success?(this.flashButton("undo"),this.updateDisplay()):prompt.showToast({message:t.message,duration:800})},flashButton(t){let e={up:"#2ECC71",down:"#2ECC71",left:"#2ECC71",right:"#2ECC71",switch:"#3498DB",reset:"#E74C3C",undo:"#9B59B6"},i=t+"BtnColor";this[i]=({up:"#36D1DC",down:"#36D1DC",left:"#36D1DC",right:"#36D1DC",switch:"#FF416C",reset:"#FF6B6B",undo:"#8E44AD"})[t],r(()=>{this[i]=e[t]},"switch"===t||"reset"===t?500:200)},getCellBg(t,e){return this.game.getCellBg(t,e)},getCellBorder(t,e){return this.game.getCellBorder(t,e)}};let c=e.default||t.exports,h=["public","protected","private"];if(c.data&&h.some(function(t){return c[t]}))throw Error('页面VM对象中的属性data不可与"'+h.join(",")+'"同时存在，请使用private替换data名称');c.data||(c.data={},c._descriptor={},h.forEach(function(t){let e=typeof c[t];if("object"===e)for(let e in c.data=Object.assign(c.data,c[t]),c[t])c._descriptor[e]={access:t};else"function"===e&&console.warn("页面VM对象中的属性"+t+"的值不能是函数，请使用对象")}))},s=function(t){let e=t||this;return aiot.__ce__("div",{__vm__:e,__opts__:{classList:["container"],style:function(){return _.g.$translateStyle$("padding: "+(e.adaptedSizes.padding||8)+"px")}}},[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["title"],src:"/common/image/title.png",style:function(){return _.g.$translateStyle$("height: "+(e.adaptedSizes.titleHeight||30)+"px; margin: "+(e.adaptedSizes.marginTop||6)+"px 0 3px 0")}}},[]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["info"]}},[aiot.__ce__("image",{__vm__:e,__opts__:{classList:["infoText"],src:"/common/image/infoText.png",style:function(){return _.g.$translateStyle$("height: "+(e.adaptedSizes.infoHeight||40)+"px")}}},[]),aiot.__ce__("image",{__vm__:e,__opts__:{classList:["hint"],src:"/common/image/hint.png",style:function(){return _.g.$translateStyle$("height: "+(e.adaptedSizes.infoHeight||40)+"px")}}},[])]),aiot.__cc__("game-grid",{__vm__:e,__opts__:{rows:function(){return e.rows},columns:function(){return e.columns},icons:function(){return e.cellIcons},cellStyles:function(){return e.cellStyles},sizeConfig:function(){return e.adaptedSizes}}},[]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["controlArea"],style:function(){return _.g.$translateStyle$("margin-top: "+(e.adaptedSizes.marginTop||4)+"px")}}},[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["switchArea"],style:function(){return _.g.$translateStyle$("margin-bottom: "+(e.adaptedSizes.marginBottom||10)+"px")}}},[aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onSwitch(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"switch",color:function(){return e.switchBtnColor},isWhite:function(){return 7===e.currentPlayer},sizeConfig:function(){return e.adaptedSizes}}},[])])]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["controlPanel"],style:function(){return _.g.$translateStyle$("margin: "+(e.adaptedSizes.controlPanelMargin||4)+"px")}}},[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["btnRow1"],style:function(){return _.g.$translateStyle$("margin-bottom: "+(e.adaptedSizes.btnRowMargin||4)+"px")}}},[aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onUp(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"arrow",color:function(){return e.upBtnColor},arrowIcon:"/common/image/icons/white-up-arrow.png",sizeConfig:function(){return e.adaptedSizes}}},[])])]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["btnRow2"]}},[aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onLeft(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"arrow",color:function(){return e.leftBtnColor},arrowIcon:"/common/image/icons/white-left-arrow.png",sizeConfig:function(){return e.adaptedSizes}}},[])]),aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onDown(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"arrow",color:function(){return e.downBtnColor},arrowIcon:"/common/image/icons/white-down-arrow.png",sizeConfig:function(){return e.adaptedSizes}}},[])]),aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onRight(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"arrow",color:function(){return e.rightBtnColor},arrowIcon:"/common/image/icons/white-right-arrow.png",sizeConfig:function(){return e.adaptedSizes}}},[])])])])]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["controlArea2"],style:function(){return _.g.$translateStyle$("gap: "+(e.adaptedSizes.controlAreaGap||40)+"px")}}},[aiot.__ce__("div",{__vm__:e,__opts__:{classList:["undoArea"]}},[aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onUndo(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"undo",color:function(){return e.undoBtnColor},sizeConfig:function(){return e.adaptedSizes}}},[])])]),aiot.__ce__("div",{__vm__:e,__opts__:{classList:["resetArea"]}},[aiot.__ce__("div",{__vm__:e,__opts__:{events:{click:function(t){return e.onReset(t)}}}},[aiot.__cc__("control-button",{__vm__:e,__opts__:{type:"reset",color:function(){return e.resetBtnColor},sizeConfig:function(){return e.adaptedSizes}}},[])])])])])},n.entry=function(e){a({},e,o),e.default.template=s,e.default.style=t}})()}()}
+export default function(global, globalThis, window, $app_exports$, $app_evaluate$) {
+    var org_app_require = $app_require$;
+    (function(global, globalThis, window, $app_exports$, $app_evaluate$) {
+        var setTimeout = global.setTimeout;
+        var setInterval = global.setInterval;
+        var clearTimeout = global.clearTimeout;
+        var clearInterval = global.clearInterval;
+        var $app_require$1 = global.$app_require$ || org_app_require;
+        var createPageHandler = function() {
+            return (()=>{
+                var __webpack_modules__ = {
+                    "./src/components/ControlButton/index.ux" (module, __unused_rspack_exports, __webpack_require__) {
+                        var $app_style$ = [
+                            [
+                                [
+                                    [
+                                        0,
+                                        "btnSwitch"
+                                    ]
+                                ],
+                                {
+                                    width: "50px",
+                                    height: "56px",
+                                    borderStyle: "none",
+                                    borderRadius: "6px",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    paddingTop: "2px",
+                                    paddingRight: "2px",
+                                    paddingBottom: "2px",
+                                    paddingLeft: "2px",
+                                    marginTop: "4px",
+                                    marginRight: "4px",
+                                    marginBottom: "4px",
+                                    marginLeft: "4px",
+                                    flexDirection: "column"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "btnArrow"
+                                    ]
+                                ],
+                                {
+                                    width: "30px",
+                                    height: "30px",
+                                    borderStyle: "none",
+                                    borderRadius: "4px",
+                                    marginTop: "1px",
+                                    marginRight: "1px",
+                                    marginBottom: "1px",
+                                    marginLeft: "1px",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "btnUndo"
+                                    ]
+                                ],
+                                {
+                                    width: "50px",
+                                    height: "36px",
+                                    borderStyle: "none",
+                                    borderRadius: "6px",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    paddingTop: "2px",
+                                    paddingRight: "2px",
+                                    paddingBottom: "2px",
+                                    paddingLeft: "2px",
+                                    marginTop: "4px",
+                                    marginRight: "4px",
+                                    marginBottom: "4px",
+                                    marginLeft: "4px"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "btnReset"
+                                    ]
+                                ],
+                                {
+                                    width: "50px",
+                                    height: "36px",
+                                    borderStyle: "none",
+                                    borderRadius: "6px",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    paddingTop: "2px",
+                                    paddingRight: "2px",
+                                    paddingBottom: "2px",
+                                    paddingLeft: "2px",
+                                    marginTop: "4px",
+                                    marginRight: "4px",
+                                    marginBottom: "4px",
+                                    marginLeft: "4px",
+                                    fontSize: "12px",
+                                    color: "white",
+                                    textAlign: "center"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "icon-row"
+                                    ]
+                                ],
+                                {
+                                    justifyContent: "center",
+                                    marginTop: "2px",
+                                    marginRight: "0",
+                                    marginBottom: "2px",
+                                    marginLeft: "0"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "icon"
+                                    ]
+                                ],
+                                {
+                                    width: "20px",
+                                    height: "20px"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "resetImage"
+                                    ]
+                                ],
+                                {
+                                    width: "20px",
+                                    height: "20px",
+                                    marginTop: "0",
+                                    marginRight: "0",
+                                    marginBottom: "0",
+                                    marginLeft: "0",
+                                    paddingTop: "0",
+                                    paddingRight: "0",
+                                    paddingBottom: "0",
+                                    paddingLeft: "0"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "undoImage"
+                                    ]
+                                ],
+                                {
+                                    width: "20px",
+                                    height: "20px",
+                                    marginTop: "0",
+                                    marginRight: "0",
+                                    marginBottom: "0",
+                                    marginLeft: "0",
+                                    paddingTop: "0",
+                                    paddingRight: "0",
+                                    paddingBottom: "0",
+                                    paddingLeft: "0"
+                                }
+                            ]
+                        ];
+                        var $app_script$ = function __scriptModule__(module, exports, $app_require$1) {
+                            "use strict";
+                            Object.defineProperty(exports, "__esModule", {
+                                value: true
+                            });
+                            exports.default = void 0;
+                            var _default = exports.default = {
+                                props: [
+                                    "type",
+                                    "color",
+                                    "arrowIcon",
+                                    "isWhite",
+                                    "sizeConfig"
+                                ],
+                                computed: {
+                                    btnClass () {
+                                        if ("arrow" === this.type) return "btnArrow";
+                                        if ("switch" === this.type) return "btnSwitch";
+                                        if ("undo" === this.type) return "btnUndo";
+                                        if ("reset" === this.type) return "btnReset";
+                                        return "control-button";
+                                    },
+                                    btnStyle () {
+                                        if (!this.sizeConfig) return "";
+                                        const s = this.sizeConfig;
+                                        if ("arrow" === this.type) return `width: ${s.arrowBtnSize}px; height: ${s.arrowBtnSize}px; margin: 1px;`;
+                                        if ("switch" === this.type) return `width: ${s.switchBtnWidth}px; height: ${s.switchBtnHeight}px; margin: ${s.btnMargin}px;`;
+                                        if ("undo" === this.type) return `width: ${s.undoBtnWidth}px; height: ${s.undoBtnHeight}px; margin: ${s.btnMargin}px;`;
+                                        if ("reset" === this.type) return `width: ${s.resetBtnWidth}px; height: ${s.resetBtnHeight}px; margin: ${s.btnMargin}px;`;
+                                        return "";
+                                    },
+                                    iconStyle () {
+                                        if (!this.sizeConfig) return "width: 20px; height: 20px; object-fit: contain";
+                                        const s = this.sizeConfig;
+                                        return `width: ${s.btnIconSize}px; height: ${s.btnIconSize}px; object-fit: contain`;
+                                    }
+                                }
+                            };
+                        };
+                        var $app_template$ = function(vm) {
+                            const _vm_ = vm || this;
+                            return aiot.__ce__("div", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: function() {
+                                        const $classValue$ = _vm_.btnClass;
+                                        if ('string' == typeof $classValue$) return $classValue$.split(' ').map((item)=>item.trim()).filter(Boolean);
+                                        return $classValue$;
+                                    },
+                                    style: function() {
+                                        return __webpack_require__.g.$translateStyle$("background-color: " + _vm_.color + ";" + _vm_.btnStyle);
+                                    }
+                                }
+                            }, [
+                                aiot.__ci__({
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        shown: function() {
+                                            return "arrow" === _vm_.type;
+                                        }
+                                    }
+                                }, function() {
+                                    return [
+                                        aiot.__ce__("image", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                src: function() {
+                                                    return _vm_.arrowIcon;
+                                                },
+                                                style: function() {
+                                                    return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                }
+                                            }
+                                        }, [])
+                                    ];
+                                }),
+                                aiot.__ci__({
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        shown: function() {
+                                            return "arrow" !== _vm_.type && "switch" === _vm_.type;
+                                        }
+                                    }
+                                }, function() {
+                                    return [
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "icon-row"
+                                                ]
+                                            }
+                                        }, [
+                                            aiot.__ce__("image", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    classList: [
+                                                        "icon"
+                                                    ],
+                                                    src: "/common/image/icons/white-qie.png",
+                                                    style: function() {
+                                                        return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                    }
+                                                }
+                                            }, []),
+                                            aiot.__ce__("image", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    classList: [
+                                                        "icon"
+                                                    ],
+                                                    src: "/common/image/icons/white-huan.png",
+                                                    style: function() {
+                                                        return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                    }
+                                                }
+                                            }, [])
+                                        ]),
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "icon-row"
+                                                ]
+                                            }
+                                        }, [
+                                            aiot.__ce__("image", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    classList: [
+                                                        "icon"
+                                                    ],
+                                                    src: "/common/image/icons/white-dao.png",
+                                                    style: function() {
+                                                        return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                    }
+                                                }
+                                            }, []),
+                                            aiot.__ci__({
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    shown: function() {
+                                                        return _vm_.isWhite;
+                                                    }
+                                                }
+                                            }, function() {
+                                                return [
+                                                    aiot.__ce__("image", {
+                                                        __vm__: _vm_,
+                                                        __opts__: {
+                                                            classList: [
+                                                                "icon"
+                                                            ],
+                                                            src: "/common/image/icons/white-white.png",
+                                                            style: function() {
+                                                                return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                            }
+                                                        }
+                                                    }, [])
+                                                ];
+                                            }),
+                                            aiot.__ci__({
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    shown: function() {
+                                                        return !_vm_.isWhite;
+                                                    }
+                                                }
+                                            }, function() {
+                                                return [
+                                                    aiot.__ce__("image", {
+                                                        __vm__: _vm_,
+                                                        __opts__: {
+                                                            classList: [
+                                                                "icon"
+                                                            ],
+                                                            src: "/common/image/icons/white-black.png",
+                                                            style: function() {
+                                                                return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                            }
+                                                        }
+                                                    }, [])
+                                                ];
+                                            })
+                                        ])
+                                    ];
+                                }),
+                                aiot.__ci__({
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        shown: function() {
+                                            return "switch" !== _vm_.type && "arrow" !== _vm_.type && "undo" === _vm_.type;
+                                        }
+                                    }
+                                }, function() {
+                                    return [
+                                        aiot.__ce__("image", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "undoImage"
+                                                ],
+                                                src: "/common/image/icons/white-che.png",
+                                                style: function() {
+                                                    return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                }
+                                            }
+                                        }, []),
+                                        aiot.__ce__("image", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "undoImage"
+                                                ],
+                                                src: "/common/image/icons/white-xiao.png",
+                                                style: function() {
+                                                    return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                }
+                                            }
+                                        }, [])
+                                    ];
+                                }),
+                                aiot.__ci__({
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        shown: function() {
+                                            return "undo" !== _vm_.type && "switch" !== _vm_.type && "arrow" !== _vm_.type && "reset" === _vm_.type;
+                                        }
+                                    }
+                                }, function() {
+                                    return [
+                                        aiot.__ce__("image", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "resetImage"
+                                                ],
+                                                src: "/common/image/icons/white-chong.png",
+                                                style: function() {
+                                                    return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                }
+                                            }
+                                        }, []),
+                                        aiot.__ce__("image", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "resetImage"
+                                                ],
+                                                src: "/common/image/icons/white-zhi.png",
+                                                style: function() {
+                                                    return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                }
+                                            }
+                                        }, [])
+                                    ];
+                                })
+                            ]);
+                        };
+                        module.exports = function($app_exports$) {
+                            $app_script$({}, $app_exports$, $app_require$1);
+                            $app_exports$.default.template = $app_template$;
+                            $app_exports$.default.style = $app_style$;
+                        };
+                    },
+                    "./src/components/GameGrid/index.ux" (module, __unused_rspack_exports, __webpack_require__) {
+                        var $app_style$ = [
+                            [
+                                [
+                                    [
+                                        0,
+                                        "game-grid"
+                                    ]
+                                ],
+                                {
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    backgroundColor: "#1a2530",
+                                    paddingTop: "2px",
+                                    paddingRight: "2px",
+                                    paddingBottom: "2px",
+                                    paddingLeft: "2px",
+                                    marginTop: "4px",
+                                    marginRight: "0",
+                                    marginBottom: "4px",
+                                    marginLeft: "0",
+                                    borderRadius: "4px"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "row"
+                                    ]
+                                ],
+                                {
+                                    display: "flex"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "cell"
+                                    ]
+                                ],
+                                {
+                                    width: "32px",
+                                    height: "32px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderTopColor: "#333333",
+                                    borderRightColor: "#333333",
+                                    borderBottomColor: "#333333",
+                                    borderLeftColor: "#333333",
+                                    borderStyle: "solid",
+                                    borderTopWidth: "1px",
+                                    borderRightWidth: "1px",
+                                    borderBottomWidth: "1px",
+                                    borderLeftWidth: "1px"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "combined-icon"
+                                    ]
+                                ],
+                                {
+                                    display: "flex",
+                                    alignItems: "center"
+                                }
+                            ],
+                            [
+                                [
+                                    [
+                                        0,
+                                        "icon"
+                                    ]
+                                ],
+                                {
+                                    display: "flex"
+                                }
+                            ]
+                        ];
+                        var $app_script$ = function __scriptModule__(module, exports, $app_require$1) {
+                            "use strict";
+                            Object.defineProperty(exports, "__esModule", {
+                                value: true
+                            });
+                            exports.default = void 0;
+                            var _default = exports.default = {
+                                props: [
+                                    'rows',
+                                    'columns',
+                                    'icons',
+                                    'cellStyles',
+                                    'sizeConfig'
+                                ],
+                                computed: {
+                                    gridStyle () {
+                                        if (!this.sizeConfig) return "padding: 2px; margin: 4px 0;";
+                                        const s = this.sizeConfig;
+                                        return `padding: ${s.gridPadding}px; margin: ${s.margin}px 0;`;
+                                    },
+                                    cellStyle () {
+                                        if (!this.sizeConfig) return "width: 32px; height: 32px; border-width: 1px; border-style: solid";
+                                        const s = this.sizeConfig;
+                                        return `width: ${s.cellSize}px; height: ${s.cellSize}px; border-width: ${s.cellBorder}px; border-style: solid`;
+                                    },
+                                    iconStyle () {
+                                        if (!this.sizeConfig) return "width: 20px; height: 20px; object-fit: contain";
+                                        const s = this.sizeConfig;
+                                        return `width: ${s.cellIconSize}px; height: ${s.cellIconSize}px; object-fit: contain`;
+                                    },
+                                    iconSmallStyle () {
+                                        if (!this.sizeConfig) return "width: 15px; height: 15px; object-fit: contain";
+                                        const s = this.sizeConfig;
+                                        return `width: ${s.cellIconSmallSize}px; height: ${s.cellIconSmallSize}px; object-fit: contain`;
+                                    }
+                                }
+                            };
+                        };
+                        var $app_template$ = function(vm) {
+                            const _vm_ = vm || this;
+                            return aiot.__ce__("div", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: [
+                                        "game-grid"
+                                    ],
+                                    style: function() {
+                                        return __webpack_require__.g.$translateStyle$(_vm_.gridStyle);
+                                    }
+                                }
+                            }, [
+                                aiot.__cf__({
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        exp: function() {
+                                            return _vm_.rows;
+                                        },
+                                        key: "y",
+                                        value: "indexY"
+                                    }
+                                }, function(y, indexY) {
+                                    return [
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                classList: [
+                                                    "row"
+                                                ]
+                                            }
+                                        }, [
+                                            aiot.__cf__({
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    exp: function() {
+                                                        return _vm_.columns;
+                                                    },
+                                                    key: "x",
+                                                    value: "indexX"
+                                                }
+                                            }, function(x, indexX) {
+                                                return [
+                                                    aiot.__ce__("div", {
+                                                        __vm__: _vm_,
+                                                        __opts__: {
+                                                            classList: [
+                                                                "cell"
+                                                            ],
+                                                            style: function() {
+                                                                return __webpack_require__.g.$translateStyle$("background-color: " + _vm_.cellStyles[y + "," + x].bg + "; border-color: " + _vm_.cellStyles[y + "," + x].border + ";" + _vm_.cellStyle);
+                                                            }
+                                                        }
+                                                    }, [
+                                                        aiot.__ci__({
+                                                            __vm__: _vm_,
+                                                            __opts__: {
+                                                                shown: function() {
+                                                                    return _vm_.icons[y + "," + x] && !_vm_.icons[y + "," + x].single && _vm_.icons[y + "," + x].src1 && _vm_.icons[y + "," + x].src2;
+                                                                }
+                                                            }
+                                                        }, function() {
+                                                            return [
+                                                                aiot.__ce__("div", {
+                                                                    __vm__: _vm_,
+                                                                    __opts__: {
+                                                                        classList: [
+                                                                            "combined-icon"
+                                                                        ]
+                                                                    }
+                                                                }, [
+                                                                    aiot.__ce__("image", {
+                                                                        __vm__: _vm_,
+                                                                        __opts__: {
+                                                                            classList: [
+                                                                                "icon"
+                                                                            ],
+                                                                            src: function() {
+                                                                                return _vm_.icons[y + "," + x].src1;
+                                                                            },
+                                                                            style: function() {
+                                                                                return __webpack_require__.g.$translateStyle$(_vm_.iconSmallStyle);
+                                                                            }
+                                                                        }
+                                                                    }, []),
+                                                                    aiot.__ce__("image", {
+                                                                        __vm__: _vm_,
+                                                                        __opts__: {
+                                                                            classList: [
+                                                                                "icon"
+                                                                            ],
+                                                                            src: function() {
+                                                                                return _vm_.icons[y + "," + x].src2;
+                                                                            },
+                                                                            style: function() {
+                                                                                return __webpack_require__.g.$translateStyle$(_vm_.iconSmallStyle);
+                                                                            }
+                                                                        }
+                                                                    }, [])
+                                                                ])
+                                                            ];
+                                                        }),
+                                                        aiot.__ci__({
+                                                            __vm__: _vm_,
+                                                            __opts__: {
+                                                                shown: function() {
+                                                                    return !(_vm_.icons[y + "," + x] && !_vm_.icons[y + "," + x].single && _vm_.icons[y + "," + x].src1 && _vm_.icons[y + "," + x].src2) && _vm_.icons[y + "," + x] && _vm_.icons[y + "," + x].single && _vm_.icons[y + "," + x].src;
+                                                                }
+                                                            }
+                                                        }, function() {
+                                                            return [
+                                                                aiot.__ce__("image", {
+                                                                    __vm__: _vm_,
+                                                                    __opts__: {
+                                                                        classList: [
+                                                                            "icon"
+                                                                        ],
+                                                                        src: function() {
+                                                                            return _vm_.icons[y + "," + x].src;
+                                                                        },
+                                                                        style: function() {
+                                                                            return __webpack_require__.g.$translateStyle$(_vm_.iconStyle);
+                                                                        }
+                                                                    }
+                                                                }, [])
+                                                            ];
+                                                        })
+                                                    ])
+                                                ];
+                                            })
+                                        ])
+                                    ];
+                                })
+                            ]);
+                        };
+                        module.exports = function($app_exports$) {
+                            $app_script$({}, $app_exports$, $app_require$1);
+                            $app_exports$.default.template = $app_template$;
+                            $app_exports$.default.style = $app_style$;
+                        };
+                    },
+                    "./src/common/screenAdapter.js" (__unused_rspack_module, exports) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.BASE_SIZES = void 0;
+                        exports.adaptFontSize = adaptFontSize;
+                        exports.adaptGap = adaptGap;
+                        exports.adaptSize = adaptSize;
+                        exports.getAdaptedSizes = getAdaptedSizes;
+                        exports.getScale = getScale;
+                        exports.getStyles = getStyles;
+                        const BASE_WIDTH = 192;
+                        const BASE_HEIGHT = 490;
+                        function getScale(screenWidth, screenHeight) {
+                            const width = Number(screenWidth);
+                            const height = Number(screenHeight);
+                            const validWidth = Number.isFinite(width) && width > 0 ? width : BASE_WIDTH;
+                            const fallbackHeight = 212 === validWidth ? 520 : BASE_HEIGHT;
+                            const validHeight = Number.isFinite(height) && height > 0 ? height : fallbackHeight;
+                            return Math.min(validWidth / BASE_WIDTH, validHeight / BASE_HEIGHT);
+                        }
+                        function adaptSize(baseSize, scale) {
+                            return Math.floor(baseSize * scale);
+                        }
+                        function adaptGap(baseGap, scale) {
+                            return Math.floor(baseGap * scale);
+                        }
+                        function adaptFontSize(baseFontSize, scale) {
+                            return Math.floor(baseFontSize * scale);
+                        }
+                        const BASE_SIZES = exports.BASE_SIZES = {
+                            cellSize: 32,
+                            cellIconSize: 20,
+                            cellIconSmallSize: 15,
+                            cellBorder: 1,
+                            switchBtnWidth: 50,
+                            switchBtnHeight: 56,
+                            arrowBtnSize: 30,
+                            undoBtnWidth: 50,
+                            undoBtnHeight: 36,
+                            resetBtnWidth: 50,
+                            resetBtnHeight: 36,
+                            btnIconSize: 20,
+                            cellGap: 0,
+                            btnMargin: 4,
+                            btnRowMargin: 2,
+                            titleHeight: 28,
+                            titleWidth: 120,
+                            infoHeight: 36,
+                            padding: 8,
+                            paddingTop: 28,
+                            paddingBottom: 32,
+                            margin: 4,
+                            marginTop: 4,
+                            marginBottom: 4,
+                            gridPadding: 2,
+                            controlPanelMargin: 2
+                        };
+                        function getAdaptedSizes(screenWidth, screenHeight) {
+                            const scale = getScale(screenWidth, screenHeight);
+                            const cellSize = adaptSize(BASE_SIZES.cellSize, scale);
+                            const cellBorder = Math.max(1, adaptSize(BASE_SIZES.cellBorder, scale));
+                            return {
+                                scale,
+                                cellSize,
+                                cellIconSize: adaptSize(BASE_SIZES.cellIconSize, scale),
+                                cellIconSmallSize: Math.min(adaptSize(BASE_SIZES.cellIconSmallSize, scale), Math.floor((cellSize - 2 * cellBorder) / 2)),
+                                cellBorder,
+                                switchBtnWidth: adaptSize(BASE_SIZES.switchBtnWidth, scale),
+                                switchBtnHeight: adaptSize(BASE_SIZES.switchBtnHeight, scale),
+                                arrowBtnSize: adaptSize(BASE_SIZES.arrowBtnSize, scale),
+                                undoBtnWidth: adaptSize(BASE_SIZES.undoBtnWidth, scale),
+                                undoBtnHeight: adaptSize(BASE_SIZES.undoBtnHeight, scale),
+                                resetBtnWidth: adaptSize(BASE_SIZES.resetBtnWidth, scale),
+                                resetBtnHeight: adaptSize(BASE_SIZES.resetBtnHeight, scale),
+                                btnIconSize: adaptSize(BASE_SIZES.btnIconSize, scale),
+                                cellGap: adaptSize(BASE_SIZES.cellGap, scale),
+                                btnMargin: adaptSize(BASE_SIZES.btnMargin, scale),
+                                btnRowMargin: adaptSize(BASE_SIZES.btnRowMargin, scale),
+                                titleHeight: adaptSize(BASE_SIZES.titleHeight, scale),
+                                titleWidth: adaptSize(BASE_SIZES.titleWidth, scale),
+                                infoHeight: adaptSize(BASE_SIZES.infoHeight, scale),
+                                padding: adaptSize(BASE_SIZES.padding, scale),
+                                paddingTop: Math.ceil(BASE_SIZES.paddingTop * scale),
+                                paddingBottom: Math.ceil(BASE_SIZES.paddingBottom * scale),
+                                margin: adaptSize(BASE_SIZES.margin, scale),
+                                marginTop: adaptSize(BASE_SIZES.marginTop, scale),
+                                marginBottom: adaptSize(BASE_SIZES.marginBottom, scale),
+                                gridPadding: adaptSize(BASE_SIZES.gridPadding, scale),
+                                controlPanelMargin: adaptSize(BASE_SIZES.controlPanelMargin, scale)
+                            };
+                        }
+                        function getStyles(sizes) {
+                            return {
+                                cell: {
+                                    width: `${sizes.cellSize}px`,
+                                    height: `${sizes.cellSize}px`,
+                                    border: `${sizes.cellBorder}px solid #333333`
+                                },
+                                cellIcon: {
+                                    width: `${sizes.cellIconSize}px`,
+                                    height: `${sizes.cellIconSize}px`
+                                },
+                                cellIconSmall: {
+                                    width: `${sizes.cellIconSmallSize}px`,
+                                    height: `${sizes.cellIconSmallSize}px`
+                                },
+                                switchBtn: {
+                                    width: `${sizes.switchBtnWidth}px`,
+                                    height: `${sizes.switchBtnHeight}px`,
+                                    margin: `${sizes.btnMargin}px`
+                                },
+                                arrowBtn: {
+                                    width: `${sizes.arrowBtnSize}px`,
+                                    height: `${sizes.arrowBtnSize}px`,
+                                    margin: '1px'
+                                },
+                                undoBtn: {
+                                    width: `${sizes.undoBtnWidth}px`,
+                                    height: `${sizes.undoBtnHeight}px`,
+                                    margin: `${sizes.btnMargin}px`
+                                },
+                                resetBtn: {
+                                    width: `${sizes.resetBtnWidth}px`,
+                                    height: `${sizes.resetBtnHeight}px`,
+                                    margin: `${sizes.btnMargin}px`
+                                },
+                                btnIcon: {
+                                    width: `${sizes.btnIconSize}px`,
+                                    height: `${sizes.btnIconSize}px`
+                                },
+                                controlPanel: {
+                                    margin: `${sizes.controlPanelMargin}px`
+                                },
+                                btnRow1: {
+                                    marginBottom: `${sizes.btnRowMargin}px`
+                                },
+                                container: {
+                                    padding: `${sizes.paddingTop}px ${sizes.padding}px ${sizes.paddingBottom}px`
+                                },
+                                title: {
+                                    height: `${sizes.titleHeight}px`,
+                                    width: `${sizes.titleWidth}px`,
+                                    margin: `${sizes.marginTop}px 0 3px 0`
+                                },
+                                info: {
+                                    height: `${sizes.infoHeight}px`,
+                                    margin: '2px'
+                                },
+                                gameGrid: {
+                                    padding: `${sizes.gridPadding}px`,
+                                    margin: `${sizes.margin}px 0`
+                                },
+                                controlArea: {
+                                    marginTop: `${sizes.marginTop}px`
+                                },
+                                switchArea: {
+                                    marginBottom: `${sizes.marginBottom}px`
+                                }
+                            };
+                        }
+                    },
+                    "./src/game/GameState.js" (__unused_rspack_module, exports, __webpack_require__) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.GameState = void 0;
+                        var _constants = __webpack_require__("./src/game/constants.js");
+                        function ownKeys(e, r) {
+                            var t = Object.keys(e);
+                            if (Object.getOwnPropertySymbols) {
+                                var o = Object.getOwnPropertySymbols(e);
+                                r && (o = o.filter(function(r) {
+                                    return Object.getOwnPropertyDescriptor(e, r).enumerable;
+                                })), t.push.apply(t, o);
+                            }
+                            return t;
+                        }
+                        function _objectSpread(e) {
+                            for(var r = 1; r < arguments.length; r++){
+                                var t = null != arguments[r] ? arguments[r] : {};
+                                r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
+                                    _defineProperty(e, r, t[r]);
+                                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
+                                    Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+                                });
+                            }
+                            return e;
+                        }
+                        function _defineProperty(e, r, t) {
+                            return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+                                value: t,
+                                enumerable: !0,
+                                configurable: !0,
+                                writable: !0
+                            }) : e[r] = t, e;
+                        }
+                        function _toPropertyKey(t) {
+                            var i = _toPrimitive(t, "string");
+                            return "symbol" == typeof i ? i : i + "";
+                        }
+                        function _toPrimitive(t, r) {
+                            if ("object" != typeof t || !t) return t;
+                            var e = t[Symbol.toPrimitive];
+                            if (void 0 !== e) {
+                                var i = e.call(t, r || "default");
+                                if ("object" != typeof i) return i;
+                                throw new TypeError("@@toPrimitive must return a primitive value.");
+                            }
+                            return ("string" === r ? String : Number)(t);
+                        }
+                        class GameState {
+                            constructor(){
+                                this.mapWidth = 5;
+                                this.mapHeight = 7;
+                                this.reset();
+                            }
+                            reset() {
+                                this.mapRules = {};
+                                this.whiteX = 0;
+                                this.whiteY = 0;
+                                this.blackX = 0;
+                                this.blackY = 0;
+                                this.lastPlayerAt = {};
+                                this.whiteBoxes = [];
+                                this.blackBoxes = [];
+                                this.whiteBoxTargets = [];
+                                this.blackBoxTargets = [];
+                                this.whitePlayerTarget = [];
+                                this.blackPlayerTarget = [];
+                                this.currentPlayer = _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK;
+                                this.stepCount = 0;
+                                this.history = [];
+                                this.buildCellLookupCache();
+                            }
+                            saveState() {
+                                const stateSnapshot = {
+                                    whiteX: this.whiteX,
+                                    whiteY: this.whiteY,
+                                    blackX: this.blackX,
+                                    blackY: this.blackY,
+                                    whiteBoxes: this.whiteBoxes.map((b)=>({
+                                            x: b.x,
+                                            y: b.y
+                                        })),
+                                    blackBoxes: this.blackBoxes.map((b)=>({
+                                            x: b.x,
+                                            y: b.y
+                                        })),
+                                    currentPlayer: this.currentPlayer,
+                                    stepCount: this.stepCount,
+                                    lastPlayerAt: _objectSpread({}, this.lastPlayerAt)
+                                };
+                                this.history.push(stateSnapshot);
+                                if (this.history.length > 50) this.history.shift();
+                            }
+                            undo() {
+                                if (0 === this.history.length) return false;
+                                const prevState = this.history.pop();
+                                this.whiteX = prevState.whiteX;
+                                this.whiteY = prevState.whiteY;
+                                this.blackX = prevState.blackX;
+                                this.blackY = prevState.blackY;
+                                this.whiteBoxes = prevState.whiteBoxes;
+                                this.blackBoxes = prevState.blackBoxes;
+                                this.currentPlayer = prevState.currentPlayer;
+                                this.stepCount = prevState.stepCount;
+                                this.lastPlayerAt = prevState.lastPlayerAt;
+                                this.buildBoxLookupCache();
+                                return true;
+                            }
+                            canUndo() {
+                                return this.history.length > 0;
+                            }
+                            getMapValue(y, x) {
+                                return this.mapRules[`${y},${x}`] || _constants.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR;
+                            }
+                            setMapValue(y, x, value) {
+                                this.mapRules[`${y},${x}`] = value;
+                            }
+                            buildCellLookupCache() {
+                                this.buildBoxLookupCache();
+                                this._whiteBoxTargetSet = new Set(this.whiteBoxTargets.map((t)=>`${t.y},${t.x}`));
+                                this._blackBoxTargetSet = new Set(this.blackBoxTargets.map((t)=>`${t.y},${t.x}`));
+                                this._whitePlayerTargetSet = new Set(this.whitePlayerTarget.map((t)=>`${t.y},${t.x}`));
+                                this._blackPlayerTargetSet = new Set(this.blackPlayerTarget.map((t)=>`${t.y},${t.x}`));
+                            }
+                            buildBoxLookupCache() {
+                                this._whiteBoxSet = new Set(this.whiteBoxes.map((b)=>`${b.y},${b.x}`));
+                                this._blackBoxSet = new Set(this.blackBoxes.map((b)=>`${b.y},${b.x}`));
+                            }
+                            hasWhiteBox(x, y) {
+                                return this._whiteBoxSet.has(`${y},${x}`);
+                            }
+                            hasBlackBox(x, y) {
+                                return this._blackBoxSet.has(`${y},${x}`);
+                            }
+                            isWhiteBoxTarget(x, y) {
+                                return this._whiteBoxTargetSet.has(`${y},${x}`);
+                            }
+                            isBlackBoxTarget(x, y) {
+                                return this._blackBoxTargetSet.has(`${y},${x}`);
+                            }
+                            isWhitePlayerTarget(x, y) {
+                                return this._whitePlayerTargetSet.has(`${y},${x}`);
+                            }
+                            isBlackPlayerTarget(x, y) {
+                                return this._blackPlayerTargetSet.has(`${y},${x}`);
+                            }
+                            switchPlayer() {
+                                this.currentPlayer = this.currentPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE ? _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK : _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE;
+                                return this.currentPlayer;
+                            }
+                            recordPlayerMove(x, y, playerType) {
+                                this.lastPlayerAt[`${y},${x}`] = playerType;
+                            }
+                        }
+                        exports.GameState = GameState;
+                    },
+                    "./src/game/IconManager.js" (__unused_rspack_module, exports, __webpack_require__) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.IconManager = void 0;
+                        var _constants = __webpack_require__("./src/game/constants.js");
+                        const ICON_PATHS = {
+                            "white-player": "/common/image/icons/grey-white.png",
+                            "black-player": "/common/image/icons/white-black.png",
+                            "white-box": "/common/image/icons/grey-box.png",
+                            "black-box": "/common/image/icons/white-box.png",
+                            "white-target": "/common/image/icons/grey-target.png",
+                            "black-target": "/common/image/icons/white-target.png"
+                        };
+                        class IconManager {
+                            constructor(gameState){
+                                this.state = gameState;
+                            }
+                            getIconParts(y, x) {
+                                const type = this.getIconType(y, x);
+                                if (!type) return {
+                                    single: true,
+                                    src: '',
+                                    src1: '',
+                                    src2: ''
+                                };
+                                const parts = type.split("-");
+                                if (4 !== parts.length) return {
+                                    single: true,
+                                    src: this.getIconImagePath(type),
+                                    src1: '',
+                                    src2: ''
+                                };
+                                {
+                                    const firstPart = parts[0] + "-" + parts[1];
+                                    const secondPart = parts[2] + "-" + parts[3];
+                                    return {
+                                        single: false,
+                                        src: '',
+                                        src1: this.getIconImagePath(firstPart),
+                                        src2: this.getIconImagePath(secondPart)
+                                    };
+                                }
+                            }
+                            getIconType(y, x) {
+                                const hasWhitePlayer = y === this.state.whiteY && x === this.state.whiteX;
+                                const hasBlackPlayer = y === this.state.blackY && x === this.state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = this.state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "white-player";
+                                    return "black-player";
+                                }
+                                if (hasWhitePlayer) return "white-player";
+                                if (hasBlackPlayer) return "black-player";
+                                const hasWhiteBox = this.state.hasWhiteBox(x, y);
+                                if (hasWhiteBox) return "white-box";
+                                const hasBlackBox = this.state.hasBlackBox(x, y);
+                                if (hasBlackBox) return "black-box";
+                                const isWhiteBoxTarget = this.state.isWhiteBoxTarget(x, y);
+                                if (isWhiteBoxTarget) return "white-box-white-target";
+                                const isBlackBoxTarget = this.state.isBlackBoxTarget(x, y);
+                                if (isBlackBoxTarget) return "black-box-black-target";
+                                const isWhitePlayerTarget = this.state.isWhitePlayerTarget(x, y);
+                                if (isWhitePlayerTarget) return "white-player-white-target";
+                                const isBlackPlayerTarget = this.state.isBlackPlayerTarget(x, y);
+                                if (isBlackPlayerTarget) return "black-player-black-target";
+                                return null;
+                            }
+                            getIconImagePath(type) {
+                                return ICON_PATHS[type] || "";
+                            }
+                            updateCellIcons() {
+                                const icons = {};
+                                for(let y = 0; y < this.state.mapHeight; y++){
+                                    for(let x = 0; x < this.state.mapWidth; x++){
+                                        const parts = this.getIconParts(y, x);
+                                        icons[`${y},${x}`] = parts;
+                                    }
+                                }
+                                return icons;
+                            }
+                        }
+                        exports.IconManager = IconManager;
+                    },
+                    "./src/game/MoveValidator.js" (__unused_rspack_module, exports, __webpack_require__) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.MoveValidator = void 0;
+                        var _constants = __webpack_require__("./src/game/constants.js");
+                        class MoveValidator {
+                            constructor(gameState){
+                                this.state = gameState;
+                            }
+                            validateMove(dx, dy, isWhite) {
+                                const [x, y] = isWhite ? [
+                                    this.state.whiteX,
+                                    this.state.whiteY
+                                ] : [
+                                    this.state.blackX,
+                                    this.state.blackY
+                                ];
+                                const [nx, ny] = [
+                                    x + dx,
+                                    y + dy
+                                ];
+                                if (!this.checkBoundary(nx, ny)) return {
+                                    valid: false,
+                                    message: "不能越界！"
+                                };
+                                if (!this.checkTerrain(nx, ny, isWhite)) {
+                                    const message = isWhite ? "白角色只能走黑色地形或白位！" : "黑角色只能走白色地形或黑位！";
+                                    return {
+                                        valid: false,
+                                        message
+                                    };
+                                }
+                                const whiteBoxIndex = this.state.whiteBoxes.findIndex((b)=>b.x === nx && b.y === ny);
+                                const blackBoxIndex = this.state.blackBoxes.findIndex((b)=>b.x === nx && b.y === ny);
+                                if (-1 !== whiteBoxIndex) return this.validateWhiteBoxPush(dx, dy, isWhite, whiteBoxIndex, nx, ny);
+                                if (-1 !== blackBoxIndex) return this.validateBlackBoxPush(dx, dy, isWhite, blackBoxIndex, nx, ny);
+                                return {
+                                    valid: true,
+                                    action: 'move',
+                                    data: {
+                                        isWhite,
+                                        nx,
+                                        ny
+                                    }
+                                };
+                            }
+                            checkBoundary(x, y) {
+                                return x >= 0 && x < this.state.mapWidth && y >= 0 && y < this.state.mapHeight;
+                            }
+                            checkTerrain(x, y, isWhite) {
+                                const targetValue = this.state.getMapValue(y, x);
+                                const otherX = isWhite ? this.state.blackX : this.state.whiteX;
+                                const otherY = isWhite ? this.state.blackY : this.state.whiteY;
+                                const isTargetOppositePlayer = x === otherX && y === otherY;
+                                const hasWhiteBox = this.state.hasWhiteBox(x, y);
+                                const hasBlackBox = this.state.hasBlackBox(x, y);
+                                const isWhiteBoxTarget = this.state.isWhiteBoxTarget(x, y);
+                                const isBlackBoxTarget = this.state.isBlackBoxTarget(x, y);
+                                const isWhitePlayerTarget = this.state.isWhitePlayerTarget(x, y);
+                                const isBlackPlayerTarget = this.state.isBlackPlayerTarget(x, y);
+                                if (isWhite) return targetValue === _constants.GAME_CONSTANTS.CELL_TYPES.BLACK_WALL || hasBlackBox || isBlackBoxTarget || isWhitePlayerTarget || isTargetOppositePlayer;
+                                return targetValue === _constants.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR || hasWhiteBox || isWhiteBoxTarget || isBlackPlayerTarget || isTargetOppositePlayer;
+                            }
+                            validateWhiteBoxPush(dx, dy, isWhite, boxIndex, nx, ny) {
+                                if (!isWhite) return {
+                                    valid: true,
+                                    action: 'move',
+                                    data: {
+                                        isWhite: false,
+                                        nx,
+                                        ny
+                                    }
+                                };
+                                const boxNextX = nx + dx;
+                                const boxNextY = ny + dy;
+                                if (!this.checkBoundary(boxNextX, boxNextY)) return {
+                                    valid: false,
+                                    message: "箱子不能越界！"
+                                };
+                                if (this.isBlocked(boxNextX, boxNextY, boxIndex, 'white')) return {
+                                    valid: false,
+                                    message: "箱子前方被阻挡！"
+                                };
+                                const boxNextValue = this.state.getMapValue(boxNextY, boxNextX);
+                                const onBlackTarget = this.state.isBlackBoxTarget(boxNextX, boxNextY);
+                                if (boxNextValue !== _constants.GAME_CONSTANTS.CELL_TYPES.BLACK_WALL && !onBlackTarget) return {
+                                    valid: false,
+                                    message: "白箱子只能在黑色地形上移动！"
+                                };
+                                return {
+                                    valid: true,
+                                    action: 'push',
+                                    data: {
+                                        isWhite: true,
+                                        playerPos: {
+                                            nx,
+                                            ny
+                                        },
+                                        boxPos: {
+                                            x: boxNextX,
+                                            y: boxNextY
+                                        },
+                                        boxIndex,
+                                        boxType: 'white'
+                                    }
+                                };
+                            }
+                            validateBlackBoxPush(dx, dy, isWhite, boxIndex, nx, ny) {
+                                if (isWhite) return {
+                                    valid: true,
+                                    action: 'move',
+                                    data: {
+                                        isWhite: true,
+                                        nx,
+                                        ny
+                                    }
+                                };
+                                const boxNextX = nx + dx;
+                                const boxNextY = ny + dy;
+                                if (!this.checkBoundary(boxNextX, boxNextY)) return {
+                                    valid: false,
+                                    message: "箱子不能越界！"
+                                };
+                                if (this.isBlocked(boxNextX, boxNextY, boxIndex, 'black')) return {
+                                    valid: false,
+                                    message: "箱子前方被阻挡！"
+                                };
+                                const boxNextValue = this.state.getMapValue(boxNextY, boxNextX);
+                                const onWhiteTarget = this.state.isWhiteBoxTarget(boxNextX, boxNextY);
+                                if (boxNextValue !== _constants.GAME_CONSTANTS.CELL_TYPES.WHITE_FLOOR && !onWhiteTarget) return {
+                                    valid: false,
+                                    message: "黑箱子只能在白色地形上移动！"
+                                };
+                                return {
+                                    valid: true,
+                                    action: 'push',
+                                    data: {
+                                        isWhite: false,
+                                        playerPos: {
+                                            nx,
+                                            ny
+                                        },
+                                        boxPos: {
+                                            x: boxNextX,
+                                            y: boxNextY
+                                        },
+                                        boxIndex,
+                                        boxType: 'black'
+                                    }
+                                };
+                            }
+                            isBlocked(x, y, excludeIndex, boxType) {
+                                if ('white' === boxType) {
+                                    const blockedByWhite = this.state.whiteBoxes.some((b, i)=>i !== excludeIndex && b.x === x && b.y === y);
+                                    const blockedByBlack = this.state.blackBoxes.some((b)=>b.x === x && b.y === y);
+                                    if (blockedByWhite || blockedByBlack) return true;
+                                } else {
+                                    const blockedByBlack = this.state.blackBoxes.some((b, i)=>i !== excludeIndex && b.x === x && b.y === y);
+                                    const blockedByWhite = this.state.whiteBoxes.some((b)=>b.x === x && b.y === y);
+                                    if (blockedByWhite || blockedByBlack) return true;
+                                }
+                                const blockedByPlayer = x === this.state.whiteX && y === this.state.whiteY || x === this.state.blackX && y === this.state.blackY;
+                                return blockedByPlayer;
+                            }
+                        }
+                        exports.MoveValidator = MoveValidator;
+                    },
+                    "./src/game/WinChecker.js" (__unused_rspack_module, exports) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.WinChecker = void 0;
+                        class WinChecker {
+                            constructor(gameState){
+                                this.state = gameState;
+                            }
+                            checkWin() {
+                                const whiteWin = this.checkWhiteBoxes();
+                                const blackWin = this.checkBlackBoxes();
+                                const whitePlayerOnTarget = this.checkWhitePlayerTarget();
+                                const blackPlayerOnTarget = this.checkBlackPlayerTarget();
+                                return whiteWin && blackWin && whitePlayerOnTarget && blackPlayerOnTarget && (this.state.whiteBoxes.length > 0 || this.state.blackBoxes.length > 0);
+                            }
+                            checkWhiteBoxes() {
+                                return this.state.whiteBoxes.every((box)=>this.state.whiteBoxTargets.some((target)=>target.x === box.x && target.y === box.y));
+                            }
+                            checkBlackBoxes() {
+                                return this.state.blackBoxes.every((box)=>this.state.blackBoxTargets.some((target)=>target.x === box.x && target.y === box.y));
+                            }
+                            checkWhitePlayerTarget() {
+                                return this.state.whitePlayerTarget.some((pos)=>pos.x === this.state.whiteX && pos.y === this.state.whiteY);
+                            }
+                            checkBlackPlayerTarget() {
+                                return this.state.blackPlayerTarget.some((pos)=>pos.x === this.state.blackX && pos.y === this.state.blackY);
+                            }
+                        }
+                        exports.WinChecker = WinChecker;
+                    },
+                    "./src/game/constants.js" (__unused_rspack_module, exports) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.GAME_CONSTANTS = void 0;
+                        const GAME_CONSTANTS = exports.GAME_CONSTANTS = {
+                            CELL_TYPES: {
+                                WHITE_FLOOR: 0,
+                                BLACK_WALL: 1
+                            },
+                            PLAYER_TYPES: {
+                                WHITE: 6,
+                                BLACK: 7
+                            },
+                            BUTTON_COLORS: {
+                                DEFAULT_SWITCH: "#3498DB",
+                                DEFAULT_ARROW: "#2ECC71",
+                                DEFAULT_RESET: "#E74C3C",
+                                DEFAULT_UNDO: "#9B59B6",
+                                PRESSED_SWITCH: "#FF416C",
+                                PRESSED_ARROW: "#36D1DC",
+                                PRESSED_RESET: "#FF6B6B",
+                                PRESSED_UNDO: "#8E44AD"
+                            }
+                        };
+                    },
+                    "./src/game/index.js" (__unused_rspack_module, exports, __webpack_require__) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.Game = void 0;
+                        var _GameState = __webpack_require__("./src/game/GameState.js");
+                        var _MoveValidator = __webpack_require__("./src/game/MoveValidator.js");
+                        var _WinChecker = __webpack_require__("./src/game/WinChecker.js");
+                        var _IconManager = __webpack_require__("./src/game/IconManager.js");
+                        var _constants = __webpack_require__("./src/game/constants.js");
+                        function ownKeys(e, r) {
+                            var t = Object.keys(e);
+                            if (Object.getOwnPropertySymbols) {
+                                var o = Object.getOwnPropertySymbols(e);
+                                r && (o = o.filter(function(r) {
+                                    return Object.getOwnPropertyDescriptor(e, r).enumerable;
+                                })), t.push.apply(t, o);
+                            }
+                            return t;
+                        }
+                        function _objectSpread(e) {
+                            for(var r = 1; r < arguments.length; r++){
+                                var t = null != arguments[r] ? arguments[r] : {};
+                                r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
+                                    _defineProperty(e, r, t[r]);
+                                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
+                                    Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+                                });
+                            }
+                            return e;
+                        }
+                        function _defineProperty(e, r, t) {
+                            return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+                                value: t,
+                                enumerable: !0,
+                                configurable: !0,
+                                writable: !0
+                            }) : e[r] = t, e;
+                        }
+                        function _toPropertyKey(t) {
+                            var i = _toPrimitive(t, "string");
+                            return "symbol" == typeof i ? i : i + "";
+                        }
+                        function _toPrimitive(t, r) {
+                            if ("object" != typeof t || !t) return t;
+                            var e = t[Symbol.toPrimitive];
+                            if (void 0 !== e) {
+                                var i = e.call(t, r || "default");
+                                if ("object" != typeof i) return i;
+                                throw new TypeError("@@toPrimitive must return a primitive value.");
+                            }
+                            return ("string" === r ? String : Number)(t);
+                        }
+                        class Game {
+                            constructor(){
+                                this.state = new _GameState.GameState();
+                                this.validator = new _MoveValidator.MoveValidator(this.state);
+                                this.winChecker = new _WinChecker.WinChecker(this.state);
+                                this.iconManager = new _IconManager.IconManager(this.state);
+                            }
+                            initLevel(levelData) {
+                                this.state.reset();
+                                if (levelData.mapRules) this.state.mapRules = _objectSpread({}, levelData.mapRules);
+                                if (levelData.whitePlayer) {
+                                    this.state.whiteX = levelData.whitePlayer.x;
+                                    this.state.whiteY = levelData.whitePlayer.y;
+                                    this.state.recordPlayerMove(levelData.whitePlayer.x, levelData.whitePlayer.y, _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE);
+                                }
+                                if (levelData.blackPlayer) {
+                                    this.state.blackX = levelData.blackPlayer.x;
+                                    this.state.blackY = levelData.blackPlayer.y;
+                                    this.state.recordPlayerMove(levelData.blackPlayer.x, levelData.blackPlayer.y, _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK);
+                                }
+                                if (levelData.whiteBoxes) this.state.whiteBoxes = levelData.whiteBoxes.map((b)=>({
+                                        x: b.x,
+                                        y: b.y
+                                    }));
+                                if (levelData.blackBoxes) this.state.blackBoxes = levelData.blackBoxes.map((b)=>({
+                                        x: b.x,
+                                        y: b.y
+                                    }));
+                                if (levelData.whiteBoxTargets) this.state.whiteBoxTargets = levelData.whiteBoxTargets.map((t)=>({
+                                        x: t.x,
+                                        y: t.y
+                                    }));
+                                if (levelData.blackBoxTargets) this.state.blackBoxTargets = levelData.blackBoxTargets.map((t)=>({
+                                        x: t.x,
+                                        y: t.y
+                                    }));
+                                if (levelData.whitePlayerTarget) this.state.whitePlayerTarget = levelData.whitePlayerTarget.map((t)=>({
+                                        x: t.x,
+                                        y: t.y
+                                    }));
+                                if (levelData.blackPlayerTarget) this.state.blackPlayerTarget = levelData.blackPlayerTarget.map((t)=>({
+                                        x: t.x,
+                                        y: t.y
+                                    }));
+                                if (void 0 !== levelData.currentPlayer) this.state.currentPlayer = levelData.currentPlayer;
+                                this.state.buildCellLookupCache();
+                            }
+                            move(dx, dy) {
+                                const isWhite = this.state.currentPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE;
+                                const result = this.validator.validateMove(dx, dy, isWhite);
+                                if (!result.valid) return {
+                                    success: false,
+                                    message: result.message
+                                };
+                                this.state.saveState();
+                                if ('move' === result.action) this.movePlayer(result.data.isWhite, result.data.nx, result.data.ny);
+                                else if ('push' === result.action) this.pushBox(result.data.isWhite, result.data.playerPos, result.data.boxPos, result.data.boxIndex, result.data.boxType);
+                                this.state.stepCount++;
+                                const isWin = this.winChecker.checkWin();
+                                return {
+                                    success: true,
+                                    isWin,
+                                    display: this.updateCellDisplay()
+                                };
+                            }
+                            undo() {
+                                const result = this.state.undo();
+                                if (result) return {
+                                    success: true
+                                };
+                                return {
+                                    success: false,
+                                    message: "无法撤销"
+                                };
+                            }
+                            canUndo() {
+                                return this.state.canUndo();
+                            }
+                            movePlayer(isWhite, x, y) {
+                                const playerType = isWhite ? _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE : _constants.GAME_CONSTANTS.PLAYER_TYPES.BLACK;
+                                if (isWhite) {
+                                    this.state.whiteX = x;
+                                    this.state.whiteY = y;
+                                } else {
+                                    this.state.blackX = x;
+                                    this.state.blackY = y;
+                                }
+                                this.state.recordPlayerMove(x, y, playerType);
+                            }
+                            pushBox(isWhite, playerPos, boxPos, boxIndex, boxType) {
+                                this.movePlayer(isWhite, playerPos.nx, playerPos.ny);
+                                if ('white' === boxType) {
+                                    this.state.whiteBoxes[boxIndex].x = boxPos.x;
+                                    this.state.whiteBoxes[boxIndex].y = boxPos.y;
+                                } else {
+                                    this.state.blackBoxes[boxIndex].x = boxPos.x;
+                                    this.state.blackBoxes[boxIndex].y = boxPos.y;
+                                }
+                                this.state.buildBoxLookupCache();
+                            }
+                            updateCellIcons() {
+                                return this.updateCellDisplay();
+                            }
+                            updateCellDisplay() {
+                                const icons = {};
+                                const styles = {};
+                                const state = this.state;
+                                for(let y = 0; y < state.mapHeight; y++){
+                                    for(let x = 0; x < state.mapWidth; x++){
+                                        const key = `${y},${x}`;
+                                        icons[key] = this.iconManager.getIconParts(y, x);
+                                        styles[key] = {
+                                            bg: this.getCellBg(y, x),
+                                            border: this.getCellBorder(y, x)
+                                        };
+                                    }
+                                }
+                                return {
+                                    icons,
+                                    styles
+                                };
+                            }
+                            switchPlayer() {
+                                this.state.switchPlayer();
+                                return this.state.currentPlayer;
+                            }
+                            checkWin() {
+                                return this.winChecker.checkWin();
+                            }
+                            getCellBg(y, x) {
+                                const state = this.state;
+                                const isWhiteBoxTarget = state.isWhiteBoxTarget(x, y);
+                                const isBlackBoxTarget = state.isBlackBoxTarget(x, y);
+                                const hasWhiteBox = state.hasWhiteBox(x, y);
+                                const hasBlackBox = state.hasBlackBox(x, y);
+                                const hasWhitePlayer = y === state.whiteY && x === state.whiteX;
+                                const hasBlackPlayer = y === state.blackY && x === state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "#FFFFFF";
+                                    return "#000000";
+                                }
+                                if (hasWhitePlayer) return "#FFFFFF";
+                                if (hasBlackPlayer) return "#000000";
+                                if (hasWhiteBox) return "#E0E0E0";
+                                if (hasBlackBox) return "#1A1A1A";
+                                if (isWhiteBoxTarget) return "#FCD3D3";
+                                if (isBlackBoxTarget) return "#333333";
+                                const hasWhitePlayerTarget = state.isWhitePlayerTarget(x, y);
+                                const hasBlackPlayerTarget = state.isBlackPlayerTarget(x, y);
+                                if (hasWhitePlayerTarget) return "#D3D3D3";
+                                if (hasBlackPlayerTarget) return "#555555";
+                                return 0 === state.getMapValue(y, x) ? "#F8F9FA" : "#2D3748";
+                            }
+                            getCellBorder(y, x) {
+                                const state = this.state;
+                                const hasWhitePlayer = y === state.whiteY && x === state.whiteX;
+                                const hasBlackPlayer = y === state.blackY && x === state.blackX;
+                                if (hasWhitePlayer && hasBlackPlayer) {
+                                    const lastPlayer = state.lastPlayerAt[`${y},${x}`];
+                                    if (lastPlayer === _constants.GAME_CONSTANTS.PLAYER_TYPES.WHITE) return "#3498DB";
+                                    return "#E74C3C";
+                                }
+                                if (hasWhitePlayer) return "#3498DB";
+                                if (hasBlackPlayer) return "#E74C3C";
+                                return "#333333";
+                            }
+                        }
+                        exports.Game = Game;
+                    }
+                };
+                var __webpack_module_cache__ = {};
+                function __webpack_require__(moduleId) {
+                    var cachedModule = __webpack_module_cache__[moduleId];
+                    if (void 0 !== cachedModule) return cachedModule.exports;
+                    var module = __webpack_module_cache__[moduleId] = {
+                        exports: {}
+                    };
+                    __webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+                    return module.exports;
+                }
+                (()=>{
+                    __webpack_require__.g = (()=>{
+                        if ('object' == typeof globalThis) return globalThis;
+                        try {
+                            return this || new Function('return this')();
+                        } catch (e) {
+                            if ('object' == typeof window) return window;
+                        }
+                    })();
+                })();
+                (()=>{
+                    __webpack_require__.rv = ()=>"1.7.5";
+                })();
+                (()=>{
+                    __webpack_require__.ruid = "bundler=rspack@1.7.5";
+                })();
+                var __webpack_exports__ = {};
+                (()=>{
+                    $app_exports$['game-grid'] = __webpack_require__("./src/components/GameGrid/index.ux");
+                    $app_exports$['control-button'] = __webpack_require__("./src/components/ControlButton/index.ux");
+                    var $app_style$ = [
+                        [
+                            [
+                                [
+                                    0,
+                                    "container"
+                                ]
+                            ],
+                            {
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                backgroundColor: "#1a1a1a",
+                                paddingTop: "28px",
+                                paddingRight: "8px",
+                                paddingBottom: "32px",
+                                paddingLeft: "8px",
+                                height: "100%",
+                                width: "100%"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "title"
+                                ]
+                            ],
+                            {
+                                backgroundColor: "#1a1a1a",
+                                height: "28px",
+                                width: "120px",
+                                objectFit: "fill",
+                                marginTop: "6px",
+                                marginRight: "0",
+                                marginBottom: "3px",
+                                marginLeft: "0"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "info"
+                                ]
+                            ],
+                            {
+                                backgroundColor: "#ffffff",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                marginTop: "2px",
+                                marginRight: "2px",
+                                marginBottom: "2px",
+                                marginLeft: "2px",
+                                borderRadius: "6px",
+                                overflow: "hidden"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "infoText"
+                                ]
+                            ],
+                            {
+                                height: "40px",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                objectFit: "fill",
+                                borderRadius: "inherit"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "hint"
+                                ]
+                            ],
+                            {
+                                height: "40px",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                objectFit: "fill",
+                                borderRadius: "inherit"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "controlArea"
+                                ]
+                            ],
+                            {
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                width: "100%",
+                                marginTop: "4px"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "switchArea"
+                                ]
+                            ],
+                            {
+                                marginBottom: "10px"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "controlPanel"
+                                ]
+                            ],
+                            {
+                                flexDirection: "column",
+                                alignItems: "center",
+                                marginTop: "4px",
+                                marginRight: "4px",
+                                marginBottom: "4px",
+                                marginLeft: "4px"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "btnRow1"
+                                ]
+                            ],
+                            {
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginBottom: "4px"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "btnRow2"
+                                ]
+                            ],
+                            {
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "controlArea2"
+                                ]
+                            ],
+                            {
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                width: "100%",
+                                marginTop: "4px"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "undoArea"
+                                ]
+                            ],
+                            {
+                                alignItems: "center"
+                            }
+                        ],
+                        [
+                            [
+                                [
+                                    0,
+                                    "resetArea"
+                                ]
+                            ],
+                            {
+                                alignItems: "center"
+                            }
+                        ]
+                    ];
+                    var $app_script$ = function __scriptModule__(module, exports, $app_require$1) {
+                        "use strict";
+                        Object.defineProperty(exports, "__esModule", {
+                            value: true
+                        });
+                        exports.default = void 0;
+                        var _index = __webpack_require__("./src/game/index.js");
+                        var _system = _interopRequireDefault($app_require$1("@app-module/system.router"));
+                        var _system2 = _interopRequireDefault($app_require$1("@app-module/system.device"));
+                        var _system3 = _interopRequireDefault($app_require$1("@app-module/system.prompt"));
+                        var _screenAdapter = __webpack_require__("./src/common/screenAdapter.js");
+                        var _constants = __webpack_require__("./src/game/constants.js");
+                        function _interopRequireDefault(e) {
+                            return e && e.__esModule ? e : {
+                                default: e
+                            };
+                        }
+                        const BUTTON_COLORS = _constants.GAME_CONSTANTS.BUTTON_COLORS;
+                        const BUTTON_FEEDBACK = {
+                            up: [
+                                BUTTON_COLORS.DEFAULT_ARROW,
+                                BUTTON_COLORS.PRESSED_ARROW,
+                                200
+                            ],
+                            down: [
+                                BUTTON_COLORS.DEFAULT_ARROW,
+                                BUTTON_COLORS.PRESSED_ARROW,
+                                200
+                            ],
+                            left: [
+                                BUTTON_COLORS.DEFAULT_ARROW,
+                                BUTTON_COLORS.PRESSED_ARROW,
+                                200
+                            ],
+                            right: [
+                                BUTTON_COLORS.DEFAULT_ARROW,
+                                BUTTON_COLORS.PRESSED_ARROW,
+                                200
+                            ],
+                            switch: [
+                                BUTTON_COLORS.DEFAULT_SWITCH,
+                                BUTTON_COLORS.PRESSED_SWITCH,
+                                500
+                            ],
+                            reset: [
+                                BUTTON_COLORS.DEFAULT_RESET,
+                                BUTTON_COLORS.PRESSED_RESET,
+                                500
+                            ],
+                            undo: [
+                                BUTTON_COLORS.DEFAULT_UNDO,
+                                BUTTON_COLORS.PRESSED_UNDO,
+                                200
+                            ]
+                        };
+                        var _default = exports.default = {
+                            private: {
+                                rows: [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6
+                                ],
+                                columns: [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4
+                                ],
+                                cellIcons: {},
+                                cellStyles: {},
+                                currentPlayer: 7,
+                                switchBtnColor: "#3498DB",
+                                upBtnColor: "#2ECC71",
+                                downBtnColor: "#2ECC71",
+                                leftBtnColor: "#2ECC71",
+                                rightBtnColor: "#2ECC71",
+                                resetBtnColor: "#E74C3C",
+                                undoBtnColor: "#9B59B6",
+                                adaptedSizes: (0, _screenAdapter.getAdaptedSizes)(192)
+                            },
+                            onInit () {
+                                this._destroyed = false;
+                                this._leaving = false;
+                                this._flashTimers = {};
+                                this.initScreenAdapter();
+                                this._game = new _index.Game();
+                                const levelData = this.getLevel1Data();
+                                this._game.initLevel(levelData);
+                                this.updateDisplay();
+                            },
+                            initScreenAdapter () {
+                                try {
+                                    _system2.default.getInfo({
+                                        success: (data)=>{
+                                            if (!this._destroyed) this.adaptedSizes = (0, _screenAdapter.getAdaptedSizes)(data && data.screenWidth, data && data.screenHeight);
+                                        },
+                                        fail: ()=>{
+                                            if (!this._destroyed) this.adaptedSizes = (0, _screenAdapter.getAdaptedSizes)(192);
+                                        }
+                                    });
+                                } catch (e) {
+                                    this.adaptedSizes = (0, _screenAdapter.getAdaptedSizes)(192);
+                                }
+                            },
+                            getLevel1Data () {
+                                return {
+                                    whitePlayer: {
+                                        x: 4,
+                                        y: 1
+                                    },
+                                    blackPlayer: {
+                                        x: 2,
+                                        y: 3
+                                    },
+                                    whiteBoxes: [
+                                        {
+                                            x: 2,
+                                            y: 6
+                                        }
+                                    ],
+                                    blackBoxes: [
+                                        {
+                                            x: 3,
+                                            y: 4
+                                        }
+                                    ],
+                                    whiteBoxTargets: [
+                                        {
+                                            x: 1,
+                                            y: 6
+                                        }
+                                    ],
+                                    blackBoxTargets: [
+                                        {
+                                            x: 3,
+                                            y: 3
+                                        }
+                                    ],
+                                    whitePlayerTarget: [
+                                        {
+                                            x: 1,
+                                            y: 5
+                                        }
+                                    ],
+                                    blackPlayerTarget: [
+                                        {
+                                            x: 4,
+                                            y: 2
+                                        }
+                                    ],
+                                    currentPlayer: 7,
+                                    mapRules: this.createMapRules()
+                                };
+                            },
+                            createMapRules () {
+                                const width = 5, height = 7;
+                                const rules = {};
+                                for(let y = 0; y < height; y++){
+                                    for(let x = 0; x < width; x++)rules[y + "," + x] = 0;
+                                }
+                                for(let x = 0; x < width; x++){
+                                    rules["0," + x] = 1;
+                                    rules[height - 1 + "," + x] = 1;
+                                }
+                                for(let y = 0; y < height; y++){
+                                    rules[y + ",0"] = 1;
+                                    rules[y + "," + (width - 1)] = 1;
+                                }
+                                rules["1,2"] = 1;
+                                rules["2,2"] = 1;
+                                rules["1,4"] = 1;
+                                rules["2,4"] = 1;
+                                return rules;
+                            },
+                            updateDisplay (display) {
+                                const result = display || this._game.updateCellDisplay();
+                                if (this.cellIcons['0,0']) Object.keys(result.icons).forEach((key)=>{
+                                    const icon = result.icons[key];
+                                    const currentIcon = this.cellIcons[key];
+                                    Object.keys(icon).forEach((field)=>{
+                                        if (currentIcon[field] !== icon[field]) currentIcon[field] = icon[field];
+                                    });
+                                    const style = result.styles[key];
+                                    const currentStyle = this.cellStyles[key];
+                                    if (currentStyle.bg !== style.bg) currentStyle.bg = style.bg;
+                                    if (currentStyle.border !== style.border) currentStyle.border = style.border;
+                                });
+                                else {
+                                    this.cellIcons = result.icons;
+                                    this.cellStyles = result.styles;
+                                }
+                                this.currentPlayer = this._game.state.currentPlayer;
+                            },
+                            onUp () {
+                                this.handleMove(0, -1, "up");
+                            },
+                            onDown () {
+                                this.handleMove(0, 1, "down");
+                            },
+                            onLeft () {
+                                this.handleMove(-1, 0, "left");
+                            },
+                            onRight () {
+                                this.handleMove(1, 0, "right");
+                            },
+                            handleMove (dx, dy, buttonType) {
+                                if (this._leaving || this._destroyed) return;
+                                const result = this._game.move(dx, dy);
+                                if (!result.success) return void _system3.default.showToast({
+                                    message: result.message,
+                                    duration: 1500
+                                });
+                                this.flashButton(buttonType);
+                                this.updateDisplay(result.display);
+                                if (result.isWin) {
+                                    this._leaving = true;
+                                    this.clearButtonFeedback();
+                                    _system.default.replace({
+                                        uri: "/pages/win",
+                                        params: {
+                                            levelId: "level01",
+                                            levelPath: "/pages/levels/level01"
+                                        }
+                                    });
+                                }
+                            },
+                            onSwitch () {
+                                if (this._leaving || this._destroyed) return;
+                                this.currentPlayer = this._game.switchPlayer();
+                                this.flashButton("switch");
+                            },
+                            onReset () {
+                                if (this._leaving || this._destroyed) return;
+                                this.clearButtonFeedback();
+                                const levelData = this.getLevel1Data();
+                                this._game.initLevel(levelData);
+                                this.flashButton("reset");
+                                this.updateDisplay();
+                            },
+                            onUndo () {
+                                if (this._leaving || this._destroyed) return;
+                                const result = this._game.undo();
+                                if (!result.success) return void _system3.default.showToast({
+                                    message: result.message,
+                                    duration: 1500
+                                });
+                                this.flashButton("undo");
+                                this.updateDisplay();
+                            },
+                            flashButton (type) {
+                                const feedback = BUTTON_FEEDBACK[type];
+                                const colorKey = type + "BtnColor";
+                                this[colorKey] = feedback[1];
+                                if (this._flashTimers[type]) clearTimeout(this._flashTimers[type]);
+                                this._flashTimers[type] = setTimeout(()=>{
+                                    this[colorKey] = feedback[0];
+                                    delete this._flashTimers[type];
+                                }, feedback[2]);
+                            },
+                            clearButtonFeedback () {
+                                Object.keys(this._flashTimers).forEach((type)=>{
+                                    clearTimeout(this._flashTimers[type]);
+                                    this[type + "BtnColor"] = BUTTON_FEEDBACK[type][0];
+                                });
+                                this._flashTimers = {};
+                            },
+                            onHide () {
+                                this.clearButtonFeedback();
+                            },
+                            onDestroy () {
+                                this._destroyed = true;
+                                this.clearButtonFeedback();
+                                this._game = null;
+                            }
+                        };
+                        const moduleOwn = exports.default || module.exports;
+                        const accessors = [
+                            'public',
+                            'protected',
+                            'private'
+                        ];
+                        if (moduleOwn.data && accessors.some(function(acc) {
+                            return moduleOwn[acc];
+                        })) throw new Error('页面VM对象中的属性data不可与"' + accessors.join(',') + '"同时存在，请使用private替换data名称');
+                        if (!moduleOwn.data) {
+                            moduleOwn.data = {};
+                            moduleOwn._descriptor = {};
+                            accessors.forEach(function(acc) {
+                                const accType = typeof moduleOwn[acc];
+                                if ('object' === accType) {
+                                    moduleOwn.data = Object.assign(moduleOwn.data, moduleOwn[acc]);
+                                    for(const name in moduleOwn[acc])moduleOwn._descriptor[name] = {
+                                        access: acc
+                                    };
+                                } else if ('function' === accType) console.warn('页面VM对象中的属性' + acc + '的值不能是函数，请使用对象');
+                            });
+                        }
+                    };
+                    var $app_template$ = function(vm) {
+                        const _vm_ = vm || this;
+                        return aiot.__ce__("div", {
+                            __vm__: _vm_,
+                            __opts__: {
+                                classList: [
+                                    "container"
+                                ],
+                                style: function() {
+                                    return __webpack_require__.g.$translateStyle$("padding: " + _vm_.adaptedSizes.paddingTop + "px " + _vm_.adaptedSizes.padding + "px " + _vm_.adaptedSizes.paddingBottom + "px");
+                                }
+                            }
+                        }, [
+                            aiot.__ce__("image", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: [
+                                        "title"
+                                    ],
+                                    src: "/common/image/title.png",
+                                    style: function() {
+                                        return __webpack_require__.g.$translateStyle$("width: " + _vm_.adaptedSizes.titleWidth + "px; height: " + _vm_.adaptedSizes.titleHeight + "px; margin: " + _vm_.adaptedSizes.marginTop + "px 0 3px 0");
+                                    }
+                                }
+                            }, []),
+                            aiot.__ce__("div", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: [
+                                        "info"
+                                    ]
+                                }
+                            }, [
+                                aiot.__ce__("image", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "infoText"
+                                        ],
+                                        src: "/common/image/infoText.png",
+                                        style: function() {
+                                            return __webpack_require__.g.$translateStyle$("height: " + (_vm_.adaptedSizes.infoHeight || 40) + "px");
+                                        }
+                                    }
+                                }, []),
+                                aiot.__ce__("image", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "hint"
+                                        ],
+                                        src: "/common/image/hint.png",
+                                        style: function() {
+                                            return __webpack_require__.g.$translateStyle$("height: " + (_vm_.adaptedSizes.infoHeight || 40) + "px");
+                                        }
+                                    }
+                                }, [])
+                            ]),
+                            aiot.__cc__("game-grid", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    rows: function() {
+                                        return _vm_.rows;
+                                    },
+                                    columns: function() {
+                                        return _vm_.columns;
+                                    },
+                                    icons: function() {
+                                        return _vm_.cellIcons;
+                                    },
+                                    cellStyles: function() {
+                                        return _vm_.cellStyles;
+                                    },
+                                    sizeConfig: function() {
+                                        return _vm_.adaptedSizes;
+                                    }
+                                }
+                            }, []),
+                            aiot.__ce__("div", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: [
+                                        "controlArea"
+                                    ],
+                                    style: function() {
+                                        return __webpack_require__.g.$translateStyle$("margin-top: " + (_vm_.adaptedSizes.marginTop || 4) + "px");
+                                    }
+                                }
+                            }, [
+                                aiot.__ce__("div", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "switchArea"
+                                        ],
+                                        style: function() {
+                                            return __webpack_require__.g.$translateStyle$("margin-bottom: " + (_vm_.adaptedSizes.marginBottom || 10) + "px");
+                                        }
+                                    }
+                                }, [
+                                    aiot.__ce__("div", {
+                                        __vm__: _vm_,
+                                        __opts__: {
+                                            events: {
+                                                click: function(evt) {
+                                                    return _vm_.onSwitch(evt);
+                                                }
+                                            }
+                                        }
+                                    }, [
+                                        aiot.__cc__("control-button", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                type: "switch",
+                                                color: function() {
+                                                    return _vm_.switchBtnColor;
+                                                },
+                                                isWhite: function() {
+                                                    return 7 === _vm_.currentPlayer;
+                                                },
+                                                sizeConfig: function() {
+                                                    return _vm_.adaptedSizes;
+                                                }
+                                            }
+                                        }, [])
+                                    ])
+                                ]),
+                                aiot.__ce__("div", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "controlPanel"
+                                        ],
+                                        style: function() {
+                                            return __webpack_require__.g.$translateStyle$("margin: " + (_vm_.adaptedSizes.controlPanelMargin || 4) + "px");
+                                        }
+                                    }
+                                }, [
+                                    aiot.__ce__("div", {
+                                        __vm__: _vm_,
+                                        __opts__: {
+                                            classList: [
+                                                "btnRow1"
+                                            ],
+                                            style: function() {
+                                                return __webpack_require__.g.$translateStyle$("margin-bottom: " + (_vm_.adaptedSizes.btnRowMargin || 4) + "px");
+                                            }
+                                        }
+                                    }, [
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                events: {
+                                                    click: function(evt) {
+                                                        return _vm_.onUp(evt);
+                                                    }
+                                                }
+                                            }
+                                        }, [
+                                            aiot.__cc__("control-button", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    type: "arrow",
+                                                    color: function() {
+                                                        return _vm_.upBtnColor;
+                                                    },
+                                                    arrowIcon: "/common/image/icons/white-up-arrow.png",
+                                                    sizeConfig: function() {
+                                                        return _vm_.adaptedSizes;
+                                                    }
+                                                }
+                                            }, [])
+                                        ])
+                                    ]),
+                                    aiot.__ce__("div", {
+                                        __vm__: _vm_,
+                                        __opts__: {
+                                            classList: [
+                                                "btnRow2"
+                                            ]
+                                        }
+                                    }, [
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                events: {
+                                                    click: function(evt) {
+                                                        return _vm_.onLeft(evt);
+                                                    }
+                                                }
+                                            }
+                                        }, [
+                                            aiot.__cc__("control-button", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    type: "arrow",
+                                                    color: function() {
+                                                        return _vm_.leftBtnColor;
+                                                    },
+                                                    arrowIcon: "/common/image/icons/white-left-arrow.png",
+                                                    sizeConfig: function() {
+                                                        return _vm_.adaptedSizes;
+                                                    }
+                                                }
+                                            }, [])
+                                        ]),
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                events: {
+                                                    click: function(evt) {
+                                                        return _vm_.onDown(evt);
+                                                    }
+                                                }
+                                            }
+                                        }, [
+                                            aiot.__cc__("control-button", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    type: "arrow",
+                                                    color: function() {
+                                                        return _vm_.downBtnColor;
+                                                    },
+                                                    arrowIcon: "/common/image/icons/white-down-arrow.png",
+                                                    sizeConfig: function() {
+                                                        return _vm_.adaptedSizes;
+                                                    }
+                                                }
+                                            }, [])
+                                        ]),
+                                        aiot.__ce__("div", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                events: {
+                                                    click: function(evt) {
+                                                        return _vm_.onRight(evt);
+                                                    }
+                                                }
+                                            }
+                                        }, [
+                                            aiot.__cc__("control-button", {
+                                                __vm__: _vm_,
+                                                __opts__: {
+                                                    type: "arrow",
+                                                    color: function() {
+                                                        return _vm_.rightBtnColor;
+                                                    },
+                                                    arrowIcon: "/common/image/icons/white-right-arrow.png",
+                                                    sizeConfig: function() {
+                                                        return _vm_.adaptedSizes;
+                                                    }
+                                                }
+                                            }, [])
+                                        ])
+                                    ])
+                                ])
+                            ]),
+                            aiot.__ce__("div", {
+                                __vm__: _vm_,
+                                __opts__: {
+                                    classList: [
+                                        "controlArea2"
+                                    ]
+                                }
+                            }, [
+                                aiot.__ce__("div", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "undoArea"
+                                        ]
+                                    }
+                                }, [
+                                    aiot.__ce__("div", {
+                                        __vm__: _vm_,
+                                        __opts__: {
+                                            events: {
+                                                click: function(evt) {
+                                                    return _vm_.onUndo(evt);
+                                                }
+                                            }
+                                        }
+                                    }, [
+                                        aiot.__cc__("control-button", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                type: "undo",
+                                                color: function() {
+                                                    return _vm_.undoBtnColor;
+                                                },
+                                                sizeConfig: function() {
+                                                    return _vm_.adaptedSizes;
+                                                }
+                                            }
+                                        }, [])
+                                    ])
+                                ]),
+                                aiot.__ce__("div", {
+                                    __vm__: _vm_,
+                                    __opts__: {
+                                        classList: [
+                                            "resetArea"
+                                        ]
+                                    }
+                                }, [
+                                    aiot.__ce__("div", {
+                                        __vm__: _vm_,
+                                        __opts__: {
+                                            events: {
+                                                click: function(evt) {
+                                                    return _vm_.onReset(evt);
+                                                }
+                                            }
+                                        }
+                                    }, [
+                                        aiot.__cc__("control-button", {
+                                            __vm__: _vm_,
+                                            __opts__: {
+                                                type: "reset",
+                                                color: function() {
+                                                    return _vm_.resetBtnColor;
+                                                },
+                                                sizeConfig: function() {
+                                                    return _vm_.adaptedSizes;
+                                                }
+                                            }
+                                        }, [])
+                                    ])
+                                ])
+                            ])
+                        ]);
+                    };
+                    $app_exports$['entry'] = function($app_exports$) {
+                        $app_script$({}, $app_exports$, $app_require$1);
+                        $app_exports$.default.template = $app_template$;
+                        $app_exports$.default.style = $app_style$;
+                    };
+                })();
+            })();
+        };
+        return createPageHandler();
+    })(global, globalThis, window, $app_exports$, $app_evaluate$);
+}

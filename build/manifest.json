@@ -39,8 +39,8 @@
   "minAPILevel": 1,
   "packageInfo": {
     "toolkit": "2.0.5",
-    "timeStamp": "2026-03-14T16:41:20.512Z",
-    "node": "v18.19.0",
+    "timeStamp": "2026-09-21T13:58:10.326Z",
+    "node": "v24.21.0",
     "platform": "win32",
     "arch": "x64",
     "component": true

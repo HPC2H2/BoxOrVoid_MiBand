@@ -82,23 +82,39 @@ test('reset restores board and controls; hiding and destruction clear pending ti
   assert.doesNotThrow(() => page.onRight())
 })
 
-for (const width of [192, 212]) {
-  test(`screenWidth=${width} selects the correct layout`, async () => {
-    const page = await createRuntime({ deviceInfo: { screenWidth: width } }).page()
-    assert.equal(page.adaptedSizes.scale, width / 192)
-    assert.equal(page.adaptedSizes.cellSize, Math.floor(34 * width / 192))
-    assert.ok(5 * page.adaptedSizes.cellSize + 2 * page.adaptedSizes.gridPadding <= width - 2 * page.adaptedSizes.padding)
+for (const [width, height] of [[192, 490], [212, 520]]) {
+  test(`${width}x${height} keeps the board and paired glyphs inside their containers`, async () => {
+    const page = await createRuntime({ deviceInfo: { screenWidth: width, screenHeight: height } }).page()
+    const sizes = page.adaptedSizes
+    assert.equal(sizes.scale, Math.min(width / 192, height / 490))
+    assert.ok(5 * sizes.cellSize + 2 * sizes.gridPadding <= width - 2 * sizes.padding)
+    assert.ok(2 * sizes.cellIconSmallSize <= sizes.cellSize - 2 * sizes.cellBorder)
+    assert.ok(2 * sizes.btnIconSize + 4 <= sizes.undoBtnWidth)
+    assert.ok(2 * sizes.btnIconSize + 4 <= sizes.resetBtnWidth)
+    assert.ok(sizes.paddingTop >= 28)
+    assert.ok(sizes.paddingBottom >= 32)
   })
 }
 
-test('device error, pending response and invalid width all have usable initial sizes', async () => {
+test('a wider screen with the same height does not enlarge the page vertically', async () => {
+  const compact = await createRuntime({ deviceInfo: { screenWidth: 212, screenHeight: 490 } }).page()
+  const taller = await createRuntime({ deviceInfo: { screenWidth: 212, screenHeight: 520 } }).page()
+  assert.equal(compact.adaptedSizes.scale, 1)
+  assert.ok(taller.adaptedSizes.cellSize > compact.adaptedSizes.cellSize)
+})
+
+test('device error, pending response and invalid dimensions have usable initial sizes', async () => {
   for (const deviceMode of ['fail', 'throw', 'deferred']) {
     const page = await createRuntime({ deviceMode }).page()
-    assert.equal(page.adaptedSizes.cellSize, 34)
+    assert.equal(page.adaptedSizes.cellSize, 32)
   }
   for (const screenWidth of [undefined, 0, -1, 'invalid']) {
     const page = await createRuntime({ deviceInfo: { screenWidth } }).page()
-    assert.equal(page.adaptedSizes.cellSize, 34)
+    assert.equal(page.adaptedSizes.cellSize, 32)
+  }
+  for (const screenHeight of [undefined, 0, -1, 'invalid']) {
+    const page = await createRuntime({ deviceInfo: { screenWidth: 212, screenHeight } }).page()
+    assert.equal(page.adaptedSizes.scale, 520 / 490)
   }
 })
 

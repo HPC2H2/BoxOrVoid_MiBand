@@ -1,0 +1,16 @@
+[
+  {
+    "device": "miband9",
+    "width": 192,
+    "height": 490,
+    "beforeOccludedPixels": 331,
+    "afterOccludedPixels": 0
+  },
+  {
+    "device": "miband10",
+    "width": 212,
+    "height": 520,
+    "beforeOccludedPixels": 2132,
+    "afterOccludedPixels": 0
+  }
+]

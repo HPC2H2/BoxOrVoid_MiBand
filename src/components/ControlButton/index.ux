@@ -78,9 +78,9 @@ export default {
       return ""
     },
     iconStyle() {
-      if (!this.sizeConfig) return "width: 20px; height: 20px"
+      if (!this.sizeConfig) return "width: 20px; height: 20px; object-fit: contain"
       const s = this.sizeConfig
-      return `width: ${s.btnIconSize}px; height: ${s.btnIconSize}px`
+      return `width: ${s.btnIconSize}px; height: ${s.btnIconSize}px; object-fit: contain`
     }
   }
 }
@@ -89,7 +89,7 @@ export default {
 <style scoped>
 .btnSwitch {
   width: 50px;
-  height: 60px;
+  height: 56px;
   border: none;
   border-radius: 6px;
   align-items: center;
@@ -111,7 +111,7 @@ export default {
 
 .btnUndo {
   width: 50px;
-  height: 40px;
+  height: 36px;
   border: none;
   border-radius: 6px;
   align-items: center;
@@ -122,7 +122,7 @@ export default {
 
 .btnReset {
   width: 50px;
-  height: 40px;
+  height: 36px;
   border: none;
   border-radius: 6px;
   align-items: center;
@@ -147,14 +147,14 @@ export default {
 .resetImage {
   width: 20px;
   height: 20px;
-  margin: 2px;
-  padding: 2px;
+  margin: 0;
+  padding: 0;
 }
 
 .undoImage {
   width: 20px;
   height: 20px;
-  margin: 2px;
-  padding: 2px;
+  margin: 0;
+  padding: 0;
 }
 </style>

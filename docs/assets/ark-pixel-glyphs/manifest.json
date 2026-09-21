@@ -1,0 +1,260 @@
+{
+  "font": "Ark Pixel 12px Mono zh_cn",
+  "version": "2026.09.01",
+  "source": "https://github.com/TakWolf/ark-pixel-font/releases/tag/2026.09.01",
+  "size": 48,
+  "scale": 4,
+  "colors": {
+    "white": "#FFFFFF",
+    "grey": "#4B4B4B"
+  },
+  "glyphCount": 61,
+  "pngCount": 122,
+  "totalPngBytes": 22031,
+  "glyphs": {
+    "0": {
+      "white": "white/white-u0030.png",
+      "grey": "grey/grey-u0030.png"
+    },
+    "1": {
+      "white": "white/white-u0031.png",
+      "grey": "grey/grey-u0031.png"
+    },
+    "2": {
+      "white": "white/white-u0032.png",
+      "grey": "grey/grey-u0032.png"
+    },
+    "3": {
+      "white": "white/white-u0033.png",
+      "grey": "grey/grey-u0033.png"
+    },
+    "4": {
+      "white": "white/white-u0034.png",
+      "grey": "grey/grey-u0034.png"
+    },
+    "5": {
+      "white": "white/white-u0035.png",
+      "grey": "grey/grey-u0035.png"
+    },
+    "6": {
+      "white": "white/white-u0036.png",
+      "grey": "grey/grey-u0036.png"
+    },
+    "7": {
+      "white": "white/white-u0037.png",
+      "grey": "grey/grey-u0037.png"
+    },
+    "8": {
+      "white": "white/white-u0038.png",
+      "grey": "grey/grey-u0038.png"
+    },
+    "9": {
+      "white": "white/white-u0039.png",
+      "grey": "grey/grey-u0039.png"
+    },
+    "选": {
+      "white": "white/white-u9009.png",
+      "grey": "grey/grey-u9009.png"
+    },
+    "关": {
+      "white": "white/white-u5173.png",
+      "grey": "grey/grey-u5173.png"
+    },
+    "经": {
+      "white": "white/white-u7ecf.png",
+      "grey": "grey/grey-u7ecf.png"
+    },
+    "典": {
+      "white": "white/white-u5178.png",
+      "grey": "grey/grey-u5178.png"
+    },
+    "定": {
+      "white": "white/white-u5b9a.png",
+      "grey": "grey/grey-u5b9a.png"
+    },
+    "时": {
+      "white": "white/white-u65f6.png",
+      "grey": "grey/grey-u65f6.png"
+    },
+    "莫": {
+      "white": "white/white-u83ab.png",
+      "grey": "grey/grey-u83ab.png"
+    },
+    "比": {
+      "white": "white/white-u6bd4.png",
+      "grey": "grey/grey-u6bd4.png"
+    },
+    "乌": {
+      "white": "white/white-u4e4c.png",
+      "grey": "grey/grey-u4e4c.png"
+    },
+    "斯": {
+      "white": "white/white-u65af.png",
+      "grey": "grey/grey-u65af.png"
+    },
+    "环": {
+      "white": "white/white-u73af.png",
+      "grey": "grey/grey-u73af.png"
+    },
+    "已": {
+      "white": "white/white-u5df2.png",
+      "grey": "grey/grey-u5df2.png"
+    },
+    "通": {
+      "white": "white/white-u901a.png",
+      "grey": "grey/grey-u901a.png"
+    },
+    "下": {
+      "white": "white/white-u4e0b.png",
+      "grey": "grey/grey-u4e0b.png"
+    },
+    "一": {
+      "white": "white/white-u4e00.png",
+      "grey": "grey/grey-u4e00.png"
+    },
+    "重": {
+      "white": "white/white-u91cd.png",
+      "grey": "grey/grey-u91cd.png"
+    },
+    "玩": {
+      "white": "white/white-u73a9.png",
+      "grey": "grey/grey-u73a9.png"
+    },
+    "暂": {
+      "white": "white/white-u6682.png",
+      "grey": "grey/grey-u6682.png"
+    },
+    "停": {
+      "white": "white/white-u505c.png",
+      "grey": "grey/grey-u505c.png"
+    },
+    "继": {
+      "white": "white/white-u7ee7.png",
+      "grey": "grey/grey-u7ee7.png"
+    },
+    "续": {
+      "white": "white/white-u7eed.png",
+      "grey": "grey/grey-u7eed.png"
+    },
+    "秒": {
+      "white": "white/white-u79d2.png",
+      "grey": "grey/grey-u79d2.png"
+    },
+    "每": {
+      "white": "white/white-u6bcf.png",
+      "grey": "grey/grey-u6bcf.png"
+    },
+    "翻": {
+      "white": "white/white-u7ffb.png",
+      "grey": "grey/grey-u7ffb.png"
+    },
+    "色": {
+      "white": "white/white-u8272.png",
+      "grey": "grey/grey-u8272.png"
+    },
+    "越": {
+      "white": "white/white-u8d8a.png",
+      "grey": "grey/grey-u8d8a.png"
+    },
+    "界": {
+      "white": "white/white-u754c.png",
+      "grey": "grey/grey-u754c.png"
+    },
+    "上": {
+      "white": "white/white-u4e0a.png",
+      "grey": "grey/grey-u4e0a.png"
+    },
+    "转": {
+      "white": "white/white-u8f6c.png",
+      "grey": "grey/grey-u8f6c.png"
+    },
+    "展": {
+      "white": "white/white-u5c55.png",
+      "grey": "grey/grey-u5c55.png"
+    },
+    "开": {
+      "white": "white/white-u5f00.png",
+      "grey": "grey/grey-u5f00.png"
+    },
+    "棋": {
+      "white": "white/white-u68cb.png",
+      "grey": "grey/grey-u68cb.png"
+    },
+    "盘": {
+      "white": "white/white-u76d8.png",
+      "grey": "grey/grey-u76d8.png"
+    },
+    "视": {
+      "white": "white/white-u89c6.png",
+      "grey": "grey/grey-u89c6.png"
+    },
+    "图": {
+      "white": "white/white-u56fe.png",
+      "grey": "grey/grey-u56fe.png"
+    },
+    "可": {
+      "white": "white/white-u53ef.png",
+      "grey": "grey/grey-u53ef.png"
+    },
+    "换": {
+      "white": "white/white-u6362.png",
+      "grey": "grey/grey-u6362.png"
+    },
+    "黑": {
+      "white": "white/white-u9ed1.png",
+      "grey": "grey/grey-u9ed1.png"
+    },
+    "白": {
+      "white": "white/white-u767d.png",
+      "grey": "grey/grey-u767d.png"
+    },
+    "箱": {
+      "white": "white/white-u7bb1.png",
+      "grey": "grey/grey-u7bb1.png"
+    },
+    "位": {
+      "white": "white/white-u4f4d.png",
+      "grey": "grey/grey-u4f4d.png"
+    },
+    "切": {
+      "white": "white/white-u5207.png",
+      "grey": "grey/grey-u5207.png"
+    },
+    "到": {
+      "white": "white/white-u5230.png",
+      "grey": "grey/grey-u5230.png"
+    },
+    "置": {
+      "white": "white/white-u7f6e.png",
+      "grey": "grey/grey-u7f6e.png"
+    },
+    "撤": {
+      "white": "white/white-u64a4.png",
+      "grey": "grey/grey-u64a4.png"
+    },
+    "销": {
+      "white": "white/white-u9500.png",
+      "grey": "grey/grey-u9500.png"
+    },
+    "始": {
+      "white": "white/white-u59cb.png",
+      "grey": "grey/grey-u59cb.png"
+    },
+    "返": {
+      "white": "white/white-u8fd4.png",
+      "grey": "grey/grey-u8fd4.png"
+    },
+    "回": {
+      "white": "white/white-u56de.png",
+      "grey": "grey/grey-u56de.png"
+    },
+    "规": {
+      "white": "white/white-u89c4.png",
+      "grey": "grey/grey-u89c4.png"
+    },
+    "则": {
+      "white": "white/white-u5219.png",
+      "grey": "grey/grey-u5219.png"
+    }
+  }
+}

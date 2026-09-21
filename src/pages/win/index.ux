@@ -6,7 +6,8 @@
     
     <div class="buttons">
       <div class="button restart-btn" onclick="restartLevel">
-        <text class="button-text">重玩</text>
+        <image class="button-glyph" src="/common/image/icons/white-chong.png"></image>
+        <image class="button-glyph" src="/common/image/icons/white-wan.png"></image>
       </div>
     </div>
   </div>
@@ -86,6 +87,7 @@ export default {
 }
 
 .button {
+  flex-direction: row;
   min-width: 70px;
   height: 40px;
   border-radius: 8px;
@@ -95,9 +97,10 @@ export default {
   margin: 0 8px;
 }
 
-.button-text {
-  font-size: 16px;
-  color: #ffffff;
+.button-glyph {
+  object-fit: contain;
+  width: 16px;
+  height: 16px;
 }
 
 .restart-btn {

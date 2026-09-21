@@ -33,24 +33,24 @@
 
     computed: {
       gridStyle() {
-        if (!this.sizeConfig) return "padding: 2px; margin: 8px 0;"
+        if (!this.sizeConfig) return "padding: 2px; margin: 4px 0;"
         const s = this.sizeConfig
         return `padding: ${s.gridPadding}px; margin: ${s.margin}px 0;`
       },
       cellStyle() {
-        if (!this.sizeConfig) return "width: 34px; height: 34px; border-width: 1px; border-style: solid"
+        if (!this.sizeConfig) return "width: 32px; height: 32px; border-width: 1px; border-style: solid"
         const s = this.sizeConfig
         return `width: ${s.cellSize}px; height: ${s.cellSize}px; border-width: ${s.cellBorder}px; border-style: solid`
       },
       iconStyle() {
-        if (!this.sizeConfig) return "width: 20px; height: 20px"
+        if (!this.sizeConfig) return "width: 20px; height: 20px; object-fit: contain"
         const s = this.sizeConfig
-        return `width: ${s.cellIconSize}px; height: ${s.cellIconSize}px`
+        return `width: ${s.cellIconSize}px; height: ${s.cellIconSize}px; object-fit: contain`
       },
       iconSmallStyle() {
-        if (!this.sizeConfig) return "width: 16px; height: 16px"
+        if (!this.sizeConfig) return "width: 15px; height: 15px; object-fit: contain"
         const s = this.sizeConfig
-        return `width: ${s.cellIconSmallSize}px; height: ${s.cellIconSmallSize}px`
+        return `width: ${s.cellIconSmallSize}px; height: ${s.cellIconSmallSize}px; object-fit: contain`
       }
     }
   }
@@ -62,7 +62,7 @@
     flex-direction: column;
     background-color: #1a2530;
     padding: 2px;
-    margin: 8px 0;
+    margin: 4px 0;
     border-radius: 4px;
   }
   
@@ -71,8 +71,8 @@
   }
   
   .cell {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
